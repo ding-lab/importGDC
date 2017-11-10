@@ -43,13 +43,19 @@ To aid in this, we have two tools to track job status and start jobs:
 * start_step.sh : Start a processing step (import, typically) for given SR UUIDs
 
 These tools can be strung together; the following command will start import of all WXS samples which have a status of "ready":
-    bash evaluate_status.sh -u -f import:ready -O ... dat/WXS.batch.dat | bash start_step.sh -S SR/SR_merged.dat -g /mwyczalk/gdc-download import -
+    bash evaluate_status.sh -u -f import:ready -O ... WXS.batch.dat | bash start_step.sh -S SR/SR_merged.dat -g /mwyczalk/gdc-download import -
 
 Scripts evaluate_status.c3b1.sh and start_step.c3b1.sh are wrappers around importGDC.git scripts which are specific to CPTAC3 Batch 1 work at MGI.
 Using these the above script becomes,
-    bash evaluate_status.c3b1.sh -u -f import:ready dat/WXS.batch.dat | bash start_import.c3b1.sh -
+    bash evaluate_status.c3b1.sh -u -f import:ready WXS.batch.dat | bash start_import.c3b1.sh -
 Note that these scripts need to be edited for specific paths, if token changes, etc.
 
+BAM Map
+
+Validation of downloading and indexing, as well as providing summaries of downloaded data, is done with summarize_import.c3b1.sh
+Create summaries of all completed RNA-Seq downloads with,
+
+    bash evaluate_status.c3b1.sh -u -f import:completed RNA-Seq.batch.dat | bash summarize_import.c3b1.sh -
 
 
 TODO: create BAM_Map file

@@ -8,13 +8,13 @@ SR="config/SR.CPTAC3.b1.dat"
 SRC="/gscuser/mwyczalk/src/importGDC/batch.import"
 
 OUT="WXS.batch.dat"
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WXS") print}' $SR | sort | bash $SRC/make_batch_file.sh - > $OUT
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WXS") print}' $SR | sort | bash $SRC/batch_from_SR.sh - > $OUT
 echo Written to $OUT
 
 OUT="WGS.batch.dat"
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WGS") print}' $SR | sort | bash $SRC/make_batch_file.sh - > $OUT
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WGS") print}' $SR | sort | bash $SRC/batch_from_SR.sh - > $OUT
 echo Written to $OUT
 
 OUT="RNA-Seq.batch.dat"
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "RNA-Seq") print}' $SR | sort | bash $SRC/make_batch_file.sh - > $OUT
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "RNA-Seq") print}' $SR | sort | bash $SRC/batch_from_SR.sh - > $OUT
 echo Written to $OUT
