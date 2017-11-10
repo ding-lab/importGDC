@@ -1,0 +1,6 @@
+# Summary Date 10/11/2017 11:42:44
+# SampleName	Case	Disease	ExpStrategy	SampType	DataPath	DataFormat	Reference	UUID
+C3L-00010.WGS.N	C3L-00010	CCRC	WGS	normal	/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/GDC_import/78d4debc-1fc1-4cb4-8f59-0a5bd2d8b36e/CPT0000060163.WholeGenome.RP-1303.bam	BAM	hg19	78d4debc-1fc1-4cb4-8f59-0a5bd2d8b36e
+C3L-00010.WGS.T	C3L-00010	CCRC	WGS	tumor	/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/GDC_import/25cb4189-1b2f-4793-b52b-ec96c35567ca/CPT0001220165.WholeGenome.RP-1303.bam	BAM	hg19	25cb4189-1b2f-4793-b52b-ec96c35567ca
+C3L-00032.WGS.N	C3L-00032	UCEC	WGS	normal	/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/GDC_import/27091176-c4d5-46a5-816c-ef22cf26f96c/CPT0000110163.WholeGenome.RP-1303.bam	BAM	hg19	27091176-c4d5-46a5-816c-ef22cf26f96c
+C3L-00032.WGS.T	C3L-00032	UCEC	WGS	tumor	/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/GDC_import/4b7eee33-2cb9-4c54-b5e7-f8f72536f062/CPT0001420005.WholeGenome.RP-1303.bam	BAM	hg19	4b7eee33-2cb9-4c54-b5e7-f8f72536f062
