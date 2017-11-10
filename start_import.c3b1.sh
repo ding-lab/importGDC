@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Start import of given UUIDs.  This is run on host computer
 
 # This is a wrapper around importGDC/start_step.sh with CPTAC3.b1-specific setup added for convenience
@@ -16,7 +18,9 @@
 DATA_DIR="/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/"
 mkdir -p $DATA_DIR
 
-LSF_GROUP="-g /mwyczalk/gdc-download"
+if [ ! -z $LSF_GROUP ]; then
+LSF_GROUP_ARG="-g $LSF_GROUP"
+fi
 
 # Should define IMPORTGDC_HOME
 export IMPORTGDC_HOME="/gscuser/mwyczalk/src/importGDC"
@@ -31,4 +35,4 @@ mkdir -p $DATA_DIR/token
 >&2 echo Copying $TOKEN_HOST to $DATA_DIR/token/gdc-user-token.txt
 cp $TOKEN_HOST $DATA_DIR/token/gdc-user-token.txt
 
-bash $IMPORTGDC_HOME/batch.import/start_step.sh -O $DATA_DIR -S $SR $LSF_GROUP -s import "$@"
+bash $IMPORTGDC_HOME/batch.import/start_step.sh -O $DATA_DIR -S $SR $LSF_GROUP_ARG -s import "$@"

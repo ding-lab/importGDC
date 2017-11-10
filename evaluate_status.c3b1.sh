@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
+
 # This is a wrapper around importGDC/evaluate_status.sh with CPTAC3.b1-specific setup added for convenience
 # All arguments passed to here will be passed to evaluate_status.sh
 

@@ -19,14 +19,15 @@ Note that this token expires after some time (one month?) so this process needs 
 
 Set IMPORTGDC_HOME variable to where importGDC.git project is installed.  Default is /usr/local/importGDC.  Define it in e.g. ~/.bashrc with,
 ```
-    export IMPORTGDC_HOME="/path/to/importGDC"
+    export IMPORTGDC_HOME="/gscuser/mwyczalk/src/importGDC"
 ```
 
 LSF Groups
 
 Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to do the trick.
 * Background: https://confluence.gsc.wustl.edu/pages/viewpage.action?pageId=27592450
-* Submission script assumes group /mwyczalk/gdc-download is being used.  It is an error if it is not defined (confirm)
+* Submission script (start_import.c3b1.sh) uses LSF groups if LSF_GROUP environment variable is defined.  Suggested use:
+    export LSF_GROUP="/mwyczalk/gdc-download"
 * To limit to 5 running jobs: `bgadd -L 5 /mwyczalk/gdc-download`  (this should be a part of a setup script?)
 * To examine: `bjgroup -s /mwyczalk/gdc-download`
 
