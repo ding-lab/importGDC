@@ -14,8 +14,6 @@
 # options
 # -r REF: reference name - assume same for all SR.  Default: hg19
 
-DATA_DIR="/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/"
-export IMPORTGDC_HOME="/gscuser/mwyczalk/src/importGDC"
-SR="config/SR.CPTAC3.b1.dat"
+source gdc-import.config
 
 bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATA_DIR -S $SR "$@"

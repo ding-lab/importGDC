@@ -14,25 +14,24 @@
 #
 # If UUID is - then read UUID from STDIN
 
-# Data download location
-DATA_DIR="/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/"
-mkdir -p $DATA_DIR
+source gdc-import.config
 
-if [ ! -z $LSF_GROUP ]; then
-LSF_GROUP_ARG="-g $LSF_GROUP"
+if [ ! -e $GDCTOKEN ]; then
+    >&2 echo Error: Token file $GDCTOKEN not found
+    exit
 fi
 
-# Should define IMPORTGDC_HOME
-export IMPORTGDC_HOME="/gscuser/mwyczalk/src/importGDC"
-
-SR="config/SR.CPTAC3.b1.dat"
+# This is MGI-specific
+if [ ! -z $LSF_GROUP ]; then
+    LSF_GROUP_ARG="-g $LSF_GROUP"
+fi
 
 # Copy token defined in host dir to container's /data directory
 # Note there may be some security considerations associated with this
-TOKEN_HOST="token/gdc-user-token.2017-11-04T01-21-42.215Z.txt"
 TOKEN_CONTAINER="/data/token/gdc-user-token.txt"
 mkdir -p $DATA_DIR/token
->&2 echo Copying $TOKEN_HOST to $DATA_DIR/token/gdc-user-token.txt
-cp $TOKEN_HOST $DATA_DIR/token/gdc-user-token.txt
+>&2 echo Copying $GDCTOKEN to $DATA_DIR/token/gdc-user-token.txt
+cp $GDCTOKEN $DATA_DIR/token/gdc-user-token.txt
+
 
 bash $IMPORTGDC_HOME/batch.import/start_step.sh -O $DATA_DIR -S $SR $LSF_GROUP_ARG -s import "$@"

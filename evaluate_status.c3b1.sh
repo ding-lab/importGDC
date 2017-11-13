@@ -16,12 +16,16 @@
 # -u: include only UUID in output
 # -D: include data file path in output
 
-# CPTAC3.b1 MGI data download location
-DATA_DIR="/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/"
-mkdir -p $DATA_DIR
+source gdc-import.config
 
-export IMPORTGDC_HOME="/gscuser/mwyczalk/src/importGDC"
-
+if [ -z $IMPORTGDC_HOME ]; then
+    >&2 echo Please define IMPORTGDC_HOME variable by running 0_init.sh
+    exit
+fi
+if [ -z $DATA_DIR ]; then
+    >&2 echo Please define DATA_DIR variable by running 0_init.sh
+    exit
+fi
 
 # Example 
 # evaluate_status.c3b1.sh -u -f import:ready dat/WXS.batch.dat 
