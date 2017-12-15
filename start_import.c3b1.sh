@@ -15,6 +15,10 @@
 # If UUID is - then read UUID from STDIN
 
 source gdc-import.config
+# Data download location
+# NOTE: this has to be compatible with SomaticWrapper analysis, and should use DATAD_H from there
+DATA_DIR="/gscmnt/gc2521/dinglab/mwyczalk/CPTAC3-download/"
+mkdir -p $DATA_DIR
 
 if [ ! -e $GDCTOKEN ]; then
     >&2 echo Error: Token file $GDCTOKEN not found
@@ -28,7 +32,7 @@ fi
 
 # Copy token defined in host dir to container's /data directory
 # Note there may be some security considerations associated with this
-TOKEN_HOST="token/gdc-user-token.2017-11-14T15_55_43.552Z.txt"
+TOKEN_HOST="token/gdc-user-token.2017-12-15T20_42_09.411Z.txt"
 TOKEN_CONTAINER="/data/token/gdc-user-token.txt"
 mkdir -p $DATA_DIR/token
 >&2 echo Copying $GDCTOKEN to $DATA_DIR/token/gdc-user-token.txt
