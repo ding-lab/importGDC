@@ -9,6 +9,7 @@ so changing it to 1 should help.  However, having problems with sudo.  Continue 
 Goal: have this start
 bash start_import.c3b1.sh  15ae9b4c-fdc6-4698-b6cc-36a13a5b418f
 
+===
 
 Call in docker is,
 bash /usr/local/importGDC/image.init/process_GDC_uuid.sh 15ae9b4c-fdc6-4698-b6cc-36a13a5b418f /data/token/gdc-user-token.txt 170802_UNC31-K00269_0072_AHK3GVBBXX_AGTCAA_S20_L006_R1_001.fastq.gz FASTQ
