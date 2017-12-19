@@ -16,4 +16,6 @@
 
 source gdc-import.config
 
+# TODO: have BamMap include file size
+
 bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATA_DIR -S $SR "$@"
