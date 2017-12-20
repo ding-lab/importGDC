@@ -6,14 +6,14 @@
 
 source gdc-import.config
 
-OUT="$CONFIG_HOME/WXS.batch.dat"
+OUT="$CONFIG_HOME_H/WXS.batch.dat"
 awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WXS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
 
-OUT="$CONFIG_HOME/WGS.batch.dat"
+OUT="$CONFIG_HOME_H/WGS.batch.dat"
 awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WGS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
 
-OUT="$CONFIG_HOME/RNA-Seq.batch.dat"
+OUT="$CONFIG_HOME_H/RNA-Seq.batch.dat"
 awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "RNA-Seq") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
