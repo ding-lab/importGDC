@@ -37,6 +37,7 @@ Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to 
     export LSF_GROUP="/mwyczalk/gdc-download"
 * To limit to 5 running jobs: `bgadd -L 5 /mwyczalk/gdc-download`  (this should be a part of a setup script?)
 * To examine: `bjgroup -s /mwyczalk/gdc-download`
+* To modify, `bgmod -L 2 /mwyczalk/gdc-download`
 
 ## Batches
 
