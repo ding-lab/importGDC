@@ -24,7 +24,7 @@ A number of locale-specific variables are defined in `0_init.sh`:
 
 * `IMPORTGDC_HOME` defines the location of [importGDC](https://github.com/ding-lab/importGDC) project.
 * `DATA_DIR` is where data will be stored; in particular, tokens will be written to $DATA_DIR/token and read data will be written to `$DATA_DIR/GDC_import` 
-* `GDCTOKEN` is path to token file, e.g., `token/gdc-user-token.2017-11-04T01-21-42.215Z.txt`.
+* `GDC_TOKEN` is path to token file, e.g., `token/gdc-user-token.2017-11-04T01-21-42.215Z.txt`.
 
 Set IMPORTGDC_HOME variable to where importGDC.git project is installed.  Default is /usr/local/importGDC.  
 ```
