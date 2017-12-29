@@ -16,18 +16,12 @@
 # -u: include only UUID in output
 # -D: include data file path in output
 
-source gdc-import.config
+# TODO: update documentation
 
-if [ -z $IMPORTGDC_HOME ]; then
-    >&2 echo Please define IMPORTGDC_HOME variable by running 0_init.sh
-    exit
-fi
-if [ -z $DATA_DIR ]; then
-    >&2 echo Please define DATA_DIR variable by running 0_init.sh
-    exit
-fi
+source gdc-import.config
 
 # Example 
 # evaluate_status.c3b1.sh -u -f import:ready dat/WXS.batch.dat 
 
-bash $IMPORTGDC_HOME/batch.import/evaluate_status.sh -O $DATA_DIR "$@"
+bash $IMPORTGDC_HOME/batch.import/evaluate_status.sh -O $DATAD -C $CONFIG_HOME_H "$@"
+#bash $IMPORTGDC_HOME/batch.import/evaluate_status.sh -O $DATAD "$@"

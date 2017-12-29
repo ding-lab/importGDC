@@ -16,6 +16,19 @@
 
 source gdc-import.config
 
-# TODO: have BamMap include file size
+function writeBamMap {
+ES=$1
 
-bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATA_DIR -S $SR "$@"
+UUIDFN="$CONFIG_HOME_H/${ES}.batch.dat"
+OUT="$CONFIG_HOME_H/${BATCH}.$ES.BamMap.dat"
+
+#cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATAD -S $SR "$@"  > $OUT
+cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATAD -S $SR -H - > $OUT
+
+echo Written to $OUT
+
+}
+
+writeBamMap WXS
+writeBamMap WGS
+writeBamMap RNA-Seq

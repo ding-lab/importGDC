@@ -15,6 +15,7 @@
 # If UUID is - then read UUID from STDIN
 
 source gdc-import.config
+# Data download location given by DATAD
 
 if [ ! -e $GDCTOKEN ]; then
     >&2 echo Error: Token file $GDCTOKEN not found
@@ -28,10 +29,13 @@ fi
 
 # Copy token defined in host dir to container's /data directory
 # Note there may be some security considerations associated with this
-TOKEN_CONTAINER="/data/token/gdc-user-token.txt"
-mkdir -p $DATA_DIR/token
->&2 echo Copying $GDCTOKEN to $DATA_DIR/token/gdc-user-token.txt
-cp $GDCTOKEN $DATA_DIR/token/gdc-user-token.txt
+mkdir -p $CONFIG_HOME_H/token
+>&2 echo Copying $GDCTOKEN to $CONFIG_HOME_H/token/gdc-user-token.txt
+cp $GDCTOKEN $CONFIG_HOME_H/token/gdc-user-token.txt
+TOKEN_C="$CONFIG_HOME_C/token/gdc-user-token.txt"
+
+# This is where bsub logs go
+LOGD_H="$CONFIG_HOME_H/logs"
 
 
-bash $IMPORTGDC_HOME/batch.import/start_step.sh -O $DATA_DIR -S $SR $LSF_GROUP_ARG -s import "$@"
+bash $IMPORTGDC_HOME/batch.import/start_step.sh -M -O $DATAD -S $SR $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"

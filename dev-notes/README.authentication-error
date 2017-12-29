@@ -1,0 +1,9 @@
+Testing permissions for downloading.  To do so, focusing on one sample with,
+
+    bash start_import.c3b1.sh -M 408d28c0-f5ef-4f57-8f2b-58203af65413
+
+We are moving the data whcih has already been downloaded:
+    ~/projects/CPTAC3/data/GDC_import/408d28c0-f5ef-4f57-8f2b-58203af65413/CPT0080610009.WholeExome.RP-1303.bam
+(added .orig to the .bam and .bai files - these have since been restored to original filename)
+
+Using token gdc-user-token.2017-11-14T15_55_43.552Z.txt downloaded with Safari browser.  This resolved problem.
