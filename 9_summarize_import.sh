@@ -14,7 +14,7 @@
 # options
 # -r REF: reference name - assume same for all SR.  Default: hg19
 
-source gdc-import.config
+source gdc-import.config.sh
 
 function writeBamMap {
 ES=$1

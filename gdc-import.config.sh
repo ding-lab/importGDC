@@ -18,7 +18,13 @@ export CONFIG_HOME_C="/data/GDC_import/import.config/$BATCH"
 mkdir -p $CONFIG_HOME_H
 
 # Moving SR file here is part of installation
-export SR="$CONFIG_HOME_H/SR.CPTAC3.b1.dat"
+export SR="$CONFIG_HOME_H/${BATCH}.SR.dat"
+
+if [ ! -e $SR ]; then
+    >&2 echo Error: SR file $SR does not exist
+    >&2 echo Please copy it from CPTAC3 discovery directory and try again
+    exit 1
+fi
 
 # Define this if in MGI environment
 MGI=0

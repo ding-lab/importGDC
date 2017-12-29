@@ -14,7 +14,7 @@
 #
 # If UUID is - then read UUID from STDIN
 
-source gdc-import.config
+source gdc-import.config.sh
 # Data download location given by DATAD
 
 if [ ! -e $GDC_TOKEN ]; then
