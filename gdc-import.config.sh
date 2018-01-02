@@ -26,5 +26,6 @@ if [ ! -e $SR ]; then
     exit 1
 fi
 
-# Define this if in MGI environment
+# Define this =1 if in MGI environment
+# Define this =0 otherwise
 MGI=0
