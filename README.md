@@ -18,6 +18,8 @@ Note that this token expires after some time (one month?) so this process needs 
 
 ### `0_init.sh`
 
+*this is old*
+
 A number of locale-specific variables are defined in `0_init.sh`:
 
 * `IMPORTGDC_HOME` defines the location of [importGDC](https://github.com/ding-lab/importGDC) project.
