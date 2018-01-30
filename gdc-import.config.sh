@@ -10,7 +10,7 @@ export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 # However, might want to change name, since other analysis will use this data too
 export DATAD="/diskmnt/Projects/cptac"
 #export DATA_DIR="/diskmnt/Projects/cptac"
-export GDC_TOKEN="token/gdc-user-token.2017-12-27T17_47_44.208Z.txt"
+export GDC_TOKEN="token/gdc-user-token.2018-01-29T20_46_47.665Z.txt"
 
 # This is where download-related metadata lives (config files, logs, etc)
 export CONFIG_HOME_H="$DATAD/GDC_import/import.config/$BATCH"

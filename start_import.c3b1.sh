@@ -5,17 +5,12 @@
 # This is a wrapper around importGDC/start_step.sh with CPTAC3.b1-specific setup added for convenience
 # All arguments passed to here will be passed to start_step.sh
 
-# Using LSF_Group /mwyczalk/gdc-download (TODO: allow this to be defined in environment variable)
-
 # Usage: start_import.c3b1.sh [options] UUID [UUID2 ...]
 # Start import on host computer.  
-# options:
-# -d: dry run
 #
 # If UUID is - then read UUID from STDIN
 
 source gdc-import.config.sh
-# Data download location given by DATAD
 
 if [ ! -e $GDC_TOKEN ]; then
     >&2 echo Error: Token file $GDC_TOKEN not found

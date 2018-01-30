@@ -23,7 +23,7 @@ UUIDFN="$CONFIG_HOME_H/${ES}.batch.dat"
 OUT="$CONFIG_HOME_H/${BATCH}.$ES.BamMap.dat"
 
 #cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATAD -S $SR "$@"  > $OUT
-cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATAD -S $SR -H - > $OUT
+cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/make_bam_map.sh -O $DATAD -S $SR -H - > $OUT
 
 echo Written to $OUT
 
