@@ -6,14 +6,27 @@
 
 source gdc-import.config.sh
 
+# Columns of SR.dat - Jan2018 update with sample_name
+#     1 sample_name
+#     2 case
+#     3 disease
+#     4 experimental_strategy
+#     5 sample_type
+#     6 samples
+#     7 filename
+#     8 filesize
+#     9 data_format
+#    10 UUID
+#    11 MD5
+
 OUT="$CONFIG_HOME_H/WXS.batch.dat"
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WXS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($4 == "WXS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
 
 OUT="$CONFIG_HOME_H/WGS.batch.dat"
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "WGS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($4 == "WGS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
 
 OUT="$CONFIG_HOME_H/RNA-Seq.batch.dat"
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "RNA-Seq") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($4 == "RNA-Seq") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
