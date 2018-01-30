@@ -18,7 +18,7 @@
 
 # TODO: update documentation
 
-source gdc-import.config
+source gdc-import.config.sh
 
 # Example 
 # evaluate_status.c3b1.sh -u -f import:ready dat/WXS.batch.dat 
