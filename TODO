@@ -1,1 +1,1 @@
-Get flagstat info for each bam file when downloading
+* Log files should be deleted prior to start.  They are currently appended
