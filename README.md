@@ -80,3 +80,5 @@ Create summaries of all completed RNA-Seq downloads with,
     ./evaluate_status.c3b1.sh -u -f import:completed RNA-Seq.batch.dat | ./summarize_import.c3b1.sh -H -
 
 ```
+
+TODO: show example of generated BamMap

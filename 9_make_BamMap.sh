@@ -16,19 +16,13 @@
 
 source gdc-import.config.sh
 
-function writeBamMap {
-ES=$1
 
-UUIDFN="$CONFIG_HOME_H/${ES}.batch.dat"
-OUT="$CONFIG_HOME_H/${BATCH}.$ES.BamMap.dat"
+UUIDFN="$CONFIG_HOME_H/*.batch.dat"
 
-#cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/summarize_import.sh -O $DATAD -S $SR "$@"  > $OUT
-cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/make_bam_map.sh -O $DATAD -S $SR -H - > $OUT
+OUT="$CONFIG_HOME_H/${BATCH}.BamMap.dat"
+
+# -w squelches warnings about data not being downloaded
+cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/make_bam_map.sh -O $DATAD -S $SR -H -w - | sort > $OUT
 
 echo Written to $OUT
 
-}
-
-writeBamMap WXS
-writeBamMap WGS
-writeBamMap RNA-Seq
