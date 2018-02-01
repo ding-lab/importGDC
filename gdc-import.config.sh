@@ -8,9 +8,9 @@ export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 # Data download location
 # NOTE: this has to be compatible with SomaticWrapper analysis, and should use DATAD_H from there
 # However, might want to change name, since other analysis will use this data too
-export DATAD="/gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/"
+export DATAD="/diskmnt/Projects/cptac"
 #export DATA_DIR="/diskmnt/Projects/cptac"
-export GDC_TOKEN="../token/gdc-user-token.2018-01-29T20_46_47.665Z.txt"
+export GDC_TOKEN="token/gdc-user-token.2018-01-29T20_46_47.665Z.txt"
 
 # This is where download-related metadata lives (config files, logs, etc)
 export CONFIG_HOME_H="$DATAD/GDC_import/import.config/$BATCH"
@@ -28,4 +28,4 @@ fi
 
 # Define this =1 if in MGI environment
 # Define this =0 otherwise
-MGI=1
+MGI=0
