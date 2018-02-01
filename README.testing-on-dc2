@@ -1,0 +1,17 @@
+
+nohup bash ./evaluate_status.c3b1.sh -u WXS | start_import.c3b1.sh - > logs/run1.WXS.dat
+
+* Download with indexing and flagstat successful for e933d585-96d2-4ab6-89b1-2b542d07fa9e/CPT0000140163.WholeExome.RP-1303.bam
+* Proceed with notes here: /diskmnt/Projects/Users/mwyczalk/data/import.CPTAC3/import.CPTAC3.b1/README.dc2_import
+  - automating download on DC2
+* Downloading can resume once DC2 rebooted
+
+
+* This works - WXS
+STDERR="logs/run1.WXS.err"; STDOUT="logs/run1.WXS.out"; ./evaluate_status.c3b1.sh -f import:ready -u WXS | nohup ./start_import.c3b1.sh - 1>$STDOUT 2>$STDERR &
+
+
+STDERR="logs/run1.WGS.err"; STDOUT="logs/run1.WGS.out"; ./evaluate_status.c3b1.sh -f import:ready -u WGS | nohup ./start_import.c3b1.sh - 1>$STDOUT 2>$STDERR &
+
+
+STDERR="logs/run1.RNA-Seq.err"; STDOUT="logs/run1.RNA-Seq.out"; ./evaluate_status.c3b1.sh -f import:ready -u RNA-Seq | nohup ./start_import.c3b1.sh - 1>$STDOUT 2>$STDERR &
