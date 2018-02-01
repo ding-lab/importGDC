@@ -21,8 +21,10 @@ UUIDFN="$CONFIG_HOME_H/*.batch.dat"
 
 OUT="$CONFIG_HOME_H/${BATCH}.BamMap.dat"
 
+bash $IMPORTGDC_HOME/batch.import/make_bam_map.sh -H > $OUT
+
 # -w squelches warnings about data not being downloaded
-cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/make_bam_map.sh -O $DATAD -S $SR -H -w - | sort > $OUT
+cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/batch.import/make_bam_map.sh -O $DATAD -S $SR - | sort >> $OUT
 
 echo Written to $OUT
 

@@ -22,6 +22,8 @@ source gdc-import.config.sh
 #    10 UUID
 #    11 MD5
 
+echo SR file: $SR
+
 OUT="$CONFIG_HOME_H/WXS.batch.dat"
 awk 'BEGIN{FS="\t";OFS="\t"}{if ($4 == "WXS") print}' $SR | sort | bash $IMPORTGDC_HOME/batch.import/batch_from_SR.sh - > $OUT
 echo Written to $OUT
