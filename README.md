@@ -1,6 +1,8 @@
-# Download CPTAC3 Batch 1 data
+# Download CPTAC3 Batch 2 data
 
-This project has (or will have) branches for both DC2 and MGI environment downloads.
+This project used to have a master branch for MGI, DC2 branch for typical docker environment.
+TODO: merge DC2 branch into master and get rid of it; all differences between environments are 
+specified in `gdc-import.config.sh`
 
 ## Installation
 
