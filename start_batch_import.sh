@@ -24,16 +24,16 @@ fi
 
 # Copy token defined in host dir to container's /data directory
 # Note there may be some security considerations associated with this
-mkdir -p $CONFIG_HOME_H/token
->&2 echo Copying $GDC_TOKEN to $CONFIG_HOME_H/token/gdc-user-token.txt
-cp $GDC_TOKEN $CONFIG_HOME_H/token/gdc-user-token.txt
-TOKEN_C="$CONFIG_HOME_C/token/gdc-user-token.txt"
+mkdir -p $IMPORT_CONFIGD_H/token
+>&2 echo Copying $GDC_TOKEN to $IMPORT_CONFIGD_H/token/gdc-user-token.txt
+cp $GDC_TOKEN $IMPORT_CONFIGD_H/token/gdc-user-token.txt
+TOKEN_C="$IMPORT_CONFIGD_C/token/gdc-user-token.txt"
 
 # This is where bsub logs go
-LOGD_H="$CONFIG_HOME_H/logs"
+LOGD_H="$IMPORT_CONFIGD_H/logs"
 
 if [ $MGI == 1 ]; then
 MGI_FLAG="-M"
 fi
 
-bash $IMPORTGDC_HOME/batch.import/start_step.sh $MGI_FLAG -O $DATAD_H -S $SR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"
+bash $IMPORTGDC_HOME/start_step.sh $MGI_FLAG -O $IMPORT_DATAD_H -S $SR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"

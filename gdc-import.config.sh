@@ -6,19 +6,19 @@ BATCH="CPTAC3.b2"
 export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 
 # Data download location
-# NOTE: this has to be compatible with SomaticWrapper analysis, and should use DATAD_H from there
+# NOTE: this has to be compatible with SomaticWrapper analysis, and should use IMPORT_DATAD_H from there
 # However, might want to change name, since other analysis will use this data too
-export DATAD_H="/gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/"
+export IMPORT_DATAD_H="/gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/"
 #export DATA_DIR="/diskmnt/Projects/cptac"
 export GDC_TOKEN="../token/gdc-user-token.2018-01-29T20_46_47.665Z.txt"
 
 # This is where download-related metadata lives (config files, logs, etc)
-export CONFIG_HOME_H="$DATAD/GDC_import/import.config/$BATCH"
-export CONFIG_HOME_C="/data/GDC_import/import.config/$BATCH"
-mkdir -p $CONFIG_HOME_H
+export IMPORT_CONFIGD_H="$IMPORT_DATAD_H/GDC_import/import.config/$BATCH"
+export IMPORT_CONFIGD_C="/data/GDC_import/import.config/$BATCH"
+mkdir -p $IMPORT_CONFIGD_H
 
 # Moving SR file here is part of installation
-export SR_H="$CONFIG_HOME_H/${BATCH}.SR.dat"
+export SR_H="$IMPORT_CONFIGD_H/${BATCH}.SR.dat"
 
 if [ ! -e $SR_H ]; then
     >&2 echo Error: SR file $SR_H does not exist
