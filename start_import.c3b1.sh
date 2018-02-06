@@ -36,4 +36,4 @@ if [ $MGI == 1 ]; then
 MGI_FLAG="-M"
 fi
 
-bash $IMPORTGDC_HOME/batch.import/start_step.sh $MGI_FLAG -O $DATAD -S $SR $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"
+bash $IMPORTGDC_HOME/batch.import/start_step.sh $MGI_FLAG -O $DATAD_H -S $SR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"
