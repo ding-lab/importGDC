@@ -8,7 +8,7 @@ export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 # Data download location
 # NOTE: this has to be compatible with SomaticWrapper analysis, and should use IMPORT_DATAD_H from there
 # However, might want to change name, since other analysis will use this data too
-export IMPORT_DATAD_H="/gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/"
+export IMPORT_DATAD_H="/gscmnt/gc2741/ding/CPTAC3-data"
 #export DATA_DIR="/diskmnt/Projects/cptac"
 export GDC_TOKEN="../token/gdc-user-token.2018-01-29T20_46_47.665Z.txt"
 
@@ -19,6 +19,10 @@ mkdir -p $IMPORT_CONFIGD_H
 
 # Moving SR file here is part of installation
 export SR_H="$IMPORT_CONFIGD_H/${BATCH}.SR.dat"
+
+# BAMMAP is created as the final step of import process.
+# Like SR, it need not be visible from container, so need not be in $CONFIG_HOME_H
+export BAMMAP="$CONFIG_HOME_H/${BATCH}.BamMap.dat"
 
 if [ ! -e $SR_H ]; then
     >&2 echo Error: SR file $SR_H does not exist

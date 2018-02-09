@@ -19,10 +19,9 @@ source gdc-import.config.sh
 
 UUIDFN="$CONFIG_HOME_H/*.batch.dat"
 
-OUT="$CONFIG_HOME_H/${BATCH}.BamMap.dat"
 
 # -w squelches warnings about data not being downloaded
-cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/make_bam_map.sh -O $DATAD -S $SR -H -w - | sort > $OUT
+cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/make_bam_map.sh -O $DATAD -S $SR -H -w - | sort > $BAMMAP
 
 echo Written to $OUT
 

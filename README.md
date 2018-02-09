@@ -1,4 +1,8 @@
-# Download CPTAC3 Batch 2 data
+# Download CPTAC3 Batch 2 data, part b
+
+This is download part b, since original disk filled.  Doing this from a different directory to keep things simple.
+
+See ../b2.summary for workflow on merging 
 
 This project used to have a master branch for MGI, DC2 branch for typical docker environment.
 TODO: merge DC2 branch into master and get rid of it; all differences between environments are 
