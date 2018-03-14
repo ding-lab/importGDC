@@ -16,12 +16,10 @@
 
 source gdc-import.config.sh
 
-
-UUIDFN="$CONFIG_HOME_H/*.batch.dat"
-
+UUIDFN="$IMPORT_CONFIGD_H/*.batch.dat"
 
 # -w squelches warnings about data not being downloaded
-cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/make_bam_map.sh -O $DATAD -S $SR -H -w - | sort > $BAMMAP
+cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/make_bam_map.sh -O $IMPORT_DATAD_H -S $SR_H -H - | sort > $BAMMAP
 
-echo Written to $OUT
+echo Written to $BAMMAP
 
