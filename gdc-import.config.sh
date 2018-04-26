@@ -1,14 +1,14 @@
 
 
 # the batch of cases under consideration for download, aka the project name
-BATCH="CPTAC3.b3"
+BATCH="CPTAC3.b12-TAN"
 
 export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 
 # Data download location
-#export IMPORT_DATAD_H="/gscmnt/gc2741/ding/CPTAC3-data"
-export IMPORT_DATAD_H="/diskmnt/Projects/cptac_downloads/data"
-export GDC_TOKEN="../token/gdc-user-token.2018-03-13T15_50_31.158Z.txt"
+export IMPORT_DATAD_H="/gscmnt/gc2619/dinglab_cptac3"
+#export IMPORT_DATAD_H="/diskmnt/Projects/cptac_downloads/data"
+export GDC_TOKEN="../token/gdc-user-token.2018-04-26T18_28_31.987Z.txt"
 
 # This is where download-related metadata lives (config files, logs, etc)
 export IMPORT_CONFIGD_H="$IMPORT_DATAD_H/GDC_import/import.config/$BATCH"
@@ -30,4 +30,4 @@ fi
 
 # Define this =1 if in MGI environment
 # Define this =0 otherwise
-MGI=0
+MGI=1
