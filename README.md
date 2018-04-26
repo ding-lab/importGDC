@@ -140,3 +140,13 @@ Confirm download is going by looking at log:
 ```
 /gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/GDC_import/import.config/CPTAC3.b2/logs/14c0cb14-71e4-4f26-89f1-349ce26f0bf9.out
 ```
+
+## DC2 procedures
+
+```
+STDERR="logs/run1.WXS.err"; STDOUT="logs/run1.WXS.out"; ./evaluate_batch_status.sh -f import:ready -u WXS | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
+STDERR="logs/run1.WGS.err"; STDOUT="logs/run1.WGS.out"; ./evaluate_batch_status.sh -f import:ready -u WGS | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
+STDERR="logs/run1.RNA-Seq.err"; STDOUT="logs/run1.RNA-Seq.out"; ./evaluate_batch_status.sh -f import:ready -u RNA-Seq | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
+```
+
+After full download, should compress logs

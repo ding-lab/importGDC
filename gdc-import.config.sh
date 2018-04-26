@@ -6,10 +6,8 @@ BATCH="CPTAC3.b3"
 export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 
 # Data download location
-# NOTE: this has to be compatible with SomaticWrapper analysis, and should use IMPORT_DATAD_H from there
-# However, might want to change name, since other analysis will use this data too
-export IMPORT_DATAD_H="/gscmnt/gc2741/ding/CPTAC3-data"
-#export DATA_DIR="/diskmnt/Projects/cptac"
+#export IMPORT_DATAD_H="/gscmnt/gc2741/ding/CPTAC3-data"
+export IMPORT_DATAD_H="/diskmnt/Projects/cptac_downloads/data"
 export GDC_TOKEN="../token/gdc-user-token.2018-03-13T15_50_31.158Z.txt"
 
 # This is where download-related metadata lives (config files, logs, etc)
@@ -32,4 +30,4 @@ fi
 
 # Define this =1 if in MGI environment
 # Define this =0 otherwise
-MGI=1
+MGI=0
