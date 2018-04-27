@@ -1,4 +1,2 @@
+confirm MD5SUM of all downloaded data is same as expected in SR file
 
-* figure out why using more space than expected
-* all RNA-Seq, some WXS and WGS which were incomplete or not downloaded (ready) in .b2 are started here
-  - confirm that all these are downloaded

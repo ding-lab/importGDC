@@ -144,6 +144,7 @@ Confirm download is going by looking at log:
 ## DC2 procedures
 
 ```
+mkdir -p logs
 STDERR="logs/run1.WXS.err"; STDOUT="logs/run1.WXS.out"; ./evaluate_batch_status.sh -f import:ready -u WXS | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
 STDERR="logs/run1.WGS.err"; STDOUT="logs/run1.WGS.out"; ./evaluate_batch_status.sh -f import:ready -u WGS | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
 STDERR="logs/run1.RNA-Seq.err"; STDOUT="logs/run1.RNA-Seq.out"; ./evaluate_batch_status.sh -f import:ready -u RNA-Seq | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
