@@ -1,14 +1,14 @@
 # Download CPTAC3 Batch 3 data
 
-## Batch 3 details
+## Batch 1 LUAD details
 
-Discovery on epazote here: /Users/mwyczalk/Projects/CPTAC3/Discovery/discover.CPTAC3.b3
+The SR file for all LUAD is here:
+    `/home/mwyczalk_test/Projects/CPTAC3/Discover/discover.CPTAC3.b12-LUAD/dat/CPTAC3.LUAD.b1-5.SR.dat`
 
-Need to copy the following files to, `/gscmnt/gc2741/ding/CPTAC3-data/GDC_import/import.config/CPTAC3.b3`
+The batch 1 subset is defined here:
+    `/gscuser/mwyczalk/projects/CPTAC3/discover/CPTAC3.LUAD.b1/dat/LUAD.b1.SR.dat`
 
-* CPTAC3.b3.SR.dat
-* CPTAC3.b3.Demographics.dat
-
+This is copied to `./dat/LUAD.b1.SR.dat`
 
 
 # GDC Import details
@@ -149,4 +149,7 @@ STDERR="logs/run1.WGS.err"; STDOUT="logs/run1.WGS.out"; ./evaluate_batch_status.
 STDERR="logs/run1.RNA-Seq.err"; STDOUT="logs/run1.RNA-Seq.out"; ./evaluate_batch_status.sh -f import:ready -u RNA-Seq | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
 ```
 
-After full download, should compress logs
+After full download, should compress logs with,
+```
+tar -zvcf logs.tar.gz logs; rm -rf logs
+```
