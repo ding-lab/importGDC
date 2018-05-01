@@ -23,3 +23,4 @@ cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/make_bam_map.sh -O $IMPORT_DATAD_H -S $S
 
 echo Written to $BAMMAP
 
+echo TODO: check all md5sums

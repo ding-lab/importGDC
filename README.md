@@ -144,9 +144,10 @@ Confirm download is going by looking at log:
 ## DC2 procedures
 
 ```
-STDERR="logs/run1.WXS.err"; STDOUT="logs/run1.WXS.out"; ./evaluate_batch_status.sh -f import:ready -u WXS | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
-STDERR="logs/run1.WGS.err"; STDOUT="logs/run1.WGS.out"; ./evaluate_batch_status.sh -f import:ready -u WGS | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
-STDERR="logs/run1.RNA-Seq.err"; STDOUT="logs/run1.RNA-Seq.out"; ./evaluate_batch_status.sh -f import:ready -u RNA-Seq | nohup ./start_batch_import.sh - 1>$STDOUT 2>$STDERR &
+mkdir -p logs
+LOG="logs/run1.WGS.log"; ./evaluate_batch_status.sh -f import:ready -u WGS | nohup ./start_batch_import.sh - &>$LOG &
+LOG="logs/run1.WXS.log"; ./evaluate_batch_status.sh -f import:ready -u WXS | nohup ./start_batch_import.sh - &>$LOG &
+LOG="logs/run1.RNA-Seq.log"; ./evaluate_batch_status.sh -f import:ready -u RNA-Seq | nohup ./start_batch_import.sh - &>$LOG &
 ```
 
 After full download, should compress logs with,
