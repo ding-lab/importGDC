@@ -1,5 +1,5 @@
 # the batch of cases under consideration for download, aka the project name
-BATCH="d3"
+BATCH="CCRC.b5"
 
 export IMPORTGDC_HOME="./importGDC"  # importGDC is a submodule
 
