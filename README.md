@@ -22,6 +22,11 @@ A number of locale-specific variables are defined in `gdc-import.config.sh`:
 * `GDC_TOKEN`
 * set up `SR` file
 
+# Update
+
+* Moving away from batches
+* Processign based on SR file
+
 #### OLD 
 
 * `DATA_DIR` is where data will be stored; in particular, tokens will be written to $DATA_DIR/token and read data will be written to `$DATA_DIR/GDC_import` 

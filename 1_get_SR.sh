@@ -24,20 +24,19 @@ echo "                          RNA-Seq: $RNA_SIZE Tb"
 
 
 
-CASES="../CommonFiles/CPTAC3.C325.cases.dat"
-SR="../CommonFiles/CPTAC3.C325.SR.dat"
-
-BATCH="b4"  # This has to match column in cases file
-DIS="LUAD"
+SR="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog/CPTAC3.hg38.b2.HAR.dat"
+BATCH="LUAD.WGS.hg38"
 
 mkdir -p dat
-TMP="dat/cases.tmp"
-SR_NEW="dat/CPTAC3.${DIS}.${BATCH}.SR.dat"
+UUID="dat/UUID.dat"
+SR_NEW="dat/CPTAC3.$BATCH.SR.dat"
 
-awk -v batch=$BATCH -v dis=$DIS 'BEGIN{FS="\t"; OFS="\t"}{if (($3 == batch) && ($2 == dis)) print $1}' $CASES  > $TMP
+echo "AWK start"
+awk 'BEGIN{FS="\t"; OFS="\t"}{if ($3 == "LUAD" && $4 == "WGS") print $10}' $SR  > $UUID
+echo "AWK end"
 
 head -n1 $SR > $SR_NEW
-grep -f $TMP $SR >> $SR_NEW
+grep -f $UUID $SR >> $SR_NEW
 
 echo Written to $SR_NEW
 
