@@ -105,10 +105,10 @@ Note, three preliminary WGS runs need to be fixed:
     - e933d585-96d2-4ab6-89b1-2b542d07fa9e
 
 
-Starting batch download of all WGS ready samples (this can be run in docker-interactive session):
+Starting batch download of all ready samples (this can be run in docker-interactive session):
 ```
 export LSF_GROUP="/mwyczalk/gdc-download"
-./evaluate_batch_status.sh -u -f import:ready WGS | ./start_batch_import.sh -
+./evaluate_batch_status.sh -u -f import:ready | ./start_batch_import.sh -
 ```
 
 ### Status
@@ -132,9 +132,7 @@ Confirm download is going by looking at log:
 
 ```
 mkdir -p logs
-LOG="logs/run1.WGS.log"; ./evaluate_batch_status.sh -f import:ready -u WGS | nohup ./start_batch_import.sh - &>$LOG &
-LOG="logs/run1.WXS.log"; ./evaluate_batch_status.sh -f import:ready -u WXS | nohup ./start_batch_import.sh - &>$LOG &
-LOG="logs/run1.RNA-Seq.log"; ./evaluate_batch_status.sh -f import:ready -u RNA-Seq | nohup ./start_batch_import.sh - &>$LOG &
+LOG="logs/run1.all.log"; ./evaluate_batch_status.sh -f import:ready -u | nohup ./start_batch_import.sh - &>$LOG &
 ```
 
 After full download, should compress logs with,
