@@ -130,9 +130,10 @@ Confirm download is going by looking at log:
 
 ## DC2 procedures
 
+Preferred approach is to run this within tmux, so no logs or nohup.
+
 ```
-mkdir -p logs
-LOG="logs/run1.all.log"; ./evaluate_batch_status.sh -f import:ready -u | nohup ./start_batch_import.sh - &>$LOG &
+./evaluate_batch_status.sh -f import:ready -u | ./start_batch_import.sh - 
 ```
 
 After full download, should compress logs with,

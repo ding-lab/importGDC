@@ -2,28 +2,43 @@
 
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
     
-# This is a wrapper around importGDC/summarize_import.sh with CPTAC3.b1-specific setup added for convenience
-# All arguments passed to here will be passed to evaluate_status.sh
-
-# Summarize details of given samples and check success of 
-# Usage: summarize_import.sh [options] UUID [UUID2 ...]
-# If UUID is - then read UUID from STDIN
-#
-# Output written to STDOUT
-
-# options
-# -r REF: reference name - assume same for all SR.  Default: hg19
+# Check success of downloads and generate BamMap file.  Also writes merged BamMap, 
+# and instructions for user
 
 source gdc-import.config.sh
 
-UUIDFN="$IMPORT_CONFIGD_H/*.batch.dat"
+REF="-r $REFERENCE"
 
-REF="-r hg38"
+bash importGDC/make_bam_map.sh -H > $BAMMAP
+bash importGDC/make_bam_map.sh -O $STAGE_ROOT -S $SR_H $REF - | sort >> $BAMMAP
 
-# -w squelches warnings about data not being downloaded
-bash $IMPORTGDC_HOME/make_bam_map.sh -H > $BAMMAP
-cut -f 1 $UUIDFN | bash $IMPORTGDC_HOME/make_bam_map.sh -O $IMPORT_DATAD_H -S $SR_H $REF - | sort >> $BAMMAP
+rc=$?
+if [[ $rc != 0 ]]; then
+    >&2 echo Written to $BAMMAP
+    >&2 echo Errors / warnings $rc: $!.  Exiting.
+    exit $rc;
+fi
 
-echo Written to $BAMMAP
+# If no errors, write merged BamMap, which is BAMMAP and BAMMAP_MASTER concatenated and sorted
+# The output filename will be $BAMMAP.merged
+# If master BAMMAP not defined, exit with no error; if defined but not exist, exit with error
+if [ -z $BAMMAP_MASTER ]; then
+    >&2 echo Master BamMap not defined.  Stopping.
+    >&2 echo Download BamMap written to $BAMMAP
+    exit 0
+fi
+if [ ! -e $BAMMAP_MASTER ]; then
+    >&2 echo Error: Master BamMap defined but does not exist.  Exiting 
+    >&2 echo Master BamMap: $BAMMAP_MASTER
+    exit 1
+fi
 
-echo TODO: check all md5sums
+BMM="${BAMMAP}.merged"
+
+head -n1 $BAMMAP > $BMM
+cat $BAMMAP_MASTER $BAMMAP | grep -v "^#" | sort >> $BMM
+
+>&2 echo Success.  Download BamMap written to $BAMMAP
+>&2 echo This file was merged with master BamMap $BAMMAP_MASTER
+>&2 echo and written to merged master $BMM
+>&2 echo Please examine merged master file and replace original master as appropriate

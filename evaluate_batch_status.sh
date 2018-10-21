@@ -25,5 +25,5 @@ source gdc-import.config.sh
 
 #SR_TEST="dat/test.SR.dat"
 
-bash importGDC/evaluate_status.sh -O $IMPORT_DATAD_H -C $IMPORT_CONFIGD_H "$@" $SR_H
-#bash importGDC/evaluate_status.sh -O $IMPORT_DATAD_H -C $IMPORT_CONFIGD_H "$@" $SR_TEST
+bash importGDC/evaluate_status.sh -O $STAGE_ROOT -C $IMPORT_CONFIGD_H "$@" $SR_H
+#bash importGDC/evaluate_status.sh -O $STAGE_ROOT -C $IMPORT_CONFIGD_H "$@" $SR_TEST
