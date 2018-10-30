@@ -1,12 +1,12 @@
 # Download batch name.  
-BATCH="UCEC.WGS.hg38.yb6"
+BATCH="UCEC.WGS.hg38.all"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
 STAGE_ROOT="/diskmnt/Projects/cptac_downloads_3"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2018-09-27T19_49_04.999Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2018-10-27T22_53_11.029Z.txt"
 
 
 # This is where download-related metadata lives (config files, logs, etc)
@@ -33,4 +33,4 @@ BAMMAP="dat/CPTAC3.${BATCH}.BamMap.dat"
 MGI=0
 
 # Code for reference, tupically hg19 or hg38
-REFERENCE="hg19"
+REFERENCE="hg38"
