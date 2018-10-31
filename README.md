@@ -1,7 +1,7 @@
 # GDC Import details
 ## Installation
 
-Scripts here rely on [importGDC.git](/gscuser/mwyczalk/src/importGDC). This is installed as a submodule with command,
+Scripts here rely on [importGDC.git](https://github.com/ding-lab/importGDC.git). This is installed as a submodule with command,
 ```
 git clone --recursive https://github.com/ding-lab/importGDC.CPTAC3.b1
 mv importGDC.CPTAC3.b1 importGDC.CPTAC3.b2
@@ -136,7 +136,7 @@ Preferred approach is to run this within tmux, so no logs or nohup.
 ./evaluate_batch_status.sh -f import:ready -u | ./start_batch_import.sh - 
 ```
 
-After full download, should compress logs with,
+Can start a second, non-competing download with,
 ```
-tar -zvcf logs.tar.gz logs; rm -rf logs
+./evaluate_batch_status.sh -f import:ready -u | tac | ./start_batch_import.sh - 
 ```

@@ -3,7 +3,7 @@ BATCH="UCEC.WGS.hg38.all"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
-STAGE_ROOT="/diskmnt/Projects/cptac_downloads_3"
+STAGE_ROOT="/diskmnt/Projects/cptac_downloads_5"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
 GDC_TOKEN="../token/gdc-user-token.2018-10-27T22_53_11.029Z.txt"
@@ -14,6 +14,9 @@ IMPORT_CONFIGD_H="$STAGE_ROOT/GDC_import/import.config/CPTAC3.$BATCH"
 >&2 echo IMPORT_CONFIGD $IMPORT_CONFIGD_H
 IMPORT_CONFIGD_C="/data/GDC_import/import.config/CPTAC3.$BATCH"
 mkdir -p $IMPORT_CONFIGD_H
+
+# this is used in importGDC scripts
+export IMPORTGDC_HOME="./importGDC"  
 
 # Master SR file containing all samples.  We will download a subset of these
 SR_MASTER="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.hg38.b2.HAR.dat"
