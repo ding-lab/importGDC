@@ -24,7 +24,7 @@ echo "                          RNA-Seq: $RNA_SIZE Tb"
 }
 
 mkdir -p dat
-UUID="dat/UUID.dat"
+UUID="dat/UUID-download.dat"
 
 head -n1 $SR_MASTER > $SR_H
 grep -f $UUID $SR_MASTER >> $SR_H
