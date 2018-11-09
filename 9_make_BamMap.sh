@@ -16,7 +16,9 @@ bash importGDC/make_bam_map.sh -O $STAGE_ROOT -S $SR_H $REF - | sort >> $BAMMAP
 rcs=${PIPESTATUS[*]};
 for rc in ${rcs}; do
 	if [[ $rc != 0 ]]; then
-		>&2 echo Fatal error.  Exiting.
+		>&2 echo Errors / warnings processing BamMap 
+        >&2 echo Written successfully to $BAMMAP
+        >&2 echo Stopping.  Will not merge with Master BamMap.
 		exit $rc;
 	fi;
 done
