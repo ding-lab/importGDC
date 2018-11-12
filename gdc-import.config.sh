@@ -1,8 +1,11 @@
 # Download batch name.  
-BATCH="hg38.WXS.sc13"
+
+BATCH="CCRC.hg38.all"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
+#STAGE_ROOT="/diskmnt/Projects/cptac_downloads_5"
+STAGE_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
 GDC_TOKEN="../token/gdc-user-token.2018-10-27T22_53_11.029Z.txt"
@@ -32,10 +35,14 @@ mkdir -p $IMPORT_CONFIGD_H
 # this is used in importGDC scripts
 export IMPORTGDC_HOME="./importGDC"  
 
+
 # This is the SR file which will drive processing here: all samples in this file will be downloaded
 # This file is generated in step 2 as a subset of SR_MASTER
 SR_H="dat/$BATCH.SR.dat"
 
 # BAMMAP is created as the final step of import process.
-BAMMAP="dat/${BATCH}.BamMap.dat"
+BAMMAP="dat/$BATCH.BamMap.dat"
+
+# Define this =1 if in MGI environment, =0 otherwise
+MGI=1
 

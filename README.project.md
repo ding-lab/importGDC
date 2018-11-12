@@ -1,3 +1,7 @@
-# Download CPTAC3 LUAD batch 3 data
+# Download all CPTAC3 CCRC hg38 WGS and WXS data which has not yet been downloaded
 
-Using C325 SR file, and subsetting based on LUAD Cases list
+
+Total required disk space WGS: 21.8956 Tb
+                          WXS: 0 Tb
+                          RNA-Seq: 0 Tb
+
