@@ -1,5 +1,4 @@
-# Get all UCEC hg38 WGS cases which have not yet been downloaded
-# Note that SR_MASTER here refers to HAR (i.e., hg38) data
+# Download all samples for a given disease, reference, and experimental strategy
 
 # Plan:
 # First, get all CCRC UUIDs in SR file - these are all available hg38 data at GDC
