@@ -1,4 +1,4 @@
-# Get all CCRC hg38 cases which have not yet been downloaded
+# Get all UCEC hg38 WGS cases which have not yet been downloaded
 # Note that SR_MASTER here refers to HAR (i.e., hg38) data
 
 # Plan:
@@ -26,10 +26,37 @@ fi
 echo SR_MASTER: $SR_MASTER
 echo BAMMAP_MASTER: $BAMMAP_MASTER
 
-# Get all CCRC data in SR 
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "CCRC") print $10}' $SR_MASTER | sort > $UUID_ALL
-# Get all CCRC data in BamMap
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "CCRC") print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
+# SR Columns
+#     1  sample_name
+#     2  case
+#     3  disease
+#     4  experimental_strategy
+#     5  sample_type
+#     6  samples
+#     7  filename
+#     8  filesize
+#     9  data_format
+#    10  UUID
+#    11  MD5
+#    12  reference
+
+# BamMap columns
+#     1  sample_name
+#     2  case
+#     3  disease
+#     4  experimental_strategy
+#     5  sample_type
+#     6  data_path
+#     7  filesize
+#     8  data_format
+#     9  reference
+#    10  UUID
+#    11  system
+
+# Get all UCEC WGS hg38 data in SR 
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "UCEC" && $4 == "WGS" && $12 == "hg38") print $10}' $SR_MASTER | sort > $UUID_ALL
+# Get all UCEC WGS hg38 data in BamMap
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "UCEC" && $4 == "WGS" && $9 == "hg38") print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
 
 # now obtain all UUID which exist in UUID_LOCAL but not UUID_ALL
 # recall: `comm -23 A B` returns lines unique in A
