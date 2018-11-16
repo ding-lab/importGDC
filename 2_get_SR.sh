@@ -16,11 +16,13 @@ DAT=$1
 WGS_SIZE=$(get_size_by_type WGS)
 WXS_SIZE=$(get_size_by_type WXS)
 RNA_SIZE=$(get_size_by_type RNA-Seq)
+MIRNA_SIZE=$(get_size_by_type miRNA-Seq)
 
 echo $DAT
 echo "Total required disk space WGS: $WGS_SIZE Tb"
 echo "                          WXS: $WXS_SIZE Tb"
 echo "                          RNA-Seq: $RNA_SIZE Tb"
+echo "                        miRNA-Seq: $MIRNA_SIZE Tb"
 }
 
 mkdir -p dat

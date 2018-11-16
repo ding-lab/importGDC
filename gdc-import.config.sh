@@ -1,6 +1,6 @@
 # Download batch name.  
 
-BATCH="UCEC.WGS.hb2"
+BATCH="miRNA.hb2"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
@@ -11,12 +11,19 @@ GDC_TOKEN="../token/gdc-user-token.2018-10-27T22_53_11.029Z.txt"
 # Master SR file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
 
-## KATMAI
+## katmai
+#SR_MASTER="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.SR.dat"
+#BAMMAP_MASTER="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/katmai.BamMap.dat"
+#STAGE_ROOT="/diskmnt/Projects/cptac_downloads_5"
+#MGI=0
+#SYSTEM="katmai"
+
+## denali
 SR_MASTER="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.SR.dat"
-BAMMAP_MASTER="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/katmai.BamMap.dat"
-STAGE_ROOT="/diskmnt/Projects/cptac_downloads_5"
+BAMMAP_MASTER="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/denali.BamMap.dat"
+STAGE_ROOT="/diskmnt/Projects/cptac_downloads/data"
 MGI=0
-SYSTEM="katmai"
+SYSTEM="denali"
 
 # MGI
 #SR_MASTER="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog/CPTAC3.SR.dat"
