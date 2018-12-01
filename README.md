@@ -66,7 +66,7 @@ Scripts `evaluate_batch_status.sh` and `start_batch_step.sh` are wrappers around
 The following command will start import of all WXS samples which have a status of "ready":
 ```
     export LSF_GROUP="/mwyczalk/gdc-download"
-    bash evaluate_batch_status.sh -u -f import:ready WXS | bash start_batch_import.sh -
+    bash evaluate_batch_status.sh -u -f import:ready | bash start_batch_import.sh -
 ```
 Note that these scripts need to be edited for specific paths, if token changes, etc.
 
@@ -79,7 +79,7 @@ TODO: illustrate how downloads started on DC2
 Validation of downloading and indexing, as well as providing summaries of downloaded data, is done with `summarize_batch_import.sh`
 Create summaries of all completed RNA-Seq downloads with,
 ```
-    ./evaluate_batch_status.sh -u -f import:completed RNA-Seq.batch.dat | ./summarize_batch_import.sh -H -
+    ./evaluate_batch_status.sh -u -f import:completed | ./summarize_batch_import.sh -H -
 
 ```
 
