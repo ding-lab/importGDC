@@ -23,7 +23,7 @@ source gdc-import.config.sh
 # Example 
 # evaluate_status.c3b1.sh -u -f import:ready dat/WXS.batch.dat 
 
-#SR_TEST="dat/test.SR.dat"
+#AR_TEST="dat/test.AR.dat"
 
-bash importGDC/evaluate_status.sh -O $STAGE_ROOT -C $IMPORT_CONFIGD_H "$@" $SR_H
-#bash importGDC/evaluate_status.sh -O $STAGE_ROOT -C $IMPORT_CONFIGD_H "$@" $SR_TEST
+bash importGDC/evaluate_status.sh -O $STAGE_ROOT -C $IMPORT_CONFIGD_H "$@" $AR_H
+#bash importGDC/evaluate_status.sh -O $STAGE_ROOT -C $IMPORT_CONFIGD_H "$@" $AR_TEST

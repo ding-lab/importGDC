@@ -36,4 +36,4 @@ if [ $MGI == 1 ]; then
 MGI_FLAG="-M"
 fi
 
-bash importGDC/start_step.sh $MGI_FLAG -O $STAGE_ROOT -S $SR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"
+bash importGDC/start_step.sh $MGI_FLAG -O $STAGE_ROOT -S $AR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"

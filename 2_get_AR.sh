@@ -1,6 +1,3 @@
-# Here, we use the C325 SR file generated on denali here:
-# We select a subset of cases from the file /Users/mwyczalk/Projects/CPTAC3/CPTAC3.Cases/dat/CPTAC3.C325.cases.dat 
-# 
 
 source gdc-import.config.sh
 
@@ -42,7 +39,7 @@ echo "                        miRNA-Seq: $MIRNA_SIZE Tb in $MIRNA_COUNT files"
 mkdir -p dat
 UUID="dat/UUID-download.dat"
 
-head -n1 $SR_MASTER > $SR_H
-grep -f $UUID $SR_MASTER >> $SR_H
+head -n1 $AR_MASTER > $AR_H
+grep -f $UUID $AR_MASTER >> $AR_H
 
-summarize $SR_H
+summarize $AR_H
