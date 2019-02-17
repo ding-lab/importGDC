@@ -53,9 +53,9 @@ echo BAMMAP_MASTER: $BAMMAP_MASTER
 #    11  system
 
 # Get all data in AR 
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "UCEC" && $4 == "WGS" && $12 == "hg38") print $10}' $AR_MASTER | sort > $UUID_ALL
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "LUAD" && $4 == "RNA-Seq" && $12 == "hg38" && $7 ~ "genomic") print $10}' $AR_MASTER | sort > $UUID_ALL
 # Get all data in BamMap
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "UCEC" && $4 == "WGS" && $9 == "hg38") print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
+awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "LUAD" && $4 == "RNA-Seq" && $9 == "hg38" && $6 ~ "genomic") print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
 
 # now obtain all UUID which exist in UUID_LOCAL but not UUID_ALL
 # recall: `comm -23 A B` returns lines unique in A

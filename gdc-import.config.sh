@@ -6,7 +6,7 @@ BATCH="LUAD.RNA-Seq.hg38"
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2018-10-27T22_53_11.029Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2019-01-28T23_27_07.488Z.txt"
 
 # Master AR file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
@@ -28,7 +28,7 @@ GDC_TOKEN="../token/gdc-user-token.2018-10-27T22_53_11.029Z.txt"
 # MGI
 AR_MASTER="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog/CPTAC3.AR.dat"
 BAMMAP_MASTER="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog/MGI.BamMap.dat"
-STAGE_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
+STAGE_ROOT="/gscmnt/gc2619/dinglab_cptac3"
 # Define this =1 if in MGI environment, =0 otherwise
 MGI=1
 SYSTEM="MGI"
