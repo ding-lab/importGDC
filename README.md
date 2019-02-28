@@ -1,4 +1,11 @@
 # GDC Import details
+
+TODO:
+
+* Implement parallel for non-MGI downloads
+* Indicate time and count for downloads, to simplify tracking (look at export project)
+
+
 ## Installation
 
 Scripts here rely on [importGDC.git](https://github.com/ding-lab/importGDC.git). This is installed as a submodule with command,
