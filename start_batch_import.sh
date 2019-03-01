@@ -24,16 +24,17 @@ fi
 
 # Copy token defined in host dir to container's /data directory
 # Note there may be some security considerations associated with this
+# TODO: this should be done by start_step, not here.
 mkdir -p $IMPORT_CONFIGD_H/token
 >&2 echo Copying $GDC_TOKEN to $IMPORT_CONFIGD_H/token/gdc-user-token.txt
 cp $GDC_TOKEN $IMPORT_CONFIGD_H/token/gdc-user-token.txt
 TOKEN_C="$IMPORT_CONFIGD_C/token/gdc-user-token.txt"
 
-# This is where bsub logs go
+# This is where logs go
 LOGD_H="$IMPORT_CONFIGD_H/logs"
 
 if [ $MGI == 1 ]; then
-MGI_FLAG="-M"
+    MGI_FLAG="-M"
 fi
 
-bash importGDC/start_step.sh $MGI_FLAG -O $STAGE_ROOT -S $AR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H -s import "$@"
+bash importGDC/start_step.sh $MGI_FLAG -O $STAGE_ROOT -S $AR_H $LSF_GROUP_ARG -t $TOKEN_C -l $LOGD_H "$@"

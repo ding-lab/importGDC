@@ -11,7 +11,7 @@ mkdir -p dat
 
 UUID_ALL="dat/UUID-all.dat"
 UUID_LOCAL="dat/UUID-local.dat"
-UUID_DOWNLOAD="dat/UUID-download.dat"
+UUID_DOWNLOAD="dat/UUID-download-miRNA-Seq.dat"
 
 if [ !  -e $AR_MASTER ]; then
     >&2 echo Error: $AR_MASTER does not exist
@@ -52,10 +52,17 @@ echo BAMMAP_MASTER: $BAMMAP_MASTER
 #    10  UUID
 #    11  system
 
+DIS="LSCC"
+ES="miRNA-Seq"
+REF="NA"
+
 # Get all data in AR 
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "LUAD" && $4 == "RNA-Seq" && $12 == "hg38" && $7 ~ "genomic") print $10}' $AR_MASTER | sort > $UUID_ALL
+awk -v dis=$DIS -v es=$ES -v ref=$REF 'BEGIN{FS="\t";OFS="\t"}{if ($3 == dis && $4 == es && $12 == ref ) print $10}' $AR_MASTER | sort > $UUID_ALL
+#awk -v dis=$DIS -v es=$ES -v ref=$REF 'BEGIN{FS="\t";OFS="\t"}{if ($3 == dis && $4 == es && $12 == ref && $7 ~ "genomic") print $10}' $AR_MASTER | sort > $UUID_ALL
+
 # Get all data in BamMap
-awk 'BEGIN{FS="\t";OFS="\t"}{if ($3 == "LUAD" && $4 == "RNA-Seq" && $9 == "hg38" && $6 ~ "genomic") print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
+awk -v dis=$DIS -v es=$ES -v ref=$REF 'BEGIN{FS="\t";OFS="\t"}{if ($3 == dis && $4 == es && $9 == ref ) print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
+#awk -v dis=$DIS -v es=$ES -v ref=$REF 'BEGIN{FS="\t";OFS="\t"}{if ($3 == dis && $4 == es && $9 == ref && $6 ~ "genomic") print $10}' $BAMMAP_MASTER  | sort > $UUID_LOCAL
 
 # now obtain all UUID which exist in UUID_LOCAL but not UUID_ALL
 # recall: `comm -23 A B` returns lines unique in A
