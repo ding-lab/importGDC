@@ -139,11 +139,9 @@ Confirm download is going by looking at log:
 
 Preferred approach is to run this within tmux, so no logs or nohup.
 
+-J4 will run four jobs in parallel on DC2
+
 ```
-./evaluate_batch_status.sh -f import:ready -u | ./start_batch_import.sh - 
+./evaluate_batch_status.sh -f import:ready -u | ./start_batch_import.sh -J4 - 
 ```
 
-Can start a second, non-competing download with,
-```
-./evaluate_batch_status.sh -f import:ready -u | tac | ./start_batch_import.sh - 
-```
