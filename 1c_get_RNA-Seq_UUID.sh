@@ -4,6 +4,9 @@
 # First, get all UUIDs of interest from AR file - these are the data we want
 # Next, get all relevant UUIDs in BamMap - these are the data we have downloaded
 # Finally, get the UUIDs which exist in the AR which do NOT exist in BamMap - tehse are the ones we want to download
+DIS="HNSCC"
+ES="RNA-Seq"
+REF="hg38"
 
 source gdc-import.config.sh
 
@@ -51,10 +54,6 @@ echo BAMMAP_MASTER: $BAMMAP_MASTER
 #     9  reference
 #    10  UUID
 #    11  system
-
-DIS="LSCC"
-ES="RNA-Seq"
-REF="hg38"
 
 # Get all data in AR 
 #awk -v dis=$DIS -v es=$ES -v ref=$REF 'BEGIN{FS="\t";OFS="\t"}{if ($3 == dis && $4 == es && $12 == ref ) print $10}' $AR_MASTER | sort > $UUID_ALL
