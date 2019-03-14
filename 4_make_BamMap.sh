@@ -38,7 +38,7 @@ fi
 BMM="${BAMMAP}.merged"
 
 head -n1 $BAMMAP > $BMM
-cat $BAMMAP_MASTER $BAMMAP | grep -v "^#" | sort >> $BMM
+cat $BAMMAP_MASTER $BAMMAP | grep -v "^#" | sort -u >> $BMM
 
 >&2 echo Success.  Download BamMap written to $BAMMAP
 >&2 echo This file was merged with master BamMap $BAMMAP_MASTER
