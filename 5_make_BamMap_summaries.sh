@@ -1,13 +1,14 @@
 # Will make BamMap summaries for MGI, katmai, denali
+source gdc-import.config.sh
 
-CASES="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.cases.dat"
-AR="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.AR.dat"
+#CASES="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.cases.dat"
+#AR="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.AR.dat"
 
 function make_summary {
     BAMMAP=$1
     OUT=$2
     ARGS=$3
-    CMD="bash importGDC/summarize_cases_available.sh $ARGS $CASES $AR $BAMMAP > $OUT"
+    CMD="bash importGDC/summarize_cases_available.sh $ARGS $CASES_MASTER $AR_MASTER $BAMMAP > $OUT"
     >&2 echo Running: $CMD
     eval $CMD
     rc=$?
@@ -19,7 +20,7 @@ function make_summary {
 }
 
 
-make_summary /home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/katmai.BamMap.dat dat/katmai.BamMap-summary.txt "$@"
-make_summary /home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/MGI.BamMap.dat dat/MGI.BamMap-summary.txt "$@"
-make_summary /home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/denali.BamMap.dat dat/denali.BamMap-summary.txt "$@"
+make_summary $CATALOG/katmai.BamMap.dat dat/katmai.BamMap-summary.txt "$@"
+make_summary $CATALOG/MGI.BamMap.dat dat/MGI.BamMap-summary.txt "$@"
+make_summary $CATALOG/denali.BamMap.dat dat/denali.BamMap-summary.txt "$@"
 
