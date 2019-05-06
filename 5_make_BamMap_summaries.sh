@@ -22,5 +22,5 @@ function make_summary {
 
 make_summary $CATALOG/katmai.BamMap.dat dat/katmai.BamMap-summary.txt "$@"
 make_summary $CATALOG/MGI.BamMap.dat dat/MGI.BamMap-summary.txt "$@"
-make_summary $CATALOG/denali.BamMap.dat dat/denali.BamMap-summary.txt "$@"
+#make_summary $CATALOG/denali.BamMap.dat dat/denali.BamMap-summary.txt "$@"
 

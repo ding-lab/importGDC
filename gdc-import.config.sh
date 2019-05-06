@@ -1,21 +1,21 @@
 # Download batch name.  
 
-BATCH="GBM.hg19.20190409"
+BATCH="Y2.b2.20190415"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2019-04-09T15_28_15.778Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2019-04-28T19_54_50.838Z.txt"
 
 # Master AR file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
 
 # katmai
-#CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
-#STAGE_ROOT="/diskmnt/Projects/cptac_downloads_6"
-#MGI=0
-#SYSTEM="katmai"
+CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
+STAGE_ROOT="/diskmnt/Projects/cptac_downloads_7"
+MGI=0
+SYSTEM="katmai"
 
 ## denali
 #CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
@@ -24,11 +24,11 @@ GDC_TOKEN="../token/gdc-user-token.2019-04-09T15_28_15.778Z.txt"
 #SYSTEM="denali"
 
 # MGI
-CATALOG="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
-STAGE_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
-# Define this =1 if in MGI environment, =0 otherwise
-MGI=1
-SYSTEM="MGI"
+#CATALOG="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
+#STAGE_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
+## Define this =1 if in MGI environment, =0 otherwise
+#MGI=1
+#SYSTEM="MGI"
 
 # This is where download-related metadata lives (config files, logs, etc)
 IMPORT_CONFIGD_H="$STAGE_ROOT/GDC_import/import.config/$BATCH"
@@ -41,7 +41,7 @@ export IMPORTGDC_HOME="./importGDC"
 
 # This is common to all systems
 AR_MASTER="$CATALOG/CPTAC3.AR.dat"
-BAMMAP_MASTER="$CATALOG/MGI.BamMap.dat"
+BAMMAP_MASTER="$CATALOG/${SYSTEM}.BamMap.dat"
 CASES_MASTER="$CATALOG/CPTAC3.cases.dat"
 
 # This is the AR file which will drive processing here: all samples in this file will be downloaded
