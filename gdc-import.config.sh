@@ -1,27 +1,28 @@
 # Download batch name.  
 
-BATCH="Y2.b2.20190415"
+BATCH="Methylation.Batch9"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2019-04-28T19_54_50.838Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2019-06-06T04_48_59.198Z.txt"
 
 # Master AR file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
 
 # katmai
-CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
-STAGE_ROOT="/diskmnt/Projects/cptac_downloads_7"
-MGI=0
-SYSTEM="katmai"
+# CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
+# STAGE_ROOT="/diskmnt/Projects/cptac_downloads_7"
+# MGI=0
+# SYSTEM="katmai"
 
 ## denali
-#CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
+CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
 #STAGE_ROOT="/diskmnt/Projects/cptac_downloads/data"
-#MGI=0
-#SYSTEM="denali"
+STAGE_ROOT="/diskmnt/Projects/cptac_downloads/methylation"
+MGI=0
+SYSTEM="denali"
 
 # MGI
 #CATALOG="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
