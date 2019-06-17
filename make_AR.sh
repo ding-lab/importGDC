@@ -49,9 +49,13 @@ function print_AR_line {
     STL=`echo "$LINE" | cut -f 3`
     CASE=`echo "$LINE" | cut -f 4`
 
-    if [ "$STL" == "Normal DNA" ] || [ "$STL" == "Germline DNA" ]; then
-        ST="N"
+    # From Mathangi,  "Tumor DNA” : DNA from tumor;  "Normal DNA” : DNA from Normal Adjacent Tissue (NAT);  "Germline DNA” : DNA from germline blood
+    if [ "$STL" == "Normal DNA" ] ; then 
+        ST="A"
         SAMP_TYPE="tissue_normal"
+    elif [ "$STL" == "Germline DNA" ]; then
+        ST="N"
+        SAMP_TYPE="blood_normal"
     elif [ "$STL" == "Tumor DNA" ]; then
         ST="T"
         SAMP_TYPE="tumor"  # assumed
