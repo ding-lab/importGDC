@@ -6,7 +6,7 @@ BATCH="Methylation.Batch9"
 #   $STAGE_ROOT/GDC_import/data/<UUID>/<FILENAME>
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2019-06-06T04_48_59.198Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2019-06-15T15_33_53.137Z.txt"
 
 # Master AR file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
