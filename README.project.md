@@ -36,3 +36,7 @@ We make extensive use of scripts which are also used to download GDC sequence da
 now we are keeping the methylation datasets separate.  In particular, download root directory
 is denali:/diskmnt/Projects/cptac_downloads/methylation
 
+Total dataset size is 3.4 Gb
+
+Currently, the batch 9 methylation BamMap and AR files are kept in ./dat, and no effort is made to
+merge them to either the master AR file or the master BamMap file.  This can be changed in the future.

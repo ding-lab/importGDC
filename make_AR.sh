@@ -32,8 +32,8 @@
 #     22  plate_name  MultiPDO_0402_EPIC01
 #     23  plate_well  A05
 
-# This is used to look up disease based on case name
-CASES="/diskmnt/Projects/cptac_scratch/CPTAC3.workflow/CPTAC3.catalog/CPTAC3.cases.dat"
+# This is used to look up disease based on case name.  This should be read from gdc-import.config.sh
+CASES="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.cases.dat"
 
 # Given line from methylation file, print one AR line
 # Usage: pass one methylation line 
@@ -77,7 +77,7 @@ function print_AR_line {
     FN=`echo "$LINE" | cut -f 16`   # file name
     FS=`echo "$LINE" | cut -f 17`   # file size
     DF="IDAT"                       # data format
-    ID=`echo "$LINE" | cut -f 8`    # ID
+    ID=`echo "$LINE" | cut -f 8`    # Using column 8, since column 1 is repeated (consistent with aliquot id)
     MD=`echo "$LINE" | cut -f 18`   
         
     printf "$SN\t$CASE\t$DISEASE\t$ES\t$SAMP_TYPE\t$SAMPS\t$FN\t$FS\t$DF\t$ID\t$MD\n"
