@@ -8,7 +8,7 @@
 source gdc-import.config.sh
 
 bash importGDC/make_bam_map.sh -H > $BAMMAP
-bash importGDC/make_bam_map.sh -O $STAGE_ROOT -S $AR_H -s $SYSTEM $@ - | sort >> $BAMMAP
+bash importGDC/make_bam_map.sh -O $DATA_ROOT -S $CATALOG_H -s $SYSTEM $@ - | sort >> $BAMMAP
 
 # Evaluate return value for chain of pipes; see https://stackoverflow.com/questions/90418/exit-shell-script-based-on-process-exit-code
 rcs=${PIPESTATUS[*]};

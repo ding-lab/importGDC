@@ -2,13 +2,13 @@
 source gdc-import.config.sh
 
 #CASES="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.cases.dat"
-#AR="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.AR.dat"
+#CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.Catalog.dat"
 
 function make_summary {
     BAMMAP=$1
     OUT=$2
     ARGS=$3
-    CMD="bash importGDC/summarize_cases_available.sh $ARGS $CASES_MASTER $AR_MASTER $BAMMAP > $OUT"
+    CMD="bash importGDC/summarize_cases_available.sh $ARGS $CASES_MASTER $CATALOG_MASTER $BAMMAP > $OUT"
     >&2 echo Running: $CMD
     eval $CMD
     rc=$?

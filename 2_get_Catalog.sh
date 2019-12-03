@@ -43,7 +43,7 @@ echo "                        TOTAL: $TOT_SIZE Tb in $TOT_COUNT files"
 mkdir -p dat
 UUID="dat/UUID-download.dat"
 
-head -n1 $AR_MASTER > $AR_H
-grep -f $UUID $AR_MASTER >> $AR_H
+head -n1 $CATALOG_MASTER > $CATALOG_H
+grep -f $UUID $CATALOG_MASTER >> $CATALOG_H
 
-summarize $AR_H
+summarize $CATALOG_H
