@@ -1,1 +1,5 @@
-Add project-specific notes here
+Development work to:
+1. Update data transfer tool to v1.5
+    See https://gdc.cancer.gov/access-data/gdc-data-transfer-tool
+2. Confirm works on compute1
+3. Simplify model of downloading

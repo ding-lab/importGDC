@@ -1,4 +1,3 @@
-docker push mwyczalkowski/importgdc:latest
-#echo Not pushing because using automated build.
-#echo Image: mwyczalkowski/importgdc
+source docker_image.sh
+docker push $IMAGE
 

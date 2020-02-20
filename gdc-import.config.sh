@@ -30,12 +30,6 @@ SYSTEM="katmai"
 #MGI=1
 #SYSTEM="MGI"
 
-# This is where download-related metadata lives (config files, logs, etc)
-IMPORT_CONFIGD_H="$DATA_ROOT/GDC_import/import.config/$BATCH"
->&2 echo IMPORT_CONFIGD $IMPORT_CONFIGD_H
-IMPORT_CONFIGD_C="/data/GDC_import/import.config/$BATCH"
-mkdir -p $IMPORT_CONFIGD_H
-
 # this is used in importGDC scripts
 export IMPORTGDC_HOME="./importGDC"  
 

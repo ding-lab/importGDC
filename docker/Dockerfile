@@ -9,19 +9,17 @@ RUN apt-get update && apt-get install -y \
     git \
     jq \
     libnss-sss \
-    trickle \
     samtools \
-    vim \
+    vim-tiny \
     wget \
     zip \
     && apt-get clean
 
 RUN cd /usr/local \
-    && wget https://gdc.cancer.gov/system/files/authenticated%20user/0/gdc-client_v1.4.0_Ubuntu_x64.zip \
-    && unzip gdc-client_v1.4.0_Ubuntu_x64.zip \
+    && wget https://gdc.cancer.gov/system/files/authenticated%20user/0/gdc-client_v1.5.0_Ubuntu_x64.zip \
+    && unzip gdc-client_v1.5.0_Ubuntu_x64.zip \
     && mv gdc-client /usr/local/bin
 
-RUN cd /usr/local \
-    && git  clone https://github.com/ding-lab/importGDC.git
+COPY . /usr/local/importGDC
 
 CMD ["/bin/bash"]
