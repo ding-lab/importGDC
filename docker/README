@@ -1,0 +1,15 @@
+Create simple docker container to use at MGI
+based on ~/src/BreakpointSurveyor/docker/Dockerfile.mgi
+
+See corresponding workflow on MGI at /gscuser/mwyczalk/projects/CPTAC3
+
+This is now associated with an automatic build on Dockerhub:
+    docker pull mwyczalkowski/importgdc
+
+The idea is that when changes occur to the github repository, this will trigger a rebuild on dockerhub to reflect these changes.
+Currently this does not seem to be working...
+Rebuilds can be forced by adding trival changes (e.g. whitespace) to the Dockerfile 'git clone' command
+
+Also note: it may be necessary to login to dockerhub with,
+
+    docker login
