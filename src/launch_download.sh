@@ -36,9 +36,16 @@ All paths are relative to host.  Essentially, this script starts docker, maps
 data and token directories, and runs download_GDC.sh within docker container
 EOF
 
-# TODO: token file should be mapped, not copied
+# utils.sh might live in . or ./src, depending on where this script runs 
+if [ -e utils.sh ]; then
+    source utils.sh
+elif [ -e src/utils.sh ]; then 
+    source src/utils.sh
+else
+    >&2 ERROR: cannot locate utils.sh
+    exit 1
+fi
 
-source utils.sh
 SCRIPT=$(basename $0)
 DOCKER="docker"
 BSUB="bsub"
@@ -50,8 +57,11 @@ LSF_ARGS=""
 LSFQ="-q research-hpc"  # LSF queue
 LOGD="./logs"
 
-while getopts ":hdl:M:g:q:i:BDIF" opt; do
+while getopts ":o:hdl:M:g:q:i:BDIF" opt; do
   case $opt in
+    o)
+      IMPORT_DATAD=$OPTARG
+      ;;
     h) 
       echo "$USAGE"
       exit 0
@@ -111,35 +121,6 @@ UUID=$1
 TOKEN=$2; confirm $TOKEN
 FN=$3
 DT=$4
-
-    CMD="/bin/bash src/download_GDC.sh $PROCESS $XARGS $UUID $TOKEN_C $FN $DF"
-
-    if [ ! $RUNBASH ]; then
-    $DOCKER run -v $IMPORT_DATAD:/data $DOCKER_IMAGE $CMD >&2
-
-    else
-
-    $DOCKER run -it -v $IMPORT_DATAD:/data $DOCKER_IMAGE /bin/bash >&2
-
-    fi
-    test_exit_status
-
-}
-
-# start docker in LSF environment
-function processUUID_LSF {
-
-
-    if [ -z $RUNBASH ]; then
-
-
-        CMD="/bin/bash $PROCESS $XARGS $UUID $TOKEN_C $FN $DF"
-        $BSUB $LSFQ $DOCKERHOST $LSF_ARGS $LOGS -a "docker($DOCKER_IMAGE)" "$CMD"
-    else
-        $BSUB $LSFQ $DOCKERHOST $LSF_ARGS -Is -a "docker($DOCKER_IMAGE)" "/bin/bash"
-    fi
-    test_exit_status
-}
 
 if [ -z $IMPORT_DATAD ]; then
     >&2 echo ERROR: output directory not defined \[-o\]

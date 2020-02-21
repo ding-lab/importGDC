@@ -24,7 +24,16 @@ Options:
   -f: force overwrite of existing data files
 EOF
 
-source utils.sh
+# utils.sh might live in . or ./src, depending on where this script runs 
+if [ -e utils.sh ]; then
+    source utils.sh
+elif [ -e src/utils.sh ]; then 
+    source src/utils.sh
+else
+    >&2 ERROR: cannot locate utils.sh
+    exit 1
+fi
+
 SCRIPT=$(basename $0)
 
 IMPORTD_C="/data/GDC_import/data"

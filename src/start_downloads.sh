@@ -39,7 +39,16 @@ Catalog file described here: https://github.com/ding-lab/CPTAC3.catalog#cptac3ca
 It provides filename and file type for each UUID, which is necessary for processing of BAM files
 EOF
 
-source utils.sh
+# utils.sh might live in . or ./src, depending on where this script runs 
+if [ -e utils.sh ]; then
+    source utils.sh
+elif [ -e src/utils.sh ]; then 
+    source src/utils.sh
+else
+    >&2 ERROR: cannot locate utils.sh
+    exit 1
+fi
+
 SCRIPT=$(basename $0)
 START_TIME=$(date)
 
