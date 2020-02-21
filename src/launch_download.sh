@@ -5,7 +5,7 @@
 
 read -r -d '' USAGE <<'EOF'
 Launch docker instance to import and index GDC data
-Usage: launch_download.sh [options] UUID TOKEN FN DT
+Usage: launch_download.sh [options] UUID TOKEN FN DF
 
 Mandatory arguments:
   UUID - UUID of object to download
@@ -29,7 +29,7 @@ Options:
 
 Arguments passed to download_GDC.sh
 -D: Download only, do not index
--I: Index and create filestat only, do not Download.  Relevant only for DT="BAM"
+-I: Index and create filestat only, do not Download.  Relevant only for DF="BAM"
 -f: force overwrite of existing data files
 
 All paths are relative to host.  Essentially, this script starts docker, maps
@@ -120,7 +120,7 @@ fi
 UUID=$1
 TOKEN=$2; confirm $TOKEN
 FN=$3
-DT=$4
+DF=$4
 
 if [ -z $IMPORT_DATAD ]; then
     >&2 echo ERROR: output directory not defined \[-o\]

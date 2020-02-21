@@ -4,7 +4,7 @@
 # https://dinglab.wustl.edu/
 
 read -r -d '' USAGE <<'EOF'
-Usage: download_GDC.sh [options] UUID TOKEN FN DT
+Usage: download_GDC.sh [options] UUID TOKEN FN DF
 
 Download data from GDC using gdc-client
 If data type is BAM, also index and create a flagstat summary file
@@ -20,7 +20,7 @@ Options:
   -d: dry run, simply print commands which would be executed for principal steps
   -O IMPORTD_C: base of imported data dir, visible from container.  Default is /data/GDC_import/data.  Optional
   -D: Download only, do not index
-  -I: Index only, do not Download.  DT must be "BAM"
+  -I: Index only, do not Download.  DF must be "BAM"
   -f: force overwrite of existing data files
 EOF
 
@@ -89,7 +89,7 @@ fi
 UUID=$1
 TOKEN=$2
 FN=$3
-DT=$4
+DF=$4
 
 mkdir -p $IMPORTD_C
 
@@ -127,7 +127,7 @@ fi
 
 
 ## Now index if this is a BAM file, and not download-only
-if [ $DT == "BAM" ] && [ -z $DLO ] ; then
+if [ $DF == "BAM" ] && [ -z $DLO ] ; then
 
     # Confirm $DAT exists
     if [ ! -f $DAT ] && [ ! $DRYRUN ]; then

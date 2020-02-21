@@ -28,7 +28,7 @@ Arguments passed to launch_download.sh
 
 Arguments passed to download_GDC.sh
 -D: Download only, do not index
--I: Index only, do not Download.  DT must be "BAM"
+-I: Index only, do not Download.  DF must be "BAM"
 -f: force overwrite of existing data files
 
 All paths passed to this script are relative to host.
