@@ -121,17 +121,15 @@ fi
 if [ $DT == "BAM" ] && [ -z $DLO ] ; then
 
     # Confirm $DAT exists
-    if [ ! -f $DAT ]; then
+    if [ ! -f $DAT ] && [ ! $DRYRUN ]; then
         >&2 echo BAM file $DAT does not exist.  Not indexing.
         exit 1
     fi
 
     # It does not seem possible to perform indexing in a pipeline, so the index and flagstat operations need to take place in separate steps
-    >&2 echo Indexing $DAT
     CMD="$SAMTOOLS index $DAT"
     run_cmd "$CMD" $DRYRUN
 
-    >&2 echo Flagstat $DAT
     CMD="$SAMTOOLS flagstat $DAT > ${DAT}.flagstat"
     run_cmd "$CMD" $DRYRUN
 fi
