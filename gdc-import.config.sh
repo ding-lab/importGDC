@@ -30,9 +30,6 @@ SYSTEM="katmai"
 #MGI=1
 #SYSTEM="MGI"
 
-# this is used in importGDC scripts
-export IMPORTGDC_HOME="./importGDC"  
-
 # This is common to all systems
 CATALOG_MASTER="$CATALOG/CPTAC3.Catalog.dat"
 BAMMAP_MASTER="$CATALOG/BamMap/${SYSTEM}.BamMap.dat"
