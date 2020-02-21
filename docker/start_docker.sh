@@ -1,11 +1,12 @@
 # Basic script to start docker container
-# Usage: start_docker.sh [data_path] 
+# Usage: start_docker.sh [data_path [token_path] ] 
 #
-# start docker using image in docker_image.sh, and optionally map data_path to /data in container
+# start docker using image in docker_image.sh. Optionally map data_path to /data in container, and token_path to /token
 
 source docker_image.sh
 
 DATD=$1
+TOKEND=$2
 
 if [ "$DATD" ]; then
     # Using python to get absolute path of DATD.  On Linux `readlink -f` works, but on Mac this is not always available
@@ -14,6 +15,14 @@ if [ "$DATD" ]; then
     >&2 echo Mounting $ADATD to /data
 
     MNT="-v $ADATD:/data"
+fi
+if [ "$TOKEND" ]; then
+    # Using python to get absolute path of DATD.  On Linux `readlink -f` works, but on Mac this is not always available
+    # see https://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
+    ADATD=$(python -c 'import os,sys;print(os.path.realpath(sys.argv[1]))' $TOKEND)
+    >&2 echo Mounting $ADATD to /token
+
+    MNT="$MNT -v $ADATD:/token"
 fi
 
 # Starting with no mounted volumes:
