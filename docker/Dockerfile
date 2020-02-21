@@ -21,5 +21,6 @@ RUN cd /usr/local \
     && mv gdc-client /usr/local/bin
 
 COPY . /usr/local/importGDC
+WORKDIR /usr/local/importGDC
 
 CMD ["/bin/bash"]
