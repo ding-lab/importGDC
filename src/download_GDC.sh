@@ -24,15 +24,15 @@ Options:
   -f: force overwrite of existing data files
 EOF
 
+# We can launch in importGDC root dir or ./src.  Test based on existence of utils.sh, and cd to root dir if necessary
 # utils.sh might live in . or ./src, depending on where this script runs 
 if [ -e utils.sh ]; then
-    source utils.sh
-elif [ -e src/utils.sh ]; then 
-    source src/utils.sh
-else
-    >&2 ERROR: cannot locate utils.sh
+    cd ..
+elif [ ! -e src/utils.sh ]; then 
+    >&2 ERROR: cannot locate src/utils.sh
     exit 1
 fi
+source src/utils.sh
 
 SCRIPT=$(basename $0)
 
@@ -143,4 +143,4 @@ if [ $DF == "BAM" ] && [ -z $DLO ] ; then
     run_cmd "$CMD" $DRYRUN
 fi
 
->&2 echo $SCRIPT succeeded
+>&2 echo Download succeeded

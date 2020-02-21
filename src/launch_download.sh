@@ -24,7 +24,7 @@ Options:
 -M: run in LSF environment
 -g LSF_ARGS: Additional args to pass to LSF.  LSF mode only
 -q LSFQ: LSF queue name.  Default: research-hpc
--i DOCKER_IMAGE: docker image to use.  Default: mwyczalkowski/importgdc
+-i IMAGE: docker image to use.  Default is obtained from docker/docker_image.sh
 -B: Start docker container, map paths, but run bash instead of starting download
 
 Arguments passed to download_GDC.sh
@@ -36,22 +36,22 @@ All paths are relative to host.  Essentially, this script starts docker, maps
 data and token directories, and runs download_GDC.sh within docker container
 EOF
 
+# We can launch in importGDC root dir or ./src.  Test based on existence of utils.sh, and cd to root dir if necessary
 # utils.sh might live in . or ./src, depending on where this script runs 
 if [ -e utils.sh ]; then
-    source utils.sh
-elif [ -e src/utils.sh ]; then 
-    source src/utils.sh
-else
-    >&2 ERROR: cannot locate utils.sh
+    cd ..
+elif [ ! -e src/utils.sh ]; then 
+    >&2 ERROR: cannot locate src/utils.sh
     exit 1
 fi
+source src/utils.sh
+source docker/docker_image.sh
 
 SCRIPT=$(basename $0)
 DOCKER="docker"
 BSUB="bsub"
+DOWNLOAD_GDC="/usr/local/importGDC/src/download_GDC.sh"  # path in docker image
 
-
-DOCKER_IMAGE="mwyczalkowski/importgdc"
 XARGS=""
 LSF_ARGS=""
 LSFQ="-q research-hpc"  # LSF queue
@@ -82,7 +82,7 @@ while getopts ":o:hdl:M:g:q:i:BDIf" opt; do
       LSFQ="-q $OPTARG"
       ;;
     i)
-      DOCKER_IMAGE="$OPTARG"
+      IMAGE="$OPTARG"
       ;;
     B)  
       RUNBASH=1
@@ -134,7 +134,7 @@ mkdir -p $LOGD
 test_exit_status
 ERRLOG="$LOGD/${UUID}.err"
 OUTLOG="$LOGD/${UUID}.out"
->&2 echo Logs: $OUTLOG and $ERRLOG
+>&2 echo Output logs written to: $OUTLOG and $ERRLOG
 rm -f $ERRLOG $OUTLOG
 
 # If DRYRUN is 'd' then we're in dry run mode (only print the called function),
@@ -160,7 +160,7 @@ TOKEN_C="/token/$TOKENFN"
 
 # This is the command that will execute on docker
 if [ ! $RUNBASH ]; then
-    CMD="/bin/bash src/download_GDC.sh $XARGS $UUID $TOKEN_C $FN $DF"
+    CMD="/bin/bash $DOWNLOAD_GDC $XARGS $UUID $TOKEN_C $FN $DF"
 else
     # Not clear how logs interact with bash.  May need to get rid of STDERR and STDOUT?
     CMD="/bin/bash"
@@ -174,10 +174,10 @@ fi
 if [ $LSF ]; then
     LOGS="-e $ERRLOG -o $OUTLOG"
     export LSF_DOCKER_VOLUMES="$IMPORT_DATAD:/data $TOKEND:/token"
-    DCMD="$BSUB $LSFQ $DOCKERHOST $LSF_ARGS $LOGS -a \"docker($DOCKER_IMAGE)\" $CMD "
+    DCMD="$BSUB $LSFQ $DOCKERHOST $LSF_ARGS $LOGS -a \"docker($IMAGE)\" $CMD "
 else
     VOL_ARGS="-v $IMPORT_DATAD:/data -v $TOKEND:/token"
-    DCMD="$DOCKER run $DOCKER_ARGS $VOL_ARGS $DOCKER_IMAGE $CMD > $OUTLOG 2> $ERRLOG "
+    DCMD="$DOCKER run $DOCKER_ARGS $VOL_ARGS $IMAGE $CMD > $OUTLOG 2> $ERRLOG "
 fi
 
 run_cmd "$DCMD" $DRYRUN

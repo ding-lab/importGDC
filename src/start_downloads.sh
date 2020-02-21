@@ -39,18 +39,21 @@ Catalog file described here: https://github.com/ding-lab/CPTAC3.catalog#cptac3ca
 It provides filename and file type for each UUID, which is necessary for processing of BAM files
 EOF
 
+# We can launch in importGDC root dir or ./src.  Test based on existence of utils.sh, and cd to root dir if necessary
 # utils.sh might live in . or ./src, depending on where this script runs 
 if [ -e utils.sh ]; then
-    source utils.sh
-elif [ -e src/utils.sh ]; then 
-    source src/utils.sh
-else
-    >&2 ERROR: cannot locate utils.sh
+    cd ..
+elif [ ! -e src/utils.sh ]; then 
+    >&2 ERROR: cannot locate src/utils.sh
     exit 1
 fi
+source src/utils.sh
 
 SCRIPT=$(basename $0)
 START_TIME=$(date)
+
+NJOBS=0
+LOGD="./logs"
 
 while getopts ":S:O:t:hd1J:l:g:MBi:DIf" opt; do
   case $opt in
@@ -148,7 +151,8 @@ function launch_import {
         exit 1
     fi
 
-    CMD="bash src/start_downloads.sh $XARGS -t $TOKEN -O $IMPORT_DATAD -p $DF -n $FN  $UUID"
+    #CMD="bash src/launch_download.sh $XARGS -t $TOKEN -O $IMPORT_DATAD -p $DF -n $FN  $UUID"
+    CMD="bash src/launch_download.sh $XARGS -o $IMPORT_DATAD $UUID $TOKEN $FN $DF"
 
     if [ $NJOBS != 0 ]; then
         JOBLOG="$LOGD/parallel.${UUID}.log"
@@ -162,6 +166,8 @@ function launch_import {
 
 confirm $CATALOG
 confirm $TOKEN
+mkdir -p $LOGD
+test_exit_status
 
 if [ "$#" -lt 1 ]; then
     >&2 echo Error: Wrong number of arguments
