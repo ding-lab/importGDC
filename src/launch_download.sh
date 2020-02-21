@@ -57,7 +57,7 @@ LSF_ARGS=""
 LSFQ="-q research-hpc"  # LSF queue
 LOGD="./logs"
 
-while getopts ":o:hdl:M:g:q:i:BDIF" opt; do
+while getopts ":o:hdl:M:g:q:i:BDIf" opt; do
   case $opt in
     o)
       IMPORT_DATAD=$OPTARG

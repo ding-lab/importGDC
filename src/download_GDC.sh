@@ -143,4 +143,4 @@ if [ $DF == "BAM" ] && [ -z $DLO ] ; then
     run_cmd "$CMD" $DRYRUN
 fi
 
-
+>&2 echo $SCRIPT succeeded
