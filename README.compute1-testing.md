@@ -64,4 +64,5 @@ src/start_downloads.sh -S $CATALOG -O $DATAD -t $TOKEN -g "-G compute-lding" -M 
 With parallel (-J 5) turned on,
     src/utils.sh: line 46: parallel: command not found
 -> This script has to be run in a container which has parallel installed
-
+-> using scripts from https://github.com/ding-lab/CromwellRunner to start cromwell runner
+   - do this for now instead of tyring to merge principal container
