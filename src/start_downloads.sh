@@ -24,7 +24,8 @@ Arguments passed to launch_download.sh
 -g LSF_ARGS: Additional args to pass to LSF.  LSF mode only
 -M: Run in LSF environment (MGI or compute1)
 -B: Start docker container, map paths, and run bash instead of starting download
--i IMAGE: docker image to use.  Default mwyczalkowski/importgdc
+-i IMAGE: docker image to use.  Default is obtained from docker/docker_image.sh
+-q LSFQ: LSF queue name.  Default: research-hpc
 
 Arguments passed to download_GDC.sh
 -D: Download only, do not index
@@ -55,7 +56,7 @@ START_TIME=$(date)
 NJOBS=0
 LOGD="./logs"
 
-while getopts ":S:O:t:hd1J:l:g:MBi:DIf" opt; do
+while getopts ":S:O:t:hd1J:l:g:MBi:q:DIf" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -86,7 +87,7 @@ while getopts ":S:O:t:hd1J:l:g:MBi:DIf" opt; do
       XARGS="$XARGS -l $OPTARG"
       ;;
     g) 
-      XARGS="$XARGS -g $OPTARG"
+      XARGS="$XARGS -g \"$OPTARG\""
       ;;
     M)  
       XARGS="$XARGS -M"
@@ -96,6 +97,9 @@ while getopts ":S:O:t:hd1J:l:g:MBi:DIf" opt; do
       ;;
     i) 
       XARGS="$XARGS -i $OPTARG"
+      ;;
+    q)
+      XARGS="$XARGS -q $OPTARG"
       ;;
     D)  
       XARGS="$XARGS -D"
@@ -219,7 +223,7 @@ done
 # this will wait until all jobs completed
 if [ $NJOBS != 0 ] ; then
     CMD="parallel --semaphore --wait --id $MYID"
-    eval "$CMD"
+    run_cmd "$CMD" $DRYRUN
     test_exit_status
 fi
 

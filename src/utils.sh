@@ -27,7 +27,7 @@ function confirm {
 
 # Evaluate given command CMD either as dry run or for real
 function run_cmd {
-    CMD=$1
+    CMD_LOC=$1
     DRYRUN=$2
     QUIET=$3
 
@@ -37,13 +37,13 @@ function run_cmd {
 
     if [ "$DRYRUN" == "d" ]; then
         if [ "$QUIET" == 0 ]; then
-            >&2 echo Dryrun: $CMD
+            >&2 echo Dryrun: $CMD_LOC
         fi
     else
         if [ "$QUIET" == 0 ]; then
-            >&2 echo Running: $CMD
+            >&2 echo Running: $CMD_LOC
         fi
-        eval $CMD
+        eval $CMD_LOC
         test_exit_status 
     fi
 }

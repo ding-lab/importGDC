@@ -57,7 +57,7 @@ LSF_ARGS=""
 LSFQ="-q research-hpc"  # LSF queue
 LOGD="./logs"
 
-while getopts ":o:hdl:M:g:q:i:BDIf" opt; do
+while getopts ":o:hdl:Mg:q:i:BDIf" opt; do
   case $opt in
     o)
       IMPORT_DATAD=$OPTARG
@@ -161,6 +161,8 @@ TOKEN_C="/token/$TOKENFN"
 # This is the command that will execute on docker
 if [ ! $RUNBASH ]; then
     CMD="/bin/bash $DOWNLOAD_GDC $XARGS $UUID $TOKEN_C $FN $DF"
+    # block until done, so parallel works right
+    LSF_ARGS="-K $LSF_ARGS"
 else
     # Not clear how logs interact with bash.  May need to get rid of STDERR and STDOUT?
     CMD="/bin/bash"
@@ -173,7 +175,8 @@ fi
 
 if [ $LSF ]; then
     LOGS="-e $ERRLOG -o $OUTLOG"
-    export LSF_DOCKER_VOLUMES="$IMPORT_DATAD:/data $TOKEND:/token"
+    ECMD="export LSF_DOCKER_VOLUMES=\"$IMPORT_DATAD:/data $TOKEND:/token\" "
+    run_cmd "$ECMD" $DRYRUN
     DCMD="$BSUB $LSFQ $DOCKERHOST $LSF_ARGS $LOGS -a \"docker($IMAGE)\" $CMD "
 else
     VOL_ARGS="-v $IMPORT_DATAD:/data -v $TOKEND:/token"
