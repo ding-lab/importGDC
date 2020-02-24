@@ -65,9 +65,6 @@ echo "          Targeted Sequencing: $TARG_SIZE Tb in $TARG_COUNT files"
 echo "                        TOTAL: $TOT_SIZE Tb in $TOT_COUNT files"
 }
 
-mkdir -p dat
-UUID="dat/UUID-all.dat"
-
 >&2 echo Catalog: $CATALOG_MASTER
 
 head -n1 $CATALOG_MASTER > $CATALOG_H

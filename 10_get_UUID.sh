@@ -1,8 +1,8 @@
 # We want all PDA genomic RNA-Seq samples available at GDC
+source gdc-import.config.sh
 
-CATALOG="/storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.Catalog.dat"
-OUT="dat/UUID_download.dat"
+OUT=$UUID
 mkdir -p dat
 
-grep PDA $CATALOG | grep genomic | cut -f 11 | sort > $OUT
+grep PDA $CATALOG_MASTER | grep genomic | cut -f 11 | sort > $OUT
 echo Written to $OUT

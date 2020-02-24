@@ -1,7 +1,8 @@
 DATAD="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-TOKEN="/storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/CPTAC3/import/token/gdc-user-token.2020-01-31T20_48_13.912Z.txt"
+#TOKEN="/storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/CPTAC3/import/token/gdc-user-token.2020-01-31T20_48_13.912Z.txt"
+TOKEN="/home/m.wyczalkowski/Projects/CPTAC3/import/token/gdc-user-token.2020-01-31T20_48_13.912Z.txt"
 CATALOG="/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.Catalog.dat"
-UUID="UUID.dat"
+UUID="UUIDs.dat"
 
 Starting docker for direct run:
 ```
