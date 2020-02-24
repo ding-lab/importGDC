@@ -66,3 +66,5 @@ With parallel (-J 5) turned on,
 -> This script has to be run in a container which has parallel installed
 -> using scripts from https://github.com/ding-lab/CromwellRunner to start cromwell runner
    - do this for now instead of tyring to merge principal container
+
+See docker/README.docker.sh

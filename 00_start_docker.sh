@@ -1,5 +1,5 @@
 #source Project.config.sh
-# Launch docker environment at MGI before running cromwell.
+# Launch docker environment before running import, so that `parallel` is available
 
 if [ "$#" -ne 1 ]; then
     >&2 echo ERROR: pass SYSTEM argument

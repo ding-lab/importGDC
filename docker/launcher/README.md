@@ -1,4 +1,4 @@
-Scripts for launching CromwellRunner environment, from 
+Scripts for launching CromwellRunner environment, obtained from 
 
 /home/m.wyczalkowski/Projects/TinDaisy/CromwellRunner/CR.dev/docker
 https://github.com/ding-lab/CromwellRunner
