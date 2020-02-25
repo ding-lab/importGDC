@@ -24,4 +24,4 @@ Fatal ERROR. Exiting.
 ```
 
 However, the jobs still seem to be running and the download is going OK.  Perhaps the fatal error has something to do with tmux and exiting?
-
+Next day, all downloads have completed successfully

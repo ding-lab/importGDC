@@ -7,8 +7,7 @@
 
 source gdc-import.config.sh
 
-bash importGDC/make_bam_map.sh -H > $BAMMAP
-bash importGDC/make_bam_map.sh -O $DATA_ROOT -S $CATALOG_H -s $SYSTEM $@ - | sort >> $BAMMAP
+cat $UUID | bash src/make_BamMap.sh -H -O $DATA_ROOT -S $CATALOG_MASTER -s $SYSTEM $@ - | sort >> $BAMMAP
 
 # Evaluate return value for chain of pipes; see https://stackoverflow.com/questions/90418/exit-shell-script-based-on-process-exit-code
 rcs=${PIPESTATUS[*]};
@@ -37,10 +36,10 @@ fi
 
 BMM="${BAMMAP}.merged"
 
-head -n1 $BAMMAP > $BMM
+grep "^#" $BAMMAP > $BMM
 cat $BAMMAP_MASTER $BAMMAP | grep -v "^#" | sort -u >> $BMM
 
 >&2 echo Success.  Download BamMap written to $BAMMAP
->&2 echo This file was merged with master BamMap $BAMMAP_MASTER
->&2 echo and written to merged master $BMM
+>&2 echo Merged with BamMap $BAMMAP_MASTER
+>&2 echo Written to $BMM
 >&2 echo Please examine merged master file and replace original master as appropriate
