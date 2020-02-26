@@ -4,6 +4,8 @@ source gdc-import.config.sh
 #CASES="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.cases.dat"
 #CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.Catalog.dat"
 
+>&2 echo NOTE: this is not really being used anymore.  Deprecate?
+
 function make_summary {
     BAMMAP=$1
     OUT=$2

@@ -1,10 +1,6 @@
 # GDC Import details
 
-TODO:
-
-* Implement parallel for non-MGI downloads
-* Indicate time and count for downloads, to simplify tracking (look at export project)
-
+Significant updates made in Y3 branch.  No longer using LSF groups, runs on compute1, MGI, and standard docker
 
 ## Preliminaries
 
@@ -23,107 +19,6 @@ A number of locale-specific variables are defined in `gdc-import.config.sh`:
 
 
 ## Execution chain
-
-1. get UUIDs to download
-
-**TODO** update documentation below
-
-
-## LSF Groups
-
-*Specific to MGI*
-
-Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to do the trick.
-* Background: https://confluence.gsc.wustl.edu/pages/viewpage.action?pageId=27592450
-* Submission script (`start_batch_import.sh`) uses LSF groups if LSF_GROUP environment variable is defined.  Suggested use:
-    export LSF_GROUP="/mwyczalk/gdc-download"
-* To limit to 5 running jobs: `bgadd -L 5 /mwyczalk/gdc-download`  (this should be a part of a setup script?)
-* To examine: `bjgroup -s /mwyczalk/gdc-download`
-* To modify, `bgmod -L 2 /mwyczalk/gdc-download`
-
-## Batches
-
-Collections of AR (Submitted Reads, i.e., BAM or FASTQ files) to be processed together.  Here, CPTAC3.b1 is split
-into WGS, WXS, and RNA-Seq batches.
-
-## Workflow
-
-Importing in practice tends to be a nonlinear workflow where it may be necessary to track, diagnose, and restart AR import jobs.
-To aid in this, we have two tools to track job status and start jobs:
-* evaluate_status.sh : check status of download for each AR in batch
-* start_step.sh : Start a processing step (import, typically) for given AR UUIDs
-
-Scripts `evaluate_batch_status.sh` and `start_batch_step.sh` are wrappers around importGDC.git scripts which are specific to CPTAC3 Batch 1 work at MGI.
-The following command will start import of all WXS samples which have a status of "ready":
-```
-    export LSF_GROUP="/mwyczalk/gdc-download"
-    bash evaluate_batch_status.sh -u -f import:ready | bash start_batch_import.sh -
-```
-Note that these scripts need to be edited for specific paths, if token changes, etc.
-
-### DC2
-TODO: illustrate how downloads started on DC2
-
-
-## BAM Map
-
-Validation of downloading and indexing, as well as providing summaries of downloaded data, is done with `summarize_batch_import.sh`
-Create summaries of all completed RNA-Seq downloads with,
-```
-    ./evaluate_batch_status.sh -u -f import:completed | ./summarize_batch_import.sh -H -
-
-```
-
-
-## Debug procedure and information for MGI downloads
-
-Command to download/index/flagstat one UUID:
-```
-    bash start_batch_import.sh 59f284e7-cffa-4891-a76c-60dd8e46a01d
-```
-
-Testing with UUID `c336c120-966a-4ec0-9fc7-6d5c856bbc22` successful, with .bai and flagstat files created.  Data directory:
-    /gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/GDC_import/data/c336c120-966a-4ec0-9fc7-6d5c856bbc22
-Log directory:
-    /gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/GDC_import/import.config/CPTAC3.b2/logs
-
-Note, three preliminary WGS runs need to be fixed:
-    * confirm .bam file downloaded
-    * confirm filenames names correct
-    * index and flagstat
-    - 27552a72-0d2c-4307-aefc-1cd193436953
-    - 59f284e7-cffa-4891-a76c-60dd8e46a01d
-    - e933d585-96d2-4ab6-89b1-2b542d07fa9e
-
-
-Starting batch download of all ready samples (this can be run in docker-interactive session):
-```
-export LSF_GROUP="/mwyczalk/gdc-download"
-./evaluate_batch_status.sh -u -f import:ready | ./start_batch_import.sh -
-```
-
-### Status
-
-Confirm that one download is running at a time.
-```
-bjgroup -s /mwyczalk/gdc-download
-```
-
-Get details of given running job:
-```
-bjobs -w 5660277
-```
-
-Confirm download is going by looking at log:
-```
-/gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/GDC_import/import.config/CPTAC3.b2/logs/14c0cb14-71e4-4f26-89f1-349ce26f0bf9.out
-```
-
-## DC2 procedures
-
-Preferred approach is to run this within tmux, so no logs or nohup.
-
--J4 will run four jobs in parallel on DC2
 
 ```
 ./evaluate_batch_status.sh -f import:ready -u | ./start_batch_import.sh -J4 - 

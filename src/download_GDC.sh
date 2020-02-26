@@ -22,6 +22,9 @@ Options:
   -D: Download only, do not index
   -I: Index only, do not Download.  DF must be "BAM"
   -f: force overwrite of existing data files
+
+for a BAM file FN.bam, creates FN.bam.bai and FN.bam.flagstat.
+Note that for some BAM data, GDC provides FN.bai; in these cases, two .bai files will exist
 EOF
 
 # We can launch in importGDC root dir or ./src.  Test based on existence of utils.sh, and cd to root dir if necessary
@@ -41,7 +44,7 @@ GDC_CLIENT="/usr/local/bin/gdc-client"
 SAMTOOLS="/usr/bin/samtools"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts "h:O:DIdfT:" opt; do
+while getopts ":hO:DIdfT:" opt; do
   case $opt in
     h)
       echo "$USAGE"

@@ -4,9 +4,18 @@ TOKEN="/home/m.wyczalkowski/Projects/CPTAC3/import/token/gdc-user-token.2020-01-
 CATALOG="/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog/CPTAC3.Catalog.dat"
 UUID="UUIDs.dat"
 
+## testing launch_download.sh with BAM
 Starting docker for direct run:
 ```
-bash start_docker.LSF.sh compute1 /storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC/ /storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/CPTAC3/import/token
+bash src/start_docker.sh -g "-G compute-lding" -I mwyczalkowski/importgdc:Y3 -M compute1 /storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC:/data /storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/CPTAC3/import/token:/token
+```
+
+Interested in downloading this:
+    11LU013.WXS.T.hg38  11LU013 LUAD    WXS tumor   CPT0053040010   3e34414d-9614-4ad3-91e6-877b3758b5a1_gdc_realn.bam  49316216018 BAM NA  54a37bf4-20a9-4e4d-ae09-567a67e5ff3d    68a83c8fbf14b838ed8a726664952425    hg38    Primary Tumor
+
+Direct download with:
+```
+bash src/download_GDC.sh 54a37bf4-20a9-4e4d-ae09-567a67e5ff3d /token/gdc-user-token.2020-01-31T20_48_13.912Z.txt 3e34414d-9614-4ad3-91e6-877b3758b5a1_gdc_realn.bam BAM
 ```
 
 ## testing launch_download.sh
@@ -62,10 +71,4 @@ This can be tested with TESTARGS=-1ddd
 
 src/start_downloads.sh -S $CATALOG -O $DATAD -t $TOKEN -g "-G compute-lding" -M -q general $TESTARGS - < $UUID
 
-With parallel (-J 5) turned on,
-    src/utils.sh: line 46: parallel: command not found
--> This script has to be run in a container which has parallel installed
--> using scripts from https://github.com/ding-lab/CromwellRunner to start cromwell runner
-   - do this for now instead of tyring to merge principal container
 
-See docker/README.docker.sh
