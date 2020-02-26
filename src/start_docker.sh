@@ -190,7 +190,7 @@ if [ $INTERACTIVE == 1 ]; then
 fi
 
 if [ $IS_LSF == 1 ]; then
-    ECMD="export LSF_DOCKER_VOLUMES=\"$PATH_MAP\" "
+    ECMD="export LSF_DOCKER_NETWORK=host && export LSF_DOCKER_VOLUMES=\"$PATH_MAP\" "
     run_cmd "$ECMD" $DRYRUN
     DCMD="$BSUB $LSFQ $LSF_ARGS $LSF_LOGS -a \"docker($DOCKER_IMAGE)\" $DOCKER_CMD "
 else
