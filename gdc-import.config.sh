@@ -6,28 +6,30 @@ BATCH="Y3.dev.PDA"
 #   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2020-01-31T20_48_13.912Z.txt"
+GDC_TOKEN="/diskmnt/Projects/cptac_scratch/CPTAC3.workflow/import.Y3/token/gdc-user-token.2020-02-28T20_37_36.653Z.txt"
 
 # Master CATALOG file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
 
 # katmai
-# CATALOG="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
-# DATA_ROOT="/diskmnt/Projects/cptac_downloads_7"
-# SYSTEM="docker"
-# LSF=0
+CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
+DATA_ROOT="/diskmnt/Projects/cptac_downloads_6"
+SYSTEM="katmai"
+LSF=0
 
 # MGI
-#CATALOG="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
+#CATALOGD="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
 #DATA_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
 #SYSTEM="MGI"
 # LSF=1
+# DL_ARGS="-M -q research-hpc" 
 
 # compute1
-CATALOGD="/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog"
-DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-SYSTEM="compute1"
-LSF=1
+# CATALOGD="/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog"
+# DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+# SYSTEM="compute1"
+# LSF=1
+# DL_ARGS="-M -q general" 
 
 UUID="dat/UUID-download.dat"
 
