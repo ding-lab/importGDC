@@ -1,1 +1,1 @@
-IMAGE="mwyczalkowski/importgdc:Y3"
+IMAGE="mwyczalkowski/importgdc"
