@@ -7,7 +7,7 @@
 
 source gdc-import.config.sh
 
-cat $UUID | bash src/make_BamMap.sh -H -O $DATA_ROOT -S $CATALOG_MASTER -s $SYSTEM $@ - | sort >> $BAMMAP
+cat $UUID | bash src/make_BamMap.sh -H -O $DATA_ROOT -S $CATALOG_MASTER -s $FILE_SYSTEM $@ - | sort >> $BAMMAP
 
 # Evaluate return value for chain of pipes; see https://stackoverflow.com/questions/90418/exit-shell-script-based-on-process-exit-code
 rcs=${PIPESTATUS[*]};
