@@ -6,7 +6,7 @@
 # * FILE_SYSTEM - one of MGI, storage1, katmai
 #     used in creation of BamMaps to indicate where data stored
 
-BATCH="Y3.dev.PDA"
+BATCH="WGS.20200309"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
@@ -19,7 +19,7 @@ GDC_TOKEN="/diskmnt/Projects/cptac_scratch/CPTAC3.workflow/import.Y3/token/gdc-u
 
 # katmai
 CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
-DATA_ROOT="/diskmnt/Projects/cptac_downloads_6"
+DATA_ROOT="/diskmnt/Projects/cptac"
 DOCKER_BIN="/home/mwyczalk_test/Projects/WUDocker"
 FILE_SYSTEM="katmai"
 DOCKER_SYSTEM="docker"
@@ -49,7 +49,7 @@ UUID="dat/UUID-download.dat"
 
 # This is common to all systems
 CATALOG_MASTER="$CATALOGD/CPTAC3.Catalog.dat"
-BAMMAP_MASTER="$CATALOGD/BamMap/${SYSTEM}.BamMap.dat"
+BAMMAP_MASTER="$CATALOGD/BamMap/${FILE_SYSTEM}.BamMap.dat"
 CASES_MASTER="$CATALOG/CPTAC3.cases.dat"
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
