@@ -1,4 +1,6 @@
-# We want all PDA genomic RNA-Seq samples available at GDC
+# This is very project-specific
+# Here, obtaining all PDA Genomic RNA-Seq data and writing UUIDs to download to $OUT
+
 source gdc-import.config.sh
 
 OUT=$UUID

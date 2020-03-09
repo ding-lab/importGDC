@@ -1,5 +1,11 @@
 # Download batch name.  
 
+# Note about SYSTEM names
+# * DOCKER_SYSTEM - one of MGI, compute1, docker
+#     used by start_docker.sh to initialize appropriately
+# * FILE_SYSTEM - one of MGI, storage1, katmai
+#     used in creation of BamMaps to indicate where data stored
+
 BATCH="Y3.dev.PDA"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
@@ -14,22 +20,30 @@ GDC_TOKEN="/diskmnt/Projects/cptac_scratch/CPTAC3.workflow/import.Y3/token/gdc-u
 # katmai
 CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
 DATA_ROOT="/diskmnt/Projects/cptac_downloads_6"
-SYSTEM="katmai"
+DOCKER_BIN="/home/mwyczalk_test/Projects/WUDocker"
+FILE_SYSTEM="katmai"
+DOCKER_SYSTEM="docker"
 LSF=0
 
 # MGI
-#CATALOGD="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
-#DATA_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
-#SYSTEM="MGI"
+# CATALOGD="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
+# DATA_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
+# DOCKER_BIN="" # git clone https://github.com/ding-lab/WUDocker.git
+# FILE_SYSTEM="MGI"
+# DOCKER_SYSTEM="MGI"
 # LSF=1
 # DL_ARGS="-M -q research-hpc" 
 
 # compute1
 # CATALOGD="/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog"
 # DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-# SYSTEM="compute1"
+# DOCKER_BIN="" # git clone https://github.com/ding-lab/WUDocker.git
+# FILE_SYSTEM="storage1"
+# DOCKER_SYSTEM="compute1"
 # LSF=1
 # DL_ARGS="-M -q general" 
+## Map home directory (containing token) and storage directory
+# VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski"
 
 UUID="dat/UUID-download.dat"
 
