@@ -19,7 +19,7 @@ GDC_TOKEN="/diskmnt/Projects/cptac_scratch/CPTAC3.workflow/import.Y3/token/gdc-u
 
 # katmai
 CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
-DATA_ROOT="/diskmnt/Projects/cptac_downloads_6"
+DATA_ROOT="/diskmnt/Projects/cptac"
 DOCKER_BIN="/home/mwyczalk_test/Projects/WUDocker"
 FILE_SYSTEM="katmai"
 DOCKER_SYSTEM="docker"
