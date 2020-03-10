@@ -155,7 +155,6 @@ function launch_import {
         exit 1
     fi
 
-    #CMD="bash src/launch_download.sh $XARGS -t $TOKEN -O $IMPORT_DATAD -p $DF -n $FN  $UUID"
     CMD="bash src/launch_download.sh $XARGS -o $IMPORT_DATAD $UUID $TOKEN $FN $DF"
 
     if [ $NJOBS != 0 ]; then

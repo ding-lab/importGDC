@@ -6,7 +6,7 @@ source gdc-import.config.sh
 IMAGE="mwyczalkowski/cromwell-runner"
 
 >&2 echo Launching $IMAGE on $SYSTEM
-CMD="bash $DOCKER_BIN/start_docker.sh -I $IMAGE -M $DOCKER_SYSTEM $@ $VOLUME_MAPPING"
+CMD="bash $START_DOCKERD/start_docker.sh -I $IMAGE -M $DOCKER_SYSTEM $@ $VOLUME_MAPPING"
 echo Running: $CMD
 eval $CMD
 

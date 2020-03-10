@@ -33,7 +33,7 @@ A number of locale-specific variables are defined in `gdc-import.config.sh`:
 * The following are system-specific
     * `CATALOGD` - path to location of [catalog file](https://github.com/ding-lab/CPTAC3.catalog)
     * `DATA_ROOT` - location where download data will be stored.
-    * `DOCKER_BIN` - path to `start_docker.sh` described above
+    * `START_DOCKERD` - path to directory of `start_docker.sh` described above
     * `FILE_SYSTEM` - Currently one of `MGI`, `compute1`, `katmai`
         * Used in BamMap to identify system where data resides
     * `DOCKER_SYSTEM` - One of `MGI`, `compute1`, or `docker`

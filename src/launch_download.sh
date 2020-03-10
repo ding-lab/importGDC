@@ -151,7 +151,8 @@ XARGS="$XARGS $DRYARG"
 # Map the following volumes:
 # IMPORT_DATAD mapped to /data
 # Directory of TOKEN mapped to /token
-TOKEND=$( dirname $TOKEN )
+TOKEN_ABS=$( readlink -f $TOKEN )
+TOKEND=$( dirname $TOKEN_ABS )
 TOKENFN=$( basename $TOKEN )
 TOKEN_C="/token/$TOKENFN"
 
