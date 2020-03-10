@@ -40,15 +40,6 @@ A number of locale-specific variables are defined in `gdc-import.config.sh`:
         * `docker` is any generic docker system
     * `LSF` - 1 for MGI and compute1, 0 otherwise
 
-
-00_start_docker.sh
-10_get_UUID.sh
-15_summarize_download.sh
-20_start_download.sh
-30_evaluate_download_status.sh
-40_make_BamMap.sh
-50_make_BamMap_summaries.sh
-
 ## Execution chain
 
 Downloading takes place through a series of command line steps, each starting with a number (`XX_step.sh`),
