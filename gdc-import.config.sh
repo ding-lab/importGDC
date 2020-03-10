@@ -6,7 +6,7 @@
 # * FILE_SYSTEM - one of MGI, storage1, katmai
 #     used in creation of BamMaps to indicate where data stored
 
-BATCH="Y3.dev.PDA"
+BATCH="miRNA.20200306"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
@@ -45,11 +45,15 @@ LSF=0
 ## Map home directory (containing token) and storage directory
 # VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski"
 
+#
+# The following typically do not need to be modified
+#
+
 UUID="dat/UUID-download.dat"
 
 # This is common to all systems
 CATALOG_MASTER="$CATALOGD/CPTAC3.Catalog.dat"
-BAMMAP_MASTER="$CATALOGD/BamMap/${SYSTEM}.BamMap.dat"
+BAMMAP_MASTER="$CATALOGD/BamMap/${FILE_SYSTEM}.BamMap.dat"
 CASES_MASTER="$CATALOG/CPTAC3.cases.dat"
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
