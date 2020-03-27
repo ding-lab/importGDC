@@ -13,7 +13,7 @@ BATCH="WXS_WGS.20200310"
 # BAM files will have a <FILENAME>.bai and <FILENAME>.flagstat written as well
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2020-02-28T20_37_36.653Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2020-03-27T16_23_03.768Z.txt"
 
 # Master CATALOG file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
@@ -44,7 +44,7 @@ DOCKER_SYSTEM="compute1"
 LSF=1
 DL_ARGS="-M -q general" 
 ## Map home directory (containing token) and storage directory
-VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski"
+VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski /storage1/fs1/dinglab/Active"
 
 #
 # The following typically do not need to be modified
