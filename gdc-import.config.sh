@@ -36,15 +36,16 @@ GDC_TOKEN="../token/gdc-user-token.2020-03-27T16_23_03.768Z.txt"
 # DL_ARGS="-M -q research-hpc" 
 
 # compute1
-CATALOGD="/home/m.wyczalkowski/Projects/CPTAC3/CPTAC3.catalog"
+CATALOGD="/storage1/fs1/dinglab/Active/CPTAC3/Common/CPTAC3.catalog"
 DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
 START_DOCKERD="/storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/WUDocker" # git clone https://github.com/ding-lab/WUDocker.git
 FILE_SYSTEM="storage1"
 DOCKER_SYSTEM="compute1"
 LSF=1
 DL_ARGS="-M -q general" 
-## Map home directory (containing token) and storage directory
-VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski /storage1/fs1/dinglab/Active"
+## Map home directory (containing token), storage volume, and dinglab volume which has CPTAC3 catalog
+VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski /storage1/fs1/dinglab"
+#VOLUME_MAPPING="/home/m.wyczalkowski /storage1/fs1/m.wyczalkowski "
 
 #
 # The following typically do not need to be modified

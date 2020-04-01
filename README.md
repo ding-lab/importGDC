@@ -57,6 +57,7 @@ using `GNU parallel`.
 ### Initialize
 
 * `00_start_docker.sh` - necessary on compute1 to start image `mwyczalkowski/cromwell-runner` and make available `parallel` utility
+    * NO LONGER USED.  See Start download on compute1 section below
 * `10_get_UUID.sh` - This will typically change with every download project.  Its goal is to parse existing Catalog and BamMap files
    to create a list of UUIDs, saved to `dat/UUID-download.dat`, which define the data to be downloaded
 * `15_summarize_download.sh` - a convenience utility which calculates the disk space required for this download.  Generates
@@ -64,13 +65,28 @@ using `GNU parallel`.
 
 ### Start download
 
-`20_start_download.sh` will start download of all UUIDs. There are a number of flags to review and modify this download
+NOTE: see below for downloads on compute1
+
+`echo dat/UUID-download.dat | 20_start_download.sh -` will start download of all UUIDs. There are a number of flags to review and modify this download
 * `-d` will perform a dry run, to examine commands without running them
 * `-1` stops execution after one UUID is processed, can be combined with `-d`
 * `-J N` will perform N downloads in parallel, and can significantly speed up downloads
 * By default, this step will download all UUIDs in `dat/UUID-download.dat`.  Alternatively, UUIDs can be
   specified as command line arguments, or read from stdin if the argument is `-`.
 * `-h` will list complete set of options
+
+#### Start download on compute1 (new)
+
+In order to run for >24 hrs compute1, the download job (step 20, src/start_downloads.sh) must be started
+in a non-interactive session.  This is performed as step 25, which wraps the call to `src/start_downloads.sh` 
+within a non-interactive bsub call.  Then, `start_downloads` proceeds as normal, looping over all UUIDs
+and launching a bsub download command for each.
+
+One complication with this approach is that it is no longer possible to pass UUIDs on command line to step 25.
+Instead, list of UUIDs to download is generated prior to this step and defined in step 25.
+
+To summarize, on compute1 run `25_start_download_docker.sh` instead of `20_start_download.sh`.
+
 
 ### Evaluate progress
 

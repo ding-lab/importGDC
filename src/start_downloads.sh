@@ -35,6 +35,7 @@ Arguments passed to download_GDC.sh
 All paths passed to this script are relative to host.
 
 If UUID is - then read UUID from STDIN
+If UUID is a file name, read UUIDs from that file
 
 Catalog file described here: https://github.com/ding-lab/CPTAC3.catalog#cptac3catalogdat
 It provides filename and file type for each UUID, which is necessary for processing of BAM files
@@ -50,7 +51,7 @@ elif [ ! -e src/utils.sh ]; then
 fi
 source src/utils.sh
 
-SCRIPT=$(basename $0)
+SCRIPT="start_downloads.sh"
 START_TIME=$(date)
 
 NJOBS=0
@@ -196,10 +197,14 @@ else    # DRYRUN has multiple d's: strip one d off the argument and pass it to f
 fi
 
 # this allows us to get UUIDs in one of two ways:
-# 1: start_step.sh ... UUID1 UUID2 UUID3
-# 2: cat UUIDS.dat | start_step.sh ... -
+# 1: start_downloads.sh ... UUID1 UUID2 UUID3
+# 2: start_downloads.sh UUID.dat
+# 2: cat UUIDS.dat | start_downloads.sh ... -
 if [ $1 == "-" ]; then
     UUIDS=$(cat - )
+elif [ -e $1 ]; then
+    >&2 echo Reading UUIDs from $1
+    UUIDS=$(cat $1)
 else
     UUIDS="$@"
 fi
