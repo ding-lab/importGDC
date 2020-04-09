@@ -173,7 +173,7 @@ function test_import_success {
                 return
             fi
 
-            SUCCESS="succeeded"
+            SUCCESS="Download succeeded"
             if ! fgrep -Fxq "$SUCCESS" $LOGERR; then
                 echo running
                 return
