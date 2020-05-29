@@ -123,7 +123,7 @@ function summarize_import {
     CASE=$(echo "$SR" | cut -f 2)
     DIS=$(echo "$SR" | cut -f 3)
     ES=$(echo "$SR" | cut -f 4)
-    STL=$(echo "$SR" | cut -f 5)
+    ST=$(echo "$SR" | cut -f 5)
     FN=$(echo "$SR" | cut -f 7)
     DS=$(echo "$SR" | cut -f 8)
     DF=$(echo "$SR" | cut -f 9)  # data format
