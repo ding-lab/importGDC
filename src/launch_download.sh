@@ -162,8 +162,9 @@ TOKEN_C="/token/$TOKENFN"
 # This is the command that will execute on docker
 if [ ! $RUNBASH ]; then
     CMD="/bin/bash $DOWNLOAD_GDC $XARGS $UUID $TOKEN_C $FN $DF"
-    # block until done, so parallel works right
-    LSF_ARGS="-K $LSF_ARGS"
+    # block until done, needed if using parallel job control on LSF.  This 
+    # is possible but LSF job control is preferred
+    #LSF_ARGS="-K $LSF_ARGS"
 else
     # Not clear how logs interact with bash.  May need to get rid of STDERR and STDOUT?
     CMD="/bin/bash"

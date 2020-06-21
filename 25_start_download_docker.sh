@@ -4,6 +4,12 @@ source gdc-import.config.sh
 # problem of interactive sessions dying after 24 hours 
 # Side effect of this is that need to have explicit list of UUIDs to download
 
+# The need for this approach may need to be reconsidered with LSF jobs moving to 
+# job control via LSF job groups.
+# This is not being run for MGI downloads currently
+
+>&2 echo NOTE: this is not currently supported or suggested
+
 # to run in container, 
 UUID="dat/UUID-run3b.dat"
 
