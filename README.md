@@ -87,10 +87,11 @@ Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to 
 
 NOTE: see below for downloads on compute1
 
-`echo dat/UUID-download.dat | 20_start_download.sh -` will start download of all UUIDs. There are a number of flags to review and modify this download
+`cat dat/UUID-download.dat | bash 20_start_download.sh -` will start download of all UUIDs. There are a number of flags to review and modify this download
 * `-d` will perform a dry run, to examine commands without running them
 * `-1` stops execution after one UUID is processed, can be combined with `-d`
 * `-J N` will perform N downloads in parallel, and can significantly speed up downloads
+  * Note, do not use -J on MGI.  Rather, number of downloads will be governed by LSF system
 * By default, this step will download all UUIDs in `dat/UUID-download.dat`.  Alternatively, UUIDs can be
   specified as command line arguments, or read from stdin if the argument is `-`.
 * `-h` will list complete set of options
