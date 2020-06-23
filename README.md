@@ -61,6 +61,19 @@ The tool is wrapped in a docker image, `mwyczalkowski/importgdc`, and a wrapper 
 UUIDs to invoke the dockerized tool in a system-dependent way.  Parallelization is implemented in the wrapper script
 using `GNU parallel`.
 
+### LSF Groups
+
+*Specific to MGI*
+
+Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to do the trick.
+* Background: https://confluence.gsc.wustl.edu/pages/viewpage.action?pageId=27592450
+* Submission script (`start_batch_import.sh`) uses LSF groups if LSF_GROUP environment variable is defined.  Suggested use:
+    export LSF_GROUP="/mwyczalk/gdc-download"
+* To limit to 5 running jobs: `bgadd -L 5 /mwyczalk/gdc-download`  (this should be a part of a setup script?)
+* To examine: `bjgroup -s /mwyczalk/gdc-download`
+* To modify, `bgmod -L 2 /mwyczalk/gdc-download`
+
+
 ### Initialize
 
 * `00_start_docker.sh` - necessary on compute1 to start image `mwyczalkowski/cromwell-runner` and make available `parallel` utility
