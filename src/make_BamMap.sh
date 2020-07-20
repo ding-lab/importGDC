@@ -127,6 +127,7 @@ function summarize_import {
     FN=$(echo "$SR" | cut -f 7)
     DS=$(echo "$SR" | cut -f 8)
     DF=$(echo "$SR" | cut -f 9)  # data format
+    RT=$(echo "$SR" | cut -f 10)  # result type
     UUID=$(echo "$SR" | cut -f 11)
     REF=$(echo "$SR" | cut -f 13)
 
@@ -152,7 +153,7 @@ function summarize_import {
         RETVAL=1
         continue
     fi
-    if [ $DF == "BAM" ]; then
+    if [[ $DF == "BAM" && $RT != "chimeric" && $RT != "transcriptome" ]]; then
         # If BAM file, test to make sure that .bai file generated
         BAI="$FNF.bai"
         if [ ! -e $BAI ] && [ -z $NOWARN ]; then

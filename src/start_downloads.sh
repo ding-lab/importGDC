@@ -28,7 +28,7 @@ Arguments passed to launch_download.sh
 -q LSFQ: LSF queue name.  Default: research-hpc
 
 Arguments passed to download_GDC.sh
--D: Download only, do not index
+-D: Download only, do not index.  Chimeric and transcriptome BAMs are not indexed
 -I: Index only, do not Download.  DF must be "BAM"
 -f: force overwrite of existing data files
 
@@ -136,27 +136,37 @@ function launch_import {
         exit 1;
     fi
 
-    # Columns of SR.dat - Jan2018 update with sample_name
-    #     1 sample_name
-    #     2 case
-    #     3 disease
-    #     4 experimental_strategy
-    #     5 sample_type
-    #     6 samples
-    #     7 filename
-    #     8 filesize
-    #     9 data_format
-    #    10 UUID
-    #    11 MD5
+# Catalog file format is defined here: https://github.com/ding-lab/CPTAC3.case.discover/blob/master/src/make_catalog.sh
+#     1  sample_name
+#     2  case
+#     3  disease
+#     4  experimental_strategy
+#     5  short_sample_type
+#     6  aliquot
+#     7  filename
+#     8  filesize
+#     9  data_format
+#    10  result_type  
+#    11  UUID
+#    12  MD5
+#    13  reference
+#    14  sample_type  
     FN=$(grep $UUID $CATALOG | cut -f 7)
     DF=$(grep $UUID $CATALOG | cut -f 9)
+    RT=$(echo "$SR" | cut -f 10)  # result type
 
     if [ -z "$FN" ]; then
         >&2 echo Error: UUID $UUID not found in $CATALOG
         exit 1
     fi
 
-    CMD="bash src/launch_download.sh $XARGS -o $IMPORT_DATAD $UUID $TOKEN $FN $DF"
+    if [[ $RT == "chimeric" || $RT == "transcriptome" ]]; then
+        INDEX_OVERRIDE="-D"
+    else
+        INDEX_OVERRIDE=""
+    fi
+
+    CMD="bash src/launch_download.sh $XARGS $INDEX_OVERRIDE -o $IMPORT_DATAD $UUID $TOKEN $FN $DF"
 
     if [ $NJOBS != 0 ]; then
         JOBLOG="$LOGD/parallel.${UUID}.log"
