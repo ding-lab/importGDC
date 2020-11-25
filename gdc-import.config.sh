@@ -6,14 +6,14 @@
 # * FILE_SYSTEM - one of MGI, storage1, katmai
 #     used in creation of BamMaps to indicate where data stored
 
-BATCH="PDA_WXS.20200623"
+BATCH="UCEC.Discovery.WGS.45"
 
 # Data download root directory.  Individual BAMS/FASTQs will be in,
 #   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
 # BAM files will have a <FILENAME>.bai and <FILENAME>.flagstat written as well
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2020-06-23T22_37_37.745Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2020-10-28T21_38_46.321Z.txt"
 
 # Master CATALOG file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
@@ -39,12 +39,17 @@ GDC_TOKEN="../token/gdc-user-token.2020-06-23T22_37_37.745Z.txt"
 
 # compute1
 CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
+
 DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+# Trying scratch destination at Matt Callaway's request
+#DATA_ROOT="/scratch1/fs1/dinglab/m.wyczalkowski/CPTAC3-GDC-tmp"
+
 START_DOCKERD="/storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/WUDocker" # git clone https://github.com/ding-lab/WUDocker.git
 FILE_SYSTEM="storage1"
 DOCKER_SYSTEM="compute1"
 LSF=1
-DL_ARGS="-M -q general" 
+#DL_ARGS="-M -q general" 
+DL_ARGS="-M -q dinglab" 
 LSF_GROUP="/mwyczalk/gdc-download"
 LSF_ARGS="-g $LSF_GROUP"
 # Map home directory (containing token), storage volume, and dinglab volume which has CPTAC3 catalog

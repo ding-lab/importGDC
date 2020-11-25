@@ -32,7 +32,7 @@ EOF
 if [ -e utils.sh ]; then
     cd ..
 elif [ ! -e src/utils.sh ]; then 
-    >&2 ERROR: cannot locate src/utils.sh
+    >&2 echo ERROR: cannot locate src/utils.sh
     exit 1
 fi
 source src/utils.sh
