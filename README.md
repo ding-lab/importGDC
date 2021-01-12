@@ -63,7 +63,7 @@ using `GNU parallel`.
 
 ### LSF Groups
 
-*Specific to MGI*
+*Specific to MGI and compute1*
 
 Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to do the trick.
 * Background: https://confluence.gsc.wustl.edu/pages/viewpage.action?pageId=27592450
@@ -87,28 +87,14 @@ Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to 
 
 ### Start download
 
-NOTE: see below for downloads on compute1
-
 `cat dat/UUID-download.dat | bash 20_start_download.sh -` will start download of all UUIDs. There are a number of flags to review and modify this download
 * `-d` will perform a dry run, to examine commands without running them
 * `-1` stops execution after one UUID is processed, can be combined with `-d`
 * `-J N` will perform N downloads in parallel, and can significantly speed up downloads
-  * Note, do not use -J on MGI.  Rather, number of downloads will be governed by LSF system
+  * Note, do not use -J on MGI or compute1.  Rather, number of downloads will be governed by LSF system
 * By default, this step will download all UUIDs in `dat/UUID-download.dat`.  Alternatively, UUIDs can be
   specified as command line arguments, or read from stdin if the argument is `-`.
 * `-h` will list complete set of options
-
-#### Start download on compute1 (new)
-
-In order to run for >24 hrs compute1, the download job (step 20, src/start_downloads.sh) must be started
-in a non-interactive session.  This is performed as step 25, which wraps the call to `src/start_downloads.sh` 
-within a non-interactive bsub call.  Then, `start_downloads` proceeds as normal, looping over all UUIDs
-and launching a bsub download command for each.
-
-One complication with this approach is that it is no longer possible to pass UUIDs on command line to step 25.
-Instead, list of UUIDs to download is generated prior to this step and defined in step 25.
-
-To summarize, on compute1 run `25_start_download_docker.sh` instead of `20_start_download.sh`.
 
 
 ### Evaluate progress
