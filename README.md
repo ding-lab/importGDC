@@ -78,10 +78,8 @@ Using LSF groups to limit download bandwidth; doing max 5 running jobs seems to 
 
 ### Initialize
 
-* `00_start_docker.sh` - necessary on compute1 to start image `mwyczalkowski/cromwell-runner` and make available `parallel` utility
-    * NO LONGER USED.  See Start download on compute1 section below
-* `10_get_UUID.sh` - This will typically change with every download project.  Its goal is to parse existing Catalog and BamMap files
-   to create a list of UUIDs, saved to `dat/UUID-download.dat`, which define the data to be downloaded
+* `10_get_UUID.sh` - Parse existing Catalog and BamMap files to create a list of UUIDs, saved to `dat/UUID-download.dat`, 
+   which define the data to be downloaded.  If UUIDs are provided this script is not used and may be deleted.
 * `15_summarize_download.sh` - a convenience utility which calculates the disk space required for this download.  Generates
    an ad hoc catalog file which can be used to examine the planned download
 
