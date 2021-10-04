@@ -3,6 +3,7 @@ FROM ubuntu:latest
 LABEL author="Matt Wyczalkowski" \
       maintainer="m.wyczalkowski@wustl.edu"
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
@@ -16,8 +17,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 RUN cd /usr/local \
-    && wget https://gdc.cancer.gov/system/files/authenticated%20user/0/gdc-client_v1.5.0_Ubuntu_x64.zip \
-    && unzip gdc-client_v1.5.0_Ubuntu_x64.zip \
+    && wget https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_Ubuntu_x64.zip \
+    && unzip gdc-client_v1.6.1_Ubuntu_x64.zip \
     && mv gdc-client /usr/local/bin
 
 COPY . /usr/local/importGDC

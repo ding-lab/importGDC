@@ -1,1 +1,1 @@
-IMAGE="mwyczalkowski/importgdc"
+IMAGE="mwyczalkowski/importgdc:20211004"
