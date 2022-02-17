@@ -103,7 +103,7 @@ A number of locale-specific variables are defined in `gdc-import.config.sh`:
    an ad hoc catalog file which can be used to examine the planned download
     * Suggest placing output of this in `README.project.md`
 
-### Start download
+## Start download
 
 ### Suggested procedure
 First, dry run of one UUID:
@@ -116,18 +116,19 @@ If looks good, run one UUID:
 cat dat/download_UUID.dat | bash 20_start_download.sh -1 -
 ```
 
-If download starts OK (check logs directory), download remainder (skipping the first UUID)
-For Katmai, download 5 at a time:
+If download starts OK (check logs directory), download remainder (skipping the first UUID). 
+
+#### Katmai
 ```
 tail -n +2 dat/download_UUID.dat | bash 20_start_download.sh -J 5 -
 ```
 
-For compute1 and MGI, let job group control number of downloads at a time:
+#### MGI and compute1
 ```
 tail -n +2 dat/download_UUID.dat | bash 20_start_download.sh -
 ```
 
-#### More details
+#### Additional downloader options
 `cat dat/UUID-download.dat | bash 20_start_download.sh -` will start download of all UUIDs. There are a number of flags to review and modify this download
 * `-d` will perform a dry run, to examine commands without running them
 * `-1` stops execution after one UUID is processed, can be combined with `-d`
@@ -135,17 +136,20 @@ tail -n +2 dat/download_UUID.dat | bash 20_start_download.sh -
   * Note, do not use -J on MGI or compute1.  Rather, number of downloads will be governed by LSF system
 * `-h` will list complete set of options
 
+A number of other options exist. Run with `-h` to view
+
+
 ### Evaluate progress
 
 `30_evaluate_download_status.sh` will list download status of all UUIDs.  
 
 ### Create BamMap
 
-* `40_make_BamMap.sh` will create a BamMap file which lists the path and other metadata associated with
+ `40_make_BamMap.sh` will create a BamMap file which lists the path and other metadata associated with
 a given download.  BamMap files are described in more detail in the [CPTAC3.Catalog project](https://github.com/ding-lab/CPTAC3.catalog), 
 and examples are [here](https://github.com/ding-lab/CPTAC3.catalog/tree/master/BamMap).
 
-### Technical details
+### Download details
 
 Downloading is performed by [GDC Data Transfer
 Tool](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool).  BAM files

@@ -3,21 +3,25 @@
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
 
-# Data download root directory.  Individual BAMS/FASTQs will be in,
-#   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
-# BAM files will have a <FILENAME>.bai and <FILENAME>.flagstat written as well
-
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
 GDC_TOKEN="../token/gdc-user-token.2022-02-04T18_10_34.287Z.txt"
+
+# Format: /USER/gdc-download
+# Create with `bgadd -L 5 /USER/gdc-download`
+LSF_GROUP="/mwyczalk/gdc-download"
 
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
     # katmai
-    CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
 # Master CATALOG file containing all samples.  We will download a subset of these
 # Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
+    CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
+
+# Data download root directory.  Individual BAMS/FASTQs will be in,
+#   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
+# BAM files will have a <FILENAME>.bai and <FILENAME>.flagstat written as well
+
     DATA_ROOT="/diskmnt/Projects/cptac"
-    START_DOCKERD="/home/mwyczalk_test/Projects/WUDocker"
 
 # Note about SYSTEM names
 # * DOCKER_SYSTEM - one of MGI, compute1, docker
@@ -32,25 +36,21 @@ elif [ $SYSTEM == "MGI" ]; then
     # MGI
     CATALOGD="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
     DATA_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
-    START_DOCKERD="/gscuser/mwyczalk/projects/WUDocker" # git clone https://github.com/ding-lab/WUDocker.git
     FILE_SYSTEM="MGI"
     DOCKER_SYSTEM="MGI"
     LSF=1
     DL_ARGS="-M -q research-hpc" 
-    LSF_GROUP="/mwyczalk/gdc-download"
     LSF_ARGS="-g $LSF_GROUP"
 
 elif [ $SYSTEM == "compute1" ]; then
     # compute1
     CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
     DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-    START_DOCKERD="/storage1/fs1/home1/Active/home/m.wyczalkowski/Projects/WUDocker" # git clone https://github.com/ding-lab/WUDocker.git
     FILE_SYSTEM="storage1"
     DOCKER_SYSTEM="compute1"
     LSF=1
     DL_ARGS="-M -q dinglab" 
-    LSF_GROUP="/mwyczalk/gdc-download"
-    LSF_ARGS="-g $LSF_GROUP"
+    LSF_ARGS="-g $LSF_GROUP -G compute-dinglab"
 
 else
 
@@ -73,3 +73,4 @@ CATALOG_H="dat/batch.Catalog.dat"
 # BAMMAP is created as the final step of import process.
 BAMMAP="dat/batch.BamMap.dat"
 
+START_DOCKERD="docker/WUDocker"
