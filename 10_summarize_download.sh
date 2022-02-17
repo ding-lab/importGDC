@@ -70,6 +70,7 @@ echo "                        TOTAL: $TOT_SIZE Tb in $TOT_COUNT files"
 }
 
 >&2 echo Catalog: $CATALOG_MASTER
+>&2 echo Evaluating UUIDs from $UUID
 
 head -n1 $CATALOG_MASTER > $CATALOG_H
 fgrep -f $UUID $CATALOG_MASTER >> $CATALOG_H
