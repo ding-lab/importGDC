@@ -4,11 +4,14 @@
 SYSTEM="compute1"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2022-02-04T18_10_34.287Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2022-08-03T21_01_37.553Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
 LSF_GROUP="/mwyczalk/gdc-download"
+
+# List of UUIDs to download
+UUID="dat/download_UUID.dat"
 
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
@@ -59,7 +62,6 @@ else
 
 fi
 
-UUID="dat/download_UUID.dat"
 
 # This is common to all systems
 CATALOG_MASTER="$CATALOGD/CPTAC3.Catalog.dat"
