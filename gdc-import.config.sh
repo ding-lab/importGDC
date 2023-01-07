@@ -4,15 +4,14 @@
 SYSTEM="compute1"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2022-08-03T21_01_37.553Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2023-01-03T16_09_57.142Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
 LSF_GROUP="/mwyczalk/gdc-download"
 
 # List of UUIDs to download
-UUID="dat/download_UUID.dat"
-
+UUID="dat/UUIDs_to_download.dat"
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
     # katmai
@@ -47,8 +46,10 @@ elif [ $SYSTEM == "MGI" ]; then
 
 elif [ $SYSTEM == "compute1" ]; then
     # compute1
-    CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
-    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+    CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+    #CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
+    # DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
     FILE_SYSTEM="storage1"
     DOCKER_SYSTEM="compute1"
     LSF=1
@@ -63,10 +64,10 @@ else
 fi
 
 
-# This is common to all systems
-CATALOG_MASTER="$CATALOGD/CPTAC3.Catalog.dat"
-BAMMAP_MASTER="$CATALOGD/BamMap/${FILE_SYSTEM}.BamMap.dat"
-CASES_MASTER="$CATALOG/CPTAC3.cases.dat"
+PROJECT="MILD"
+# This differs for GDAN and Catalog3 systems
+CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
+BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
 # It is no longer used to drive the workflow but remains for convenience

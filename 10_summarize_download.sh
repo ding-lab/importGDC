@@ -1,34 +1,34 @@
 
 source gdc-import.config.sh
 
-# Catalog format
-#     1    # sample_name
+# Catalog3 format
+#     1  dataset_name
 #     2  case
 #     3  disease
 #     4  experimental_strategy
-#     5  short_sample_type
-#     6  aliquot
+#     5  sample_type
+#     6  specimen_name
 #     7  filename
 #     8  filesize
 #     9  data_format
-#    10  result_type
-#    11  UUID
-#    12  MD5
-#    13  reference
-#    14  sample_type
+#    10  data_variety
+#    11  alignment
+#    12  project
+#    13  uuid
+#    14  md5
+#    15  metadata
+
 
 # Usage: get_size_by_type TYPE
 # where TYPE is WGS, WXS, RNA-Seq
 function get_size_by_type {
         grep -v "^#" $DAT | awk -v t="$1" 'BEGIN{FS="\t"}{if ($4 == t) print}' | cut -f 8 | awk '{s+=$1} END {print s / 1024 / 1024 / 1024 / 1024}'
-        #SIZE=$(grep -v "^#" $DAT | cut -f 8 | awk '{s+=$1} END {print s / 1024 / 1024 / 1024 / 1024}')
 }
 
 # Usage: get_count_by_type TYPE
 # where TYPE is WGS, WXS, RNA-Seq
 function get_count_by_type {
         grep -v "^#" $DAT | awk -v t="$1" 'BEGIN{FS="\t"}{if ($4 == t) print}' | wc -l 
-        #SIZE=$(grep -v "^#" $DAT | cut -f 8 | awk '{s+=$1} END {print s / 1024 / 1024 / 1024 / 1024}')
 }
 
 function summarize {

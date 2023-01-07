@@ -136,24 +136,26 @@ function launch_import {
         exit 1;
     fi
 
-# Catalog file format is defined here: https://github.com/ding-lab/CPTAC3.case.discover/blob/master/src/make_catalog.sh
-#     1  sample_name
+# Catalog3: https://docs.google.com/document/d/1uSgle8jiIx9EnDFf_XHV3fWYKFElszNLkmGlht_CQGE/edit
+#     1  dataset_name
 #     2  case
 #     3  disease
 #     4  experimental_strategy
-#     5  short_sample_type
-#     6  aliquot
+#     5  sample_type
+#     6  specimen_name
 #     7  filename
 #     8  filesize
 #     9  data_format
-#    10  result_type  
-#    11  UUID
-#    12  MD5
-#    13  reference
-#    14  sample_type  
+#    10  data_variety
+#    11  alignment
+#    12  project
+#    13  uuid
+#    14  md5
+#    15  metadata
+
     FN=$(grep $UUID $CATALOG | cut -f 7)
     DF=$(grep $UUID $CATALOG | cut -f 9)
-    RT=$(echo "$SR" | cut -f 10)  # result type
+    RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
 
     if [ -z "$FN" ]; then
         >&2 echo Error: UUID $UUID not found in $CATALOG
