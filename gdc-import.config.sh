@@ -2,16 +2,17 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
+PROJECT="CTSP_KIRC"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2023-01-03T16_09_57.142Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2023-02-10T16_23_56.520Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
 LSF_GROUP="/mwyczalk/gdc-download"
 
 # List of UUIDs to download
-UUID="dat/UUIDs_to_download.dat"
+UUID="get_UUID/dat/download_UUID.dat"
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
     # katmai
@@ -64,7 +65,6 @@ else
 fi
 
 
-PROJECT="MILD"
 # This differs for GDAN and Catalog3 systems
 CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
 BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"

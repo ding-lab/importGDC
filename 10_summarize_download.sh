@@ -47,11 +47,11 @@ RNA_COUNT=$(get_count_by_type RNA-Seq)
 MIRNA_SIZE=$(get_size_by_type miRNA-Seq)
 MIRNA_COUNT=$(get_count_by_type miRNA-Seq)
 
-METH_SIZE=$(get_size_by_type "Methylation Array")
-METH_COUNT=$(get_count_by_type "Methylation Array")
+METH_SIZE=$(get_size_by_type "Methylation_Array")
+METH_COUNT=$(get_count_by_type "Methylation_Array")
 
-TARG_SIZE=$(get_size_by_type "Targeted Sequencing")
-TARG_COUNT=$(get_count_by_type "Targeted Sequencing")
+TARG_SIZE=$(get_size_by_type "Targeted_Sequencing")
+TARG_COUNT=$(get_count_by_type "Targeted_Sequencing")
 
 SCRNA_SIZE=$(get_size_by_type "scRNA-Seq")
 SCRNA_COUNT=$(get_count_by_type "scRNA-Seq")
