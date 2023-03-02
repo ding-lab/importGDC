@@ -31,6 +31,7 @@ Arguments passed to download_GDC.sh
 -D: Download only, do not index.  Chimeric and transcriptome BAMs are not indexed
 -I: Index only, do not Download.  DF must be "BAM"
 -f: force overwrite of existing data files
+-s server: The TCP server address server[:port]
 
 All paths passed to this script are relative to host.
 
@@ -57,7 +58,7 @@ START_TIME=$(date)
 NJOBS=0
 LOGD="./logs"
 
-while getopts ":S:O:t:hd1J:l:g:MBi:q:DIf" opt; do
+while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -110,6 +111,9 @@ while getopts ":S:O:t:hd1J:l:g:MBi:q:DIf" opt; do
       ;;
     f)  
       XARGS="$XARGS -f"
+      ;;
+    s)  
+      XARGS="$XARGS -s $OPTARG"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 

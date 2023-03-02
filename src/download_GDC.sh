@@ -22,6 +22,7 @@ Options:
   -D: Download only, do not index
   -I: Index only, do not Download.  DF must be "BAM"
   -f: force overwrite of existing data files
+  -s server: The TCP server address server[:port].  Passed directly to gdc_client
 
 for a BAM file FN.bam, creates FN.bam.bai and FN.bam.flagstat.
 Note that for some BAM data, GDC provides FN.bai; in these cases, two .bai files will exist
@@ -44,7 +45,7 @@ GDC_CLIENT="/usr/local/bin/gdc-client"
 SAMTOOLS="/usr/bin/samtools"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":hO:DIdfT:" opt; do
+while getopts ":hO:DIdfs:" opt; do
   case $opt in
     h)
       echo "$USAGE"
@@ -67,6 +68,9 @@ while getopts ":hO:DIdfT:" opt; do
       ;;
     d)  # dry run
       DRYRUN="d"
+      ;;
+    s)  
+      XARGS="-s $OPTARG"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" >&2
@@ -124,7 +128,7 @@ if [ -z $IXO ]; then
 
     # Documentation of gdc-client: https://docs.gdc.cancer.gov/Data_Transfer_Tool/Users_Guide/Accessing_Built-in_Help/
     # GDC Client saves data to file $IMPORTD_C/$UUID/$FN.  We take advantage of this information to index BAM file after download
-    CMD="$GDC_CLIENT download -t $TOKEN -d $IMPORTD_C $UUID"
+    CMD="$GDC_CLIENT download $XARGS -t $TOKEN -d $IMPORTD_C $UUID"
     run_cmd "$CMD" $DRYRUN
 fi
 

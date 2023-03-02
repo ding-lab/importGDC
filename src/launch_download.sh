@@ -31,6 +31,7 @@ Arguments passed to download_GDC.sh
 -D: Download only, do not index
 -I: Index and create filestat only, do not Download.  Relevant only for DF="BAM"
 -f: force overwrite of existing data files
+-s server: The TCP server address server[:port]
 
 All paths are relative to host.  Essentially, this script starts docker, maps
 data and token directories, and runs download_GDC.sh within docker container
@@ -57,7 +58,7 @@ LSF_ARGS=""
 LSFQ="-q research-hpc"  # LSF queue
 LOGD="./logs"
 
-while getopts ":o:hdl:Mg:q:i:BDIf" opt; do
+while getopts ":o:hdl:Mg:q:i:BDIfs:" opt; do
   case $opt in
     o)
       IMPORT_DATAD=$OPTARG
@@ -95,6 +96,9 @@ while getopts ":o:hdl:Mg:q:i:BDIf" opt; do
       ;;
     f)  
       XARGS="$XARGS -f"
+      ;;
+    s)  
+      XARGS="$XARGS -s $OPTARG"
       ;;
     \?)
       echo "ERROR: Invalid option: -$OPTARG" >&2
