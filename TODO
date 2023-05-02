@@ -1,0 +1,7 @@
+* Figure out home / cache path duplication issue
+* KeyError: 'uuid' - make sure BM3 returns this rather than `id` as column
+* Allow 50_ to run in foreground, no exit until done
+* Merging and renaming is awkward, both for when catalog exists and when it does not:
+    $ cp batch.BamMap.dat ~/Projects/GDAN/GDAN.catalog/Catalog3/WUSTL-BamMap/HCMI.BamMap3.tsv
+
+

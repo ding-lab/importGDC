@@ -1,3 +1,4 @@
-# README.project.md template
+Downloading 16 HCMI WGS datasets identified here:
+/home/m.wyczalkowski/Projects/GDAN/Work/20230501.HCMI/README.md
 
-Provide details about downloads in this template file
+
