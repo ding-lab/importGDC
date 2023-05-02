@@ -222,25 +222,22 @@ printf "$UUID\t$SN\t$DATAD/$UUID/$FN\timport:$TEST1\n"
 function process_UUID {
     UUID=$1
 
-# Catalog file format
-#     1  # sample_name
-#     2  case
-#     3  disease
-#     4  experimental_strategy
-#     5  short_sample_type
-#     6  aliquot
-#     7  filename
-#     8  filesize
-#     9  data_format
-#    10  result_type
-#    11  UUID
-#    12  MD5
-#    13  reference
-#    14  sample_type
+# REST API Catalog file format
+#     1  dataset_name    CTSP-ACY0.WGS.N
+#     2  case    CTSP-ACY0
+#     3  sample_type Blood Derived Normal
+#     4  data_format BAM
+#     5  experimental_strategy   WGS
+#     6  preservation_method Frozen
+#     7  aliquot CTSP-ACY0-NB1-A-1-0-D-A791-36
+#     8  file_name   957099c7-0bc3-42dd-8df0-ffec8f99955a_wgs_gdc_realn.bam
+#     9  file_size   78181632397
+#    10  id  0e4322dc-bccf-481b-906a-e7ed5c3ce56a
+#    11  md5sum  52112fbc3679a8478b9eac328bffb2d3
 
     SN=$(grep $UUID $CATALOG | cut -f 1)
-    FN=$(grep $UUID $CATALOG | cut -f 7)
-    DF=$(grep $UUID $CATALOG | cut -f 9)
+    FN=$(grep $UUID $CATALOG | cut -f 8)
+    DF=$(grep $UUID $CATALOG | cut -f 4)
 
     STATUS=$(get_job_status $UUID $SN $FN $DF)
 

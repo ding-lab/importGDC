@@ -19,16 +19,17 @@ source gdc-import.config.sh
 #    15  metadata
 
 
+# modified to work with current GDC REST API catalog
 # Usage: get_size_by_type TYPE
 # where TYPE is WGS, WXS, RNA-Seq
 function get_size_by_type {
-        grep -v "^#" $DAT | awk -v t="$1" 'BEGIN{FS="\t"}{if ($4 == t) print}' | cut -f 8 | awk '{s+=$1} END {print s / 1024 / 1024 / 1024 / 1024}'
+        grep -v "^#" $DAT | awk -v t="$1" 'BEGIN{FS="\t"}{if ($5 == t) print}' | cut -f 9 | awk '{s+=$1} END {print s / 1024 / 1024 / 1024 / 1024}'
 }
 
 # Usage: get_count_by_type TYPE
 # where TYPE is WGS, WXS, RNA-Seq
 function get_count_by_type {
-        grep -v "^#" $DAT | awk -v t="$1" 'BEGIN{FS="\t"}{if ($4 == t) print}' | wc -l 
+        grep -v "^#" $DAT | awk -v t="$1" 'BEGIN{FS="\t"}{if ($5 == t) print}' | wc -l 
 }
 
 function summarize {

@@ -15,5 +15,5 @@ if [ $LSF == 1 ]; then
 fi
 
 CMD="bash src/evaluate_status.sh $ARG -S $CATALOG_MASTER -O $DATA_ROOT $@ - < $UUID"
+>&2 echo Running: $CMD
 eval $CMD
-

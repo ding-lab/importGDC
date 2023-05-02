@@ -140,32 +140,30 @@ function launch_import {
         exit 1;
     fi
 
-# Catalog3: https://docs.google.com/document/d/1uSgle8jiIx9EnDFf_XHV3fWYKFElszNLkmGlht_CQGE/edit
+# REST API catalog
 #     1  dataset_name
 #     2  case
-#     3  disease
-#     4  experimental_strategy
-#     5  sample_type
-#     6  specimen_name
-#     7  filename
-#     8  filesize
-#     9  data_format
-#    10  data_variety
-#    11  alignment
-#    12  project
-#    13  uuid
-#    14  md5
-#    15  metadata
+#     3  sample_type
+#     4  data_format
+#     5  experimental_strategy
+#     6  preservation_method
+#     7  aliquot
+#     8  file_name
+#     9  file_size
+#    10  id
+#    11  md5sum
 
-    FN=$(grep $UUID $CATALOG | cut -f 7)
-    DF=$(grep $UUID $CATALOG | cut -f 9)
-    RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
+    FN=$(grep $UUID $CATALOG | cut -f 8)
+    DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
+    #RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
+    RT="x"
 
     if [ -z "$FN" ]; then
         >&2 echo Error: UUID $UUID not found in $CATALOG
         exit 1
     fi
 
+    # This is dumb.  just pass an argument into this function whether to override indexing
     if [[ $RT == "chimeric" || $RT == "transcriptome" ]]; then
         INDEX_OVERRIDE="-D"
     else

@@ -88,22 +88,18 @@ shift $((OPTIND-1))
 # * If this is a BAM, make sure .bai and .flagstat file exists.  Print warning if it does not
 
 function summarize_import {
-# Catalog3 file format is defined here: https://github.com/ding-lab/CPTAC3.case.discover/blob/master/src/make_catalog.s://docs.google.com/document/d/1uSgle8jiIx9EnDFf_XHV3fWYKFElszNLkmGlht_CQGE/edit# 
+# REST API catalog
 #     1  dataset_name
 #     2  case
-#     3  disease
-#     4  experimental_strategy
-#     5  sample_type
-#     6  specimen_name
-#     7  filename
-#     8  filesize
-#     9  data_format
-#    10  data_variety
-#    11  alignment
-#    12  project
-#    13  uuid
-#    14  md5
-#    15  metadata
+#     3  sample_type
+#     4  data_format
+#     5  experimental_strategy
+#     6  preservation_method
+#     7  aliquot
+#     8  file_name
+#     9  file_size
+#    10  id
+#    11  md5sum
 
     UUID=$1
 
@@ -116,11 +112,11 @@ function summarize_import {
     ISOK=1
 
     SN=$(echo "$SR" | cut -f 1)
-    FN=$(echo "$SR" | cut -f 7)
-    DS=$(echo "$SR" | cut -f 8)
-    DF=$(echo "$SR" | cut -f 9)  # data format
-    RT=$(echo "$SR" | cut -f 10)  # result type
-    UUID=$(echo "$SR" | cut -f 13)
+    FN=$(echo "$SR" | cut -f 8)
+    DS=$(echo "$SR" | cut -f 9) # file size
+    DF=$(echo "$SR" | cut -f 4)  # data format
+#    RT=$(echo "$SR" | cut -f 10)  # result type
+    UUID=$(echo "$SR" | cut -f 10)
 
     # Test existence of output file and index file
     FNF=$(echo "$DATD/$UUID/$FN" | tr -s '/')  # append full path to data file, normalize path separators
@@ -144,7 +140,9 @@ function summarize_import {
         RETVAL=1
         continue
     fi
-    if [[ $DF == "BAM" && $RT != "chimeric" && $RT != "transcriptome" ]]; then
+
+    if [[ $DF == "BAM" ]]; then # this will fail for chimeric and transcriptome RNA-Seq data, which is not indexed.  But we no longer have RT = result type
+    #if [[ $DF == "BAM" && $RT != "chimeric" && $RT != "transcriptome" ]]; then
         # If BAM file, test to make sure that .bai file generated
         BAI="$FNF.bai"
         if [ ! -e $BAI ] && [ -z $NOWARN ]; then
