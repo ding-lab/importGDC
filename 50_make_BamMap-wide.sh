@@ -12,10 +12,10 @@ PYTHON="./python3_docker"
 
 #CATALOG="/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3/DLBCL.GDC_REST.20230409-AWG.tsv"
 #CATALOG="/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3/HCMI.Catalog-REST.tsv"
-CATALOG="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3/HCMI.Catalog-REST.tsv"
+CATALOG="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3/MILD.Catalog-REST.tsv"
 
 #BM3="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/import/02.MILD_WXS_311/dat/batch.BamMap.dat.merged"
-BM3="dat/batch.BamMap.dat"
+BM3="dat/batch.BamMap.dat.merged"
 OUT="dat/${PROJECT}.BamMap-wide.tsv"
 
 CMD="$PYTHON src/make_BamMap-wide.py $@ -o $OUT $BM3 $CATALOG"

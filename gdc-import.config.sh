@@ -2,7 +2,7 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
-PROJECT="HCMI"
+PROJECT="MILD"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
 GDC_TOKEN="../token/gdc-user-token.2023-05-01T19_43_50.254Z-AWG.txt"
@@ -12,7 +12,7 @@ GDC_TOKEN="../token/gdc-user-token.2023-05-01T19_43_50.254Z-AWG.txt"
 LSF_GROUP="/mwyczalk/gdc-download"
 
 # List of UUIDs to download
-UUID="dat/UUID_of_interest.dat"
+UUID="dat/UUID_download.dat"
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
     # katmai
@@ -34,16 +34,6 @@ if [ $SYSTEM == "katmai" ]; then
     FILE_SYSTEM="katmai"
     DOCKER_SYSTEM="docker"
     LSF=0
-
-elif [ $SYSTEM == "MGI" ]; then 
-    # MGI
-    CATALOGD="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
-    DATA_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
-    FILE_SYSTEM="MGI"
-    DOCKER_SYSTEM="MGI"
-    LSF=1
-    DL_ARGS="-M -q research-hpc" 
-    LSF_ARGS="-g $LSF_GROUP"
 
 elif [ $SYSTEM == "compute1" ]; then
     # compute1
