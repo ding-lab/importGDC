@@ -2,10 +2,10 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
-PROJECT="MILD"
+PROJECT="CPTAC3"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2023-05-01T19_43_50.254Z-AWG.txt"
+GDC_TOKEN="../token/gdc-user-token.2023-05-08T18_10_41.502Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
@@ -37,10 +37,11 @@ if [ $SYSTEM == "katmai" ]; then
 
 elif [ $SYSTEM == "compute1" ]; then
     # compute1
-    CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
-    #CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
-    # DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+    #CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+    CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
+    #DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+    DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+    #DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
     FILE_SYSTEM="storage1"
     DOCKER_SYSTEM="compute1"
     LSF=1
@@ -56,10 +57,12 @@ fi
 
 
 # This differs for GDAN and Catalog3 systems
-#CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
-CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog-REST.tsv"
-#/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3/HCMI.Catalog-REST.tsv
-BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
+
+# For this one, converting to Catalog3
+CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
+#CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog-REST.tsv"  
+
+BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${FILE_SYSTEM}.BamMap3.tsv"
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
 # It is no longer used to drive the workflow but remains for convenience

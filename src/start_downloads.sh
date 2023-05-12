@@ -153,8 +153,27 @@ function launch_import {
 #    10  id
 #    11  md5sum
 
-    FN=$(grep $UUID $CATALOG | cut -f 8)
-    DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
+# Modified for Catalog3
+#     1  dataset_name
+#     2  case
+#     3  disease
+#     4  experimental_strategy
+#     5  sample_type
+#     6  specimen_name
+#     7  filename
+#     8  filesize
+#     9  data_format
+#    10  data_variety
+#    11  alignment
+#    12  project
+#    13  uuid
+#    14  md5
+#    15  metadata
+
+    FN=$(grep $UUID $CATALOG | cut -f 7)
+    DF=$(grep $UUID $CATALOG | cut -f 9)  # this is not necessary - just flags whether indexing should be done
+#    FN=$(grep $UUID $CATALOG | cut -f 8)
+#    DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
     #RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
     RT="x"
 

@@ -235,9 +235,32 @@ function process_UUID {
 #    10  id  0e4322dc-bccf-481b-906a-e7ed5c3ce56a
 #    11  md5sum  52112fbc3679a8478b9eac328bffb2d3
 
+#    SN=$(grep $UUID $CATALOG | cut -f 1)
+#    FN=$(grep $UUID $CATALOG | cut -f 8)
+#    DF=$(grep $UUID $CATALOG | cut -f 4)
+
+# Catalog3 header
+#     1  dataset_name
+#     2  case
+#     3  disease
+#     4  experimental_strategy
+#     5  sample_type
+#     6  specimen_name
+#     7  filename
+#     8  filesize
+#     9  data_format
+#    10  data_variety
+#    11  alignment
+#    12  project
+#    13  uuid
+#    14  md5
+#    15  metadata
+
+
+# For one, we are using Catalog3
     SN=$(grep $UUID $CATALOG | cut -f 1)
-    FN=$(grep $UUID $CATALOG | cut -f 8)
-    DF=$(grep $UUID $CATALOG | cut -f 4)
+    FN=$(grep $UUID $CATALOG | cut -f 7)
+    DF=$(grep $UUID $CATALOG | cut -f 9)
 
     STATUS=$(get_job_status $UUID $SN $FN $DF)
 

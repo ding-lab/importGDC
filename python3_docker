@@ -18,11 +18,11 @@ CMD_PY="$PYTHON3 $PY $@"
 
 # Be able to read mapped dirs from command line
 #MAPPED_DIR=". /home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
-MAPPED_DIR=". /home/m.wyczalkowski/Projects/GDAN/GDAN.catalog /cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3"
+MAPPED_DIR=". /home/m.wyczalkowski/Projects/GDAN/GDAN.catalog /cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog/Catalog3 /storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
 
 #ARGS="-l"
 # -l - send output to stdout
-ARGS="-q dinglab"
+ARGS="-q dinglab -r"
 CMD="$START_DOCKER -M compute1 -I $IMAGE $ARGS -c \"$CMD_PY\" $MAPPED_DIR"
 #CMD="$START_DOCKER -M compute1 -I $IMAGE $MAPPED_DIR"
 >&2 echo Running: $CMD

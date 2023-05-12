@@ -101,6 +101,24 @@ function summarize_import {
 #    10  id
 #    11  md5sum
 
+# For one, back to Catalog3
+#     1  dataset_name
+#     2  case
+#     3  disease
+#     4  experimental_strategy
+#     5  sample_type
+#     6  specimen_name
+#     7  filename
+#     8  filesize
+#     9  data_format
+#    10  data_variety
+#    11  alignment
+#    12  project
+#    13  uuid
+#    14  md5
+#    15  metadata
+
+
     UUID=$1
 
     SR=$(grep $UUID $CATALOG)
@@ -111,12 +129,19 @@ function summarize_import {
 
     ISOK=1
 
+# REST API
+#    SN=$(echo "$SR" | cut -f 1)
+#    FN=$(echo "$SR" | cut -f 8)
+#    DS=$(echo "$SR" | cut -f 9) # file size
+#    DF=$(echo "$SR" | cut -f 4)  # data format
+#    UUID=$(echo "$SR" | cut -f 10)
+
+# Catalog3
     SN=$(echo "$SR" | cut -f 1)
-    FN=$(echo "$SR" | cut -f 8)
-    DS=$(echo "$SR" | cut -f 9) # file size
-    DF=$(echo "$SR" | cut -f 4)  # data format
-#    RT=$(echo "$SR" | cut -f 10)  # result type
-    UUID=$(echo "$SR" | cut -f 10)
+    FN=$(echo "$SR" | cut -f 7)
+    DS=$(echo "$SR" | cut -f 8) # file size
+    DF=$(echo "$SR" | cut -f 9)  # data format
+    UUID=$(echo "$SR" | cut -f 13)
 
     # Test existence of output file and index file
     FNF=$(echo "$DATD/$UUID/$FN" | tr -s '/')  # append full path to data file, normalize path separators
