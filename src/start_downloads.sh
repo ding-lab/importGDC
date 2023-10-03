@@ -170,10 +170,12 @@ function launch_import {
 #    14  md5
 #    15  metadata
 
-    FN=$(grep $UUID $CATALOG | cut -f 7)
-    DF=$(grep $UUID $CATALOG | cut -f 9)  # this is not necessary - just flags whether indexing should be done
-#    FN=$(grep $UUID $CATALOG | cut -f 8)
-#    DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
+# CATALOG3
+#    FN=$(grep $UUID $CATALOG | cut -f 7)
+#    DF=$(grep $UUID $CATALOG | cut -f 9)  # this is not necessary - just flags whether indexing should be done
+# REST 
+    FN=$(grep $UUID $CATALOG | cut -f 8)
+    DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
     #RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
     RT="x"
 
