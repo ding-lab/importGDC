@@ -2,17 +2,17 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
-PROJECT="CTSP_KIRC"
+PROJECT="CPTAC3"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2023-02-10T16_23_56.520Z.txt"
+GDC_TOKEN="dat/gdc-user-token.2023-07-26T20_45_05.094Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
 LSF_GROUP="/mwyczalk/gdc-download"
 
 # List of UUIDs to download
-UUID="get_UUID/dat/download_UUID.dat"
+UUID="dat/UUID_download.dat"
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
     # katmai
@@ -35,22 +35,12 @@ if [ $SYSTEM == "katmai" ]; then
     DOCKER_SYSTEM="docker"
     LSF=0
 
-elif [ $SYSTEM == "MGI" ]; then 
-    # MGI
-    CATALOGD="/gscuser/mwyczalk/projects/CPTAC3/CPTAC3.catalog"
-    DATA_ROOT="/gscmnt/gc2741/ding/CPTAC3-data"
-    FILE_SYSTEM="MGI"
-    DOCKER_SYSTEM="MGI"
-    LSF=1
-    DL_ARGS="-M -q research-hpc" 
-    LSF_ARGS="-g $LSF_GROUP"
-
 elif [ $SYSTEM == "compute1" ]; then
     # compute1
-    CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
-    #CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
-    # DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+    #CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+    # DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+    CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
+    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
     FILE_SYSTEM="storage1"
     DOCKER_SYSTEM="compute1"
     LSF=1
@@ -67,7 +57,8 @@ fi
 
 # This differs for GDAN and Catalog3 systems
 CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
-BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
+#BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
+BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/storage1.BamMap3.tsv"
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
 # It is no longer used to drive the workflow but remains for convenience
