@@ -2,17 +2,17 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
-PROJECT="CTSP_DLBCL"
+PROJECT="CTSP_KIRC"
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2023-10-02T22_10_28.806Z-AWG.txt"
+GDC_TOKEN="../token/gdc-user-token.AWG.2024-04-02T19_21_37.947Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
 LSF_GROUP="/mwyczalk/gdc-download"
 
 # List of UUIDs to download
-UUID="dat/uuid_download.dat"
+UUID="dat/UUID_download.dat"
 # Variables below should not need to be modified in most cases
 if [ $SYSTEM == "katmai" ]; then
     # katmai
@@ -37,7 +37,8 @@ if [ $SYSTEM == "katmai" ]; then
 
 elif [ $SYSTEM == "compute1" ]; then
     # compute1
-    CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+#    CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+    CATALOGD="/rdcw/fs2/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
     #CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
     #DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
     #DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/CPTAC3.share/CPTAC3-GDC"
