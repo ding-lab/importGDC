@@ -7,7 +7,7 @@
 
 source gdc-import.config.sh
 
-CMD="cat $UUID | bash src/make_BamMap3.sh -H -O $DATA_ROOT -S $CATALOG_MASTER -s $FILE_SYSTEM $@ - | sort >> $BAMMAP"
+CMD="cat $UUID | bash src/make_BamMap3.sh -H -O $DATA_ROOT -S $CATALOG_MASTER -s $FILE_SYSTEM $@ - > $BAMMAP"
 echo "Running: $CMD"
 eval $CMD
 
@@ -38,8 +38,8 @@ fi
 
 BMM="${BAMMAP}.merged"
 
-grep "^#" $BAMMAP | head -n 1 > $BMM
-cat $BAMMAP_MASTER $BAMMAP | grep -v "^#" | sort -u >> $BMM
+head -n 1 $BAMMAP > $BMM
+cat <(tail -n +2 $BAMMAP_MASTER) <(tail -n +2 $BAMMAP) | grep -v "^#" | sort -u >> $BMM
 
 >&2 echo Success.  Download BamMap written to $BAMMAP
 >&2 echo Merged with BamMap $BAMMAP_MASTER
