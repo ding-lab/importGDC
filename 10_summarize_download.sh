@@ -76,6 +76,7 @@ echo "                    scRNA-Seq: $SCRNA_SIZE Tb in $SCRNA_COUNT files"
 echo "                        TOTAL: $TOT_SIZE Tb in $TOT_COUNT files"
 }
 
+mkdir -p dat
 >&2 echo Catalog: $CATALOG_MASTER
 >&2 echo Evaluating UUIDs from $UUID
 
