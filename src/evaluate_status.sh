@@ -255,14 +255,14 @@ function process_UUID {
 
 
 # Catalog3
-#    SN=$(grep $UUID $CATALOG | cut -f 1)
-#    FN=$(grep $UUID $CATALOG | cut -f 7)
-#    DF=$(grep $UUID $CATALOG | cut -f 9)
+    SN=$(grep $UUID $CATALOG | cut -f 1)
+    FN=$(grep $UUID $CATALOG | cut -f 7)
+    DF=$(grep $UUID $CATALOG | cut -f 9)
 
 # REST
-    SN=$(grep $UUID $CATALOG | cut -f 1)
-    FN=$(grep $UUID $CATALOG | cut -f 8)
-    DF=$(grep $UUID $CATALOG | cut -f 4)
+#    SN=$(grep $UUID $CATALOG | cut -f 1)
+#    FN=$(grep $UUID $CATALOG | cut -f 8)
+#    DF=$(grep $UUID $CATALOG | cut -f 4)
 
     STATUS=$(get_job_status $UUID $SN $FN $DF)
 
