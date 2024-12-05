@@ -150,7 +150,7 @@ function summarize_import {
         >&2 echo This file will not be added to BamMap
         ISOK=0
         RETVAL=1
-        continue
+        return
     fi
 
     # Test actual filesize on disk vs. size expected from SR file
@@ -163,7 +163,6 @@ function summarize_import {
         >&2 echo Continuing.
         ISOK=0
         RETVAL=1
-        continue
     fi
 
     if [[ $DF == "BAM" ]]; then # this will fail for chimeric and transcriptome RNA-Seq data, which is not indexed.  But we no longer have RT = result type
@@ -175,14 +174,12 @@ function summarize_import {
             >&2 echo Continuing.
             ISOK=0
             RETVAL=1
-            continue
         fi
         if [ ! -s $BAI ] && [ -z $NOWARN ]; then
             >&2 echo WARNING: Index file zero size: $BAI
             >&2 echo Continuing.
             ISOK=0
             RETVAL=1
-            continue
         fi
         BAI="$FNF.flagstat"
         if [ ! -e $BAI ] && [ -z $NOWARN ]; then
@@ -190,7 +187,6 @@ function summarize_import {
             >&2 echo Continuing.
             ISOK=0
             RETVAL=1
-            continue
         fi
     fi
 
