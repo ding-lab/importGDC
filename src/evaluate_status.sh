@@ -212,7 +212,6 @@ DF=$3
 # For now, we'll grep for "Successfully completed." in the .out file of the submitted job
 # This will probably not catch jobs which exit early for some reason (memory, etc), and is LSF specific
 
-
 TEST1=$(test_import_success $UUID $FN $DF)  
 
 # for multi-step processing would report back a test for each step
@@ -255,14 +254,16 @@ function process_UUID {
 
 
 # Catalog3
-    SN=$(grep $UUID $CATALOG | cut -f 1)
-    FN=$(grep $UUID $CATALOG | cut -f 7)
-    DF=$(grep $UUID $CATALOG | cut -f 9)
+#    >&2 echo CATALOG3 mode
+#    SN=$(grep $UUID $CATALOG | cut -f 1)
+#    FN=$(grep $UUID $CATALOG | cut -f 7)
+#    DF=$(grep $UUID $CATALOG | cut -f 9)
 
 # REST
-#    SN=$(grep $UUID $CATALOG | cut -f 1)
-#    FN=$(grep $UUID $CATALOG | cut -f 8)
-#    DF=$(grep $UUID $CATALOG | cut -f 4)
+#    >&2 echo REST mode
+    SN=$(grep $UUID $CATALOG | cut -f 1)
+    FN=$(grep $UUID $CATALOG | cut -f 8)
+    DF=$(grep $UUID $CATALOG | cut -f 4)
 
     STATUS=$(get_job_status $UUID $SN $FN $DF)
 
