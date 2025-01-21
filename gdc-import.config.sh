@@ -2,7 +2,8 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
-PROJECT="MMRF"
+PROJECT="CPTAC4-STAD"
+CAT_TYPE="Catalog3" # or GDAN
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
 GDC_TOKEN="../token/gdc-user-token.2025-01-02T21_21_22.946Z.txt"
@@ -57,14 +58,14 @@ else
 
 fi
 
-
 # This differs for GDAN/REST and Catalog3/CPTAC3 systems
-
-#CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
-#BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${FILE_SYSTEM}.BamMap3.tsv"
-
-CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog-REST.tsv"  
-BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
+if [ $CAT_TYPE == "Catalog3" ]; then
+    CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
+    BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${FILE_SYSTEM}.BamMap3.tsv"
+else
+    CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog-REST.tsv"  
+    BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
+fi
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
 # It is no longer used to drive the workflow but remains for convenience

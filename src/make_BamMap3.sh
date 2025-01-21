@@ -1,6 +1,9 @@
 #!/bin/bash
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
+CAT_TYPE="Catalog3"
+# CAT_TYPE="GDAN"
+
 read -r -d '' USAGE <<'EOF'
 Usage: make_BamMap.sh [options] UUID [UUID2 ...]
 
@@ -129,19 +132,22 @@ function summarize_import {
 
     ISOK=1
 
-# REST API
-    SN=$(echo "$SR" | cut -f 1)
-    FN=$(echo "$SR" | cut -f 8)
-    DS=$(echo "$SR" | cut -f 9) # file size
-    DF=$(echo "$SR" | cut -f 4)  # data format
-    UUID=$(echo "$SR" | cut -f 10)
 
 # Catalog3
-#    SN=$(echo "$SR" | cut -f 1)
-#    FN=$(echo "$SR" | cut -f 7)
-#    DS=$(echo "$SR" | cut -f 8) # file size
-#    DF=$(echo "$SR" | cut -f 9)  # data format
-#    UUID=$(echo "$SR" | cut -f 13)
+    if [ $CAT_TYPE == "Catalog3" ]; then
+        SN=$(echo "$SR" | cut -f 1)
+        FN=$(echo "$SR" | cut -f 7)
+        DS=$(echo "$SR" | cut -f 8) # file size
+        DF=$(echo "$SR" | cut -f 9)  # data format
+        UUID=$(echo "$SR" | cut -f 13)
+    else
+# REST API
+        SN=$(echo "$SR" | cut -f 1)
+        FN=$(echo "$SR" | cut -f 8)
+        DS=$(echo "$SR" | cut -f 9) # file size
+        DF=$(echo "$SR" | cut -f 4)  # data format
+        UUID=$(echo "$SR" | cut -f 10)
+    fi
 
     # Test existence of output file and index file
     FNF=$(echo "$DATD/$UUID/$FN" | tr -s '/')  # append full path to data file, normalize path separators

@@ -2,6 +2,9 @@
 #
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
+CAT_TYPE="Catalog3"
+# CAT_TYPE="GDAN"
+
 read -r -d '' USAGE <<'EOF'
 Usage: evaluate_status.sh [options] UUID [UUID2 ...]
 
@@ -254,17 +257,19 @@ function process_UUID {
 
 
 # Catalog3
-#    >&2 echo CATALOG3 mode
-#    SN=$(grep $UUID $CATALOG | cut -f 1)
-#    FN=$(grep $UUID $CATALOG | cut -f 7)
-#    DF=$(grep $UUID $CATALOG | cut -f 9)
+   if [ $CAT_TYPE == "Catalog3" ]; then
+#        >&2 echo CATALOG3 mode
+        SN=$(grep $UUID $CATALOG | cut -f 1)
+        FN=$(grep $UUID $CATALOG | cut -f 7)
+        DF=$(grep $UUID $CATALOG | cut -f 9)
 
+    else
 # REST
-#    >&2 echo REST mode
-    SN=$(grep $UUID $CATALOG | cut -f 1)
-    FN=$(grep $UUID $CATALOG | cut -f 8)
-    DF=$(grep $UUID $CATALOG | cut -f 4)
-
+#        >&2 echo REST mode
+        SN=$(grep $UUID $CATALOG | cut -f 1)
+        FN=$(grep $UUID $CATALOG | cut -f 8)
+        DF=$(grep $UUID $CATALOG | cut -f 4)
+    fi
     STATUS=$(get_job_status $UUID $SN $FN $DF)
 
     # which columns to output?

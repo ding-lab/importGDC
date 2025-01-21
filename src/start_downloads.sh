@@ -2,6 +2,10 @@
 
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
+CAT_TYPE="Catalog3"
+# CAT_TYPE="GDAN"
+
+
 read -r -d '' USAGE <<'EOF'
 Usage: start_downloads.sh [options] UUID [UUID2 ...]
 
@@ -171,11 +175,15 @@ function launch_import {
 #    15  metadata
 
 # CATALOG3
-#    FN=$(grep $UUID $CATALOG | cut -f 7)
-#    DF=$(grep $UUID $CATALOG | cut -f 9)  # this is not necessary - just flags whether indexing should be done
+
+    if [ $CAT_TYPE == "Catalog3" ]; then
+        FN=$(grep $UUID $CATALOG | cut -f 7)
+        DF=$(grep $UUID $CATALOG | cut -f 9)  # this is not necessary - just flags whether indexing should be done
 # REST 
-    FN=$(grep $UUID $CATALOG | cut -f 8)
-    DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
+    else
+        FN=$(grep $UUID $CATALOG | cut -f 8)
+        DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
+    fi
     #RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
     RT="x"
 
