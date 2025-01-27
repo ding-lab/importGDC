@@ -2,8 +2,8 @@
 
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
-CAT_TYPE="Catalog3"
-# CAT_TYPE="GDAN"
+#CAT_TYPE="Catalog3"
+CAT_TYPE="REST"
 
 
 read -r -d '' USAGE <<'EOF'
@@ -23,6 +23,7 @@ Options:
 -1 : stop after one case processed.
 -J NJOBS: Specify number of UUID to download in parallel.  Default 0 runs downloads sequentially
 -l LOGD: Log output base directory.  Default: ./logs
+-C CAT_TYPE: Catalog type, either Catalog3 or REST
 
 Arguments passed to launch_download.sh
 -g LSF_ARGS: Additional args to pass to LSF.  LSF mode only
@@ -62,7 +63,7 @@ START_TIME=$(date)
 NJOBS=0
 LOGD="./logs"
 
-while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:" opt; do
+while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:C:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -118,6 +119,9 @@ while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:" opt; do
       ;;
     s)  
       XARGS="$XARGS -s $OPTARG"
+      ;;
+    C)  
+      CAT_TYPE="$OPTARG"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 

@@ -2,8 +2,8 @@
 
 # System is one of MGI, compute1, or katmai
 SYSTEM="compute1"
-PROJECT="TCGA-KICH"
-CAT_TYPE="GDAN" # Catalog3 or GDAN
+PROJECT="CPTAC3"
+CAT_TYPE="REST" # Catalog3 or REST
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
 GDC_TOKEN="../token/gdc-user-token.2025-01-02T21_21_22.946Z.txt"
@@ -17,8 +17,12 @@ UUID="dat/UUID_download.dat"
 
 # compute1
 #    CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
-CATALOGD="/rdcw/fs2/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
-#    CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
+
+# for GDAN
+#CATALOGD="/rdcw/fs2/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+
+# for CPTAC3
+CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
 
 #    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
 #DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/CPTAC3.share/CPTAC3-GDC"

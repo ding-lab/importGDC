@@ -2,8 +2,8 @@
 #
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
-CAT_TYPE="Catalog3"
-# CAT_TYPE="GDAN"
+#CAT_TYPE="Catalog3"
+CAT_TYPE="GDAN"
 
 read -r -d '' USAGE <<'EOF'
 Usage: evaluate_status.sh [options] UUID [UUID2 ...]
@@ -22,6 +22,7 @@ Options:
 -f status: output only lines matching status, e.g., -f import:complete
 -u: include only UUID in output
 -D: include data file path in output
+-C CAT_TYPE: Catalog type, either Catalog3 or REST
 
 If UUID is - then read UUID from STDIN
 EOF
@@ -70,6 +71,9 @@ while getopts ":S:O:h1l:Mf:uD" opt; do
       ;;
     D)  
       DATA_PATH=1
+      ;;
+    C)  
+      CAT_TYPE="$OPTARG"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
