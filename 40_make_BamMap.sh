@@ -7,7 +7,7 @@
 
 source gdc-import.config.sh
 
-CMD="cat $UUID | bash src/make_BamMap3.sh -H -O $DATA_ROOT -S $CATALOG_MASTER -s $FILE_SYSTEM $@ - > $BAMMAP"
+CMD="cat $UUID | bash src/make_BamMap3.sh -C $CAT_TYPE -H -O $DATA_ROOT -S $CATALOG_MASTER -s $FILE_SYSTEM $@ - > $BAMMAP"
 echo "Running: $CMD"
 eval $CMD
 

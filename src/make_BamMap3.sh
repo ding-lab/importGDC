@@ -1,8 +1,8 @@
 #!/bin/bash
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
-CAT_TYPE="Catalog3"
-# CAT_TYPE="GDAN"
+#CAT_TYPE="Catalog3"
+CAT_TYPE="REST"
 
 read -r -d '' USAGE <<'EOF'
 Usage: make_BamMap.sh [options] UUID [UUID2 ...]
@@ -20,6 +20,7 @@ Options:
 -w: don't print warnings about missing data
 -f: If unknown sample type, print warning but proceed
 -H: Print header
+-C CAT_TYPE: Catalog type, either Catalog3 or REST
 
 If UUID is - then read UUID from STDIN
 
@@ -45,7 +46,7 @@ EOF
 SCRIPT=$(basename $0)
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":S:O:s:h1wfH" opt; do
+while getopts ":S:O:s:h1wfHC:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -71,6 +72,9 @@ while getopts ":S:O:s:h1wfH" opt; do
       ;;
     H) 
       HEADER=1
+      ;;
+    C)  
+      CAT_TYPE="$OPTARG"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" >&2

@@ -26,6 +26,8 @@ PYTHON="./python3_docker"
 # Error like this indicates that header in wrong line, needs to be fixed:
 # KeyError: "['dataset_name'] not found in axis"
 
+# this is currently broken for CPTAC3, since BamMap-wide has inconsistent format.  Need to convert everything to REST style
+
 #BM3="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/import/02.MILD_WXS_311/dat/batch.BamMap.dat.merged"
 BM3="dat/batch.BamMap.dat.merged"
 OUT="dat/${PROJECT}.BamMap-wide.tsv"

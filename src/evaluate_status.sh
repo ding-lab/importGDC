@@ -42,7 +42,7 @@ SCRIPT=$(basename $0)
 LOG_DIR="./logs"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":S:O:h1l:Mf:uD" opt; do
+while getopts ":S:O:h1l:Mf:uDC:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
