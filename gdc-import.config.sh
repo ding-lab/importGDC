@@ -1,10 +1,10 @@
 # Download batch name.  
 
-PROJECT="CPTAC3"
+PROJECT="CPTAC2-COAD"
 CAT_TYPE="REST" # Catalog3 or REST
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2025-01-02T21_21_22.946Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2025-02-05T19_46_26.526Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
@@ -20,7 +20,8 @@ UUID="dat/UUID_download.dat"
 
 #    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
 #DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+#DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/GDAN-GDC"                       # GDAN data on dinglab volume
 FILE_SYSTEM="storage1"
 DOCKER_SYSTEM="compute1"
 LSF=1
