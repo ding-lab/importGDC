@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+source gdc-import.config.sh
+
+# Usage: python3_docker script.py [ARGS]
+# Run script.py in a python3 environment with json and requests packages
+
+START_DOCKER="bash WUDocker/start_docker.sh"
+
+# based on: https://www.freecodecamp.org/news/building-python-data-science-container-using-docker/
+IMAGE="faizanbashir/python-datascience:3.6"
+
+PY_SRC=$1
+# Get absolute path of script
+PY=$(readlink -f $PY_SRC)
+PYTHON3="/usr/bin/python3"
+
+shift
+CMD_PY="$PYTHON3 $PY $@"
+
+# Be able to read mapped dirs from command line
+#MAPPED_DIR=". /home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+MAPPED_DIR=". /home/m.wyczalkowski/Projects/GDAN/GDAN.catalog $CATALOGD /storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
+
+#ARGS="-l"
+# -l - send output to stdout
+ARGS="-q dinglab -r"
+CMD="$START_DOCKER -M compute1 -I $IMAGE $ARGS -c \"$CMD_PY\" $MAPPED_DIR"
+#CMD="$START_DOCKER -M compute1 -I $IMAGE $MAPPED_DIR"
+>&2 echo Running: $CMD
+eval $CMD
+
+#bash docker/WUDocker/start_docker.sh -I mwyczalkowski/python3_gdc:20230315 -c "/usr/local/bin/python3 /diskmnt/Projects/cptac_scratch/CPTAC3.workflow/discover/dev/20230314.REST-test/test1.py" -l .

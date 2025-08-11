@@ -2,6 +2,10 @@
 
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
+#CAT_TYPE="Catalog3"
+CAT_TYPE="REST"
+
+
 read -r -d '' USAGE <<'EOF'
 Usage: start_downloads.sh [options] UUID [UUID2 ...]
 
@@ -19,6 +23,7 @@ Options:
 -1 : stop after one case processed.
 -J NJOBS: Specify number of UUID to download in parallel.  Default 0 runs downloads sequentially
 -l LOGD: Log output base directory.  Default: ./logs
+-C CAT_TYPE: Catalog type, either Catalog3 or REST
 
 Arguments passed to launch_download.sh
 -g LSF_ARGS: Additional args to pass to LSF.  LSF mode only
@@ -58,7 +63,7 @@ START_TIME=$(date)
 NJOBS=0
 LOGD="./logs"
 
-while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:" opt; do
+while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:C:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -115,6 +120,9 @@ while getopts ":S:O:t:hd1J:l:g:MBi:q:DIfs:" opt; do
     s)  
       XARGS="$XARGS -s $OPTARG"
       ;;
+    C)  
+      CAT_TYPE="$OPTARG"
+      ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 
       >&2 echo "$USAGE"
@@ -140,7 +148,20 @@ function launch_import {
         exit 1;
     fi
 
-# Catalog3: https://docs.google.com/document/d/1uSgle8jiIx9EnDFf_XHV3fWYKFElszNLkmGlht_CQGE/edit
+# REST API catalog
+#     1  dataset_name
+#     2  case
+#     3  sample_type
+#     4  data_format
+#     5  experimental_strategy
+#     6  preservation_method
+#     7  aliquot
+#     8  file_name
+#     9  file_size
+#    10  id
+#    11  md5sum
+
+# Modified for Catalog3
 #     1  dataset_name
 #     2  case
 #     3  disease
@@ -157,15 +178,25 @@ function launch_import {
 #    14  md5
 #    15  metadata
 
-    FN=$(grep $UUID $CATALOG | cut -f 7)
-    DF=$(grep $UUID $CATALOG | cut -f 9)
-    RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
+# CATALOG3
+
+    if [ $CAT_TYPE == "Catalog3" ]; then
+        FN=$(grep $UUID $CATALOG | cut -f 7)
+        DF=$(grep $UUID $CATALOG | cut -f 9)  # this is not necessary - just flags whether indexing should be done
+# REST 
+    else
+        FN=$(grep $UUID $CATALOG | cut -f 8)
+        DF=$(grep $UUID $CATALOG | cut -f 4)  # this is not necessary - just flags whether indexing should be done
+    fi
+    #RT=$(echo "$SR" | cut -f 10)  # result type aka data variety
+    RT="x"
 
     if [ -z "$FN" ]; then
         >&2 echo Error: UUID $UUID not found in $CATALOG
         exit 1
     fi
 
+    # This is dumb.  just pass an argument into this function whether to override indexing
     if [[ $RT == "chimeric" || $RT == "transcriptome" ]]; then
         INDEX_OVERRIDE="-D"
     else

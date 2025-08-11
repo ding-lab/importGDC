@@ -2,6 +2,9 @@
 #
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
+#CAT_TYPE="Catalog3"
+CAT_TYPE="GDAN"
+
 read -r -d '' USAGE <<'EOF'
 Usage: evaluate_status.sh [options] UUID [UUID2 ...]
 
@@ -19,6 +22,7 @@ Options:
 -f status: output only lines matching status, e.g., -f import:complete
 -u: include only UUID in output
 -D: include data file path in output
+-C CAT_TYPE: Catalog type, either Catalog3 or REST
 
 If UUID is - then read UUID from STDIN
 EOF
@@ -38,7 +42,7 @@ SCRIPT=$(basename $0)
 LOG_DIR="./logs"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":S:O:h1l:Mf:uD" opt; do
+while getopts ":S:O:h1l:Mf:uDC:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -67,6 +71,9 @@ while getopts ":S:O:h1l:Mf:uD" opt; do
       ;;
     D)  
       DATA_PATH=1
+      ;;
+    C)  
+      CAT_TYPE="$OPTARG"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -212,7 +219,6 @@ DF=$3
 # For now, we'll grep for "Successfully completed." in the .out file of the submitted job
 # This will probably not catch jobs which exit early for some reason (memory, etc), and is LSF specific
 
-
 TEST1=$(test_import_success $UUID $FN $DF)  
 
 # for multi-step processing would report back a test for each step
@@ -222,26 +228,52 @@ printf "$UUID\t$SN\t$DATAD/$UUID/$FN\timport:$TEST1\n"
 function process_UUID {
     UUID=$1
 
-# Catalog file format
-#     1  # sample_name
+# REST API Catalog file format
+#     1  dataset_name    CTSP-ACY0.WGS.N
+#     2  case    CTSP-ACY0
+#     3  sample_type Blood Derived Normal
+#     4  data_format BAM
+#     5  experimental_strategy   WGS
+#     6  preservation_method Frozen
+#     7  aliquot CTSP-ACY0-NB1-A-1-0-D-A791-36
+#     8  file_name   957099c7-0bc3-42dd-8df0-ffec8f99955a_wgs_gdc_realn.bam
+#     9  file_size   78181632397
+#    10  id  0e4322dc-bccf-481b-906a-e7ed5c3ce56a
+#    11  md5sum  52112fbc3679a8478b9eac328bffb2d3
+
+
+# Catalog3 header
+#     1  dataset_name
 #     2  case
 #     3  disease
 #     4  experimental_strategy
-#     5  short_sample_type
-#     6  aliquot
+#     5  sample_type
+#     6  specimen_name
 #     7  filename
 #     8  filesize
 #     9  data_format
-#    10  result_type
-#    11  UUID
-#    12  MD5
-#    13  reference
-#    14  sample_type
+#    10  data_variety
+#    11  alignment
+#    12  project
+#    13  uuid
+#    14  md5
+#    15  metadata
 
-    SN=$(grep $UUID $CATALOG | cut -f 1)
-    FN=$(grep $UUID $CATALOG | cut -f 7)
-    DF=$(grep $UUID $CATALOG | cut -f 9)
 
+# Catalog3
+   if [ $CAT_TYPE == "Catalog3" ]; then
+#        >&2 echo CATALOG3 mode
+        SN=$(grep $UUID $CATALOG | cut -f 1)
+        FN=$(grep $UUID $CATALOG | cut -f 7)
+        DF=$(grep $UUID $CATALOG | cut -f 9)
+
+    else
+# REST
+#        >&2 echo REST mode
+        SN=$(grep $UUID $CATALOG | cut -f 1)
+        FN=$(grep $UUID $CATALOG | cut -f 8)
+        DF=$(grep $UUID $CATALOG | cut -f 4)
+    fi
     STATUS=$(get_job_status $UUID $SN $FN $DF)
 
     # which columns to output?

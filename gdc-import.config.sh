@@ -1,11 +1,10 @@
 # Download batch name.  
 
-# System is one of MGI, compute1, or katmai
-SYSTEM="compute1"
-PROJECT="CPTAC3"
+PROJECT="CPTAC2-COAD"
+CAT_TYPE="REST" # Catalog3 or REST
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="dat/gdc-user-token.2023-07-26T20_45_05.094Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2025-02-05T19_46_26.526Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
@@ -13,52 +12,34 @@ LSF_GROUP="/mwyczalk/gdc-download"
 
 # List of UUIDs to download
 UUID="dat/UUID_download.dat"
-# Variables below should not need to be modified in most cases
-if [ $SYSTEM == "katmai" ]; then
-    # katmai
-# Master CATALOG file containing all samples.  We will download a subset of these
-# Master BamMap file which hold most current list of BamMaps on system.  This file will not be modified by any scripts 
-    CATALOGD="/home/mwyczalk_test/Projects/CPTAC3/CPTAC3.catalog"
 
-# Data download root directory.  Individual BAMS/FASTQs will be in,
-#   $DATA_ROOT/GDC_import/data/<UUID>/<FILENAME>
-# BAM files will have a <FILENAME>.bai and <FILENAME>.flagstat written as well
+#    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+#DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/CPTAC3.share/CPTAC3-GDC"
+#DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/GDAN-GDC"                       # GDAN data on dinglab volume
+FILE_SYSTEM="storage1"
+DOCKER_SYSTEM="compute1"
+LSF=1
+DL_ARGS="-M -q dinglab" 
+LSF_ARGS="-g $LSF_GROUP -G compute-dinglab"
 
-    DATA_ROOT="/diskmnt/Projects/cptac"
-
-# Note about SYSTEM names
-# * DOCKER_SYSTEM - one of MGI, compute1, docker
-#     used by start_docker.sh to initialize appropriately
-# * FILE_SYSTEM - one of MGI, storage1, katmai
-#     used in creation of BamMaps to indicate where data stored
-    FILE_SYSTEM="katmai"
-    DOCKER_SYSTEM="docker"
-    LSF=0
-
-elif [ $SYSTEM == "compute1" ]; then
-    # compute1
-    #CATALOGD="/cache1/fs1/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
-    # DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
+# This differs for GDAN and CPTAC3 systems
+if [ $PROJECT == "CPTAC3" ]; then
+# for CPTAC3
     CATALOGD="/storage1/fs1/dinglab/Active/Projects/CPTAC3/Common/CPTAC3.catalog"
-    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-    FILE_SYSTEM="storage1"
-    DOCKER_SYSTEM="compute1"
-    LSF=1
-    DL_ARGS="-M -q dinglab" 
-    LSF_ARGS="-g $LSF_GROUP -G compute-dinglab"
-
+    BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${FILE_SYSTEM}.BamMap3.tsv"
 else
-
-    >&2 echo ERROR: Unknown system $SYSTEM
-    exit 1
-
+# for GDAN
+    CATALOGD="/rdcw/fs2/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
+    BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
 fi
 
-
-# This differs for GDAN and Catalog3 systems
-CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
-#BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
-BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/storage1.BamMap3.tsv"
+# note that CPTAC3 can have catalog3 or REST catalogs
+if [ $CAT_TYPE == "REST" ]; then
+    CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog-REST.tsv"  
+else
+    CATALOG_MASTER="$CATALOGD/Catalog3/${PROJECT}.Catalog3.tsv"
+fi
 
 # This file is generated in step 2 as a subset of CATALOG_MASTER
 # It is no longer used to drive the workflow but remains for convenience

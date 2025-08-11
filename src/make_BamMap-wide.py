@@ -3,6 +3,9 @@ import pandas as pd
 import argparse, sys, os, binascii
 import csv, re, json
 
+# Append BamMap path and system info to catalog by merging to catalog on column uuid, retain
+# only entries in BamMap
+
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 

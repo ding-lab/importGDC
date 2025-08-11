@@ -1,6 +1,9 @@
 #!/bin/bash
 # author: Matthew Wyczalkowski m.wyczalkowski@wustl.edu
 
+#CAT_TYPE="Catalog3"
+CAT_TYPE="REST"
+
 read -r -d '' USAGE <<'EOF'
 Usage: make_BamMap.sh [options] UUID [UUID2 ...]
 
@@ -17,6 +20,7 @@ Options:
 -w: don't print warnings about missing data
 -f: If unknown sample type, print warning but proceed
 -H: Print header
+-C CAT_TYPE: Catalog type, either Catalog3 or REST
 
 If UUID is - then read UUID from STDIN
 
@@ -42,7 +46,7 @@ EOF
 SCRIPT=$(basename $0)
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":S:O:s:h1wfH" opt; do
+while getopts ":S:O:s:h1wfHC:" opt; do
   case $opt in
     S) 
       CATALOG=$OPTARG
@@ -69,6 +73,9 @@ while getopts ":S:O:s:h1wfH" opt; do
     H) 
       HEADER=1
       ;;
+    C)  
+      CAT_TYPE="$OPTARG"
+      ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" >&2
       exit 1
@@ -88,7 +95,20 @@ shift $((OPTIND-1))
 # * If this is a BAM, make sure .bai and .flagstat file exists.  Print warning if it does not
 
 function summarize_import {
-# Catalog3 file format is defined here: https://github.com/ding-lab/CPTAC3.case.discover/blob/master/src/make_catalog.s://docs.google.com/document/d/1uSgle8jiIx9EnDFf_XHV3fWYKFElszNLkmGlht_CQGE/edit# 
+# REST API catalog
+#     1  dataset_name
+#     2  case
+#     3  sample_type
+#     4  data_format
+#     5  experimental_strategy
+#     6  preservation_method
+#     7  aliquot
+#     8  file_name
+#     9  file_size
+#    10  id
+#    11  md5sum
+
+# For one, back to Catalog3
 #     1  dataset_name
 #     2  case
 #     3  disease
@@ -105,6 +125,7 @@ function summarize_import {
 #    14  md5
 #    15  metadata
 
+
     UUID=$1
 
     SR=$(grep $UUID $CATALOG)
@@ -115,12 +136,22 @@ function summarize_import {
 
     ISOK=1
 
-    SN=$(echo "$SR" | cut -f 1)
-    FN=$(echo "$SR" | cut -f 7)
-    DS=$(echo "$SR" | cut -f 8)
-    DF=$(echo "$SR" | cut -f 9)  # data format
-    RT=$(echo "$SR" | cut -f 10)  # result type
-    UUID=$(echo "$SR" | cut -f 13)
+
+# Catalog3
+    if [ $CAT_TYPE == "Catalog3" ]; then
+        SN=$(echo "$SR" | cut -f 1)
+        FN=$(echo "$SR" | cut -f 7)
+        DS=$(echo "$SR" | cut -f 8) # file size
+        DF=$(echo "$SR" | cut -f 9)  # data format
+        UUID=$(echo "$SR" | cut -f 13)
+    else
+# REST API
+        SN=$(echo "$SR" | cut -f 1)
+        FN=$(echo "$SR" | cut -f 8)
+        DS=$(echo "$SR" | cut -f 9) # file size
+        DF=$(echo "$SR" | cut -f 4)  # data format
+        UUID=$(echo "$SR" | cut -f 10)
+    fi
 
     # Test existence of output file and index file
     FNF=$(echo "$DATD/$UUID/$FN" | tr -s '/')  # append full path to data file, normalize path separators
@@ -129,7 +160,7 @@ function summarize_import {
         >&2 echo This file will not be added to BamMap
         ISOK=0
         RETVAL=1
-        continue
+        return
     fi
 
     # Test actual filesize on disk vs. size expected from SR file
@@ -142,9 +173,10 @@ function summarize_import {
         >&2 echo Continuing.
         ISOK=0
         RETVAL=1
-        continue
     fi
-    if [[ $DF == "BAM" && $RT != "chimeric" && $RT != "transcriptome" ]]; then
+
+    if [[ $DF == "BAM" ]]; then # this will fail for chimeric and transcriptome RNA-Seq data, which is not indexed.  But we no longer have RT = result type
+    #if [[ $DF == "BAM" && $RT != "chimeric" && $RT != "transcriptome" ]]; then
         # If BAM file, test to make sure that .bai file generated
         BAI="$FNF.bai"
         if [ ! -e $BAI ] && [ -z $NOWARN ]; then
@@ -152,14 +184,12 @@ function summarize_import {
             >&2 echo Continuing.
             ISOK=0
             RETVAL=1
-            continue
         fi
         if [ ! -s $BAI ] && [ -z $NOWARN ]; then
             >&2 echo WARNING: Index file zero size: $BAI
             >&2 echo Continuing.
             ISOK=0
             RETVAL=1
-            continue
         fi
         BAI="$FNF.flagstat"
         if [ ! -e $BAI ] && [ -z $NOWARN ]; then
@@ -167,7 +197,6 @@ function summarize_import {
             >&2 echo Continuing.
             ISOK=0
             RETVAL=1
-            continue
         fi
     fi
 
