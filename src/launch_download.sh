@@ -131,11 +131,9 @@ if [ -z $IMPORT_DATAD ]; then
     >&2 echo "$USAGE"
     exit 1
 fi
->&2 echo DEBUG B: $IMPORT_DATAD
 mkdir -p $IMPORT_DATAD
 test_exit_status
 
->&2 echo DEBUG C: $LOGD
 mkdir -p $LOGD
 test_exit_status
 ERRLOG="$LOGD/${UUID}.err"

@@ -217,7 +217,6 @@ function launch_import {
 
 confirm $CATALOG
 confirm $TOKEN
->&2 echo DEBUG A - LOGD = $LOGD
 mkdir -p $LOGD
 test_exit_status
 

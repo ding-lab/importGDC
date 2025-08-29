@@ -1,10 +1,10 @@
 # Download batch name.  
 
-PROJECT="CPTAC2-COAD"
+PROJECT="TCGA-KIRC"
 CAT_TYPE="REST" # Catalog3 or REST
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2025-02-05T19_46_26.526Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2025-08-05T21_01_50.156Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
@@ -13,10 +13,12 @@ LSF_GROUP="/mwyczalk/gdc-download"
 # List of UUIDs to download
 UUID="dat/UUID_download.dat"
 
-#    DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-#DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/CPTAC3.share/CPTAC3-GDC"
-#DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # new GDAN data
-DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/GDAN-GDC"                       # GDAN data on dinglab volume
+# Current policy is to keep all GDC data on a volume named GDAN-GDC.  The older CPTAC3-GDC
+# DATA_ROOT is no longer used
+# Try to stay on m.wyczalkowski when possible
+DATA_ROOT="/storage1/fs1/m.wyczalkowski/Active/Primary/CPTAC3.share/GDAN-GDC"   # All GDC data on m.wyczalkowski
+#DATA_ROOT="/storage1/fs1/dinglab/Active/Primary/GDAN-GDC"                      # All GDC data on dinglab
+
 FILE_SYSTEM="storage1"
 DOCKER_SYSTEM="compute1"
 LSF=1
