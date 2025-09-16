@@ -8,11 +8,11 @@ BM3="dat/BamMap3-updated.tsv"
 BMWOUT="dat/BamMap-wide-updated.tsv"
 
 
-head -n1 $BAMMAPW > $BMWOUT
-fgrep -f <(cut -f 2 $BM3 | tail -n +2) $BAMMAPW >> $BMWOUT
+head -n1 $BAMMAP_WIDE > $BMWOUT
+fgrep -f <(cut -f 2 $BM3 | tail -n +2) $BAMMAP_WIDE >> $BMWOUT
 
 
 
 >&2 echo Successfully completed.
 >&2 echo Written to $BMWOUT
->&2 echo Original BamMap: $BAMMAPW
+>&2 echo Original BamMap: $BAMMAP_WIDE

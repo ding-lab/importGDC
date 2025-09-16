@@ -3,7 +3,7 @@ source gdc-import.config.sh
 BMOUT="dat/BamMap3-updated.tsv"
 
 # Recommend running with -d first time
-CMD="cat $UUID | bash src/rm_UUID.sh $@ -B $BAMMAP_MASTER - > $BMOUT"
+CMD="cat $UUID_DELETE | bash src/rm_UUID.sh $@ -B $BAMMAP_MASTER - > $BMOUT"
 
 >&2 echo Running: $CMD
 eval $CMD

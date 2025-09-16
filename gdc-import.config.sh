@@ -1,17 +1,18 @@
 # Download batch name.  
 
-PROJECT="TCGA-KIRC"
+PROJECT="TCGA"
 CAT_TYPE="REST" # Catalog3 or REST
 
 # Download token from GDC, good for 30 days.  Generating a new one causes old ones to break
-GDC_TOKEN="../token/gdc-user-token.2025-08-05T21_01_50.156Z.txt"
+GDC_TOKEN="../token/gdc-user-token.2025-09-04T16_53_36.318Z.txt"
 
 # Format: /USER/gdc-download
 # Create with `bgadd -L 5 /USER/gdc-download`
 LSF_GROUP="/mwyczalk/gdc-download"
 
-# List of UUIDs to download
+# List of UUIDs to download - and delete if we're deleting the whole batch
 UUID="dat/UUID_download.dat"
+UUID_DELETE="dat/UUID_download.dat"
 
 # Current policy is to keep all GDC data on a volume named GDAN-GDC.  The older CPTAC3-GDC
 # DATA_ROOT is no longer used
@@ -34,6 +35,7 @@ else
 # for GDAN
     CATALOGD="/rdcw/fs2/home1/Active/home/m.wyczalkowski/Projects/GDAN/GDAN.catalog"
     BAMMAP_MASTER="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap3.tsv"
+    BAMMAP_WIDE="$CATALOGD/Catalog3/WUSTL-BamMap/${PROJECT}.BamMap-wide.tsv"
 fi
 
 # note that CPTAC3 can have catalog3 or REST catalogs

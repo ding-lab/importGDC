@@ -78,8 +78,8 @@ source config.sh
 CATALOG_TMP="dat/catalog.tmp"
 mkdir -p dat
 >&2 echo Catalog: $CATALOG_MASTER
->&2 echo Evaluating UUIDs from $UUID, writing to $CATALOG_TMP
+>&2 echo Evaluating UUIDs from $UUID_DELETE, writing to $CATALOG_TMP
 
-fgrep -f $UUID $CATALOG_MASTER > $CATALOG_TMP
+fgrep -f $UUID_DELETE $CATALOG_MASTER > $CATALOG_TMP
 
 summarize $CATALOG_TMP
